@@ -1,0 +1,289 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: #24312b;
+  background:
+    linear-gradient(135deg, rgba(242, 248, 236, 0.94), rgba(252, 246, 232, 0.82)),
+    #f7f3ea;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(1220px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 32px 0 48px;
+}
+
+.workspace-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: #5b7565;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+h3 {
+  font-size: 16px;
+}
+
+.workspace-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 430px) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.input-panel,
+.output-panel {
+  border: 1px solid rgba(67, 83, 73, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 12px 30px rgba(57, 68, 58, 0.08);
+}
+
+.input-panel {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+}
+
+.field-group {
+  display: grid;
+  gap: 8px;
+}
+
+label {
+  color: #33463c;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid rgba(70, 86, 76, 0.28);
+  border-radius: 6px;
+  background: #fffdf7;
+  color: #24312b;
+  font-size: 15px;
+  line-height: 1.5;
+  outline: none;
+}
+
+input,
+select {
+  height: 42px;
+  padding: 0 12px;
+}
+
+textarea {
+  min-height: 130px;
+  resize: vertical;
+  padding: 10px 12px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #40916c;
+  box-shadow: 0 0 0 3px rgba(64, 145, 108, 0.14);
+}
+
+.style-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.style-note {
+  margin: -4px 0 0;
+  color: #4f6258;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.primary-button,
+.secondary-button {
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.primary-button {
+  height: 46px;
+  background: #1f7a5a;
+  color: white;
+}
+
+.secondary-button {
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid rgba(56, 91, 74, 0.28);
+  background: #fffdf7;
+  color: #24533f;
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+  filter: brightness(0.98);
+}
+
+.output-panel {
+  min-height: 720px;
+  padding: 18px;
+}
+
+.output-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(67, 83, 73, 0.14);
+}
+
+.output-heading span {
+  border-radius: 999px;
+  background: #f7d889;
+  color: #594012;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 5px 10px;
+}
+
+.empty-state {
+  display: grid;
+  min-height: 560px;
+  place-items: center;
+  color: #66746c;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.prompt-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.prompt-block {
+  border: 1px solid rgba(67, 83, 73, 0.14);
+  border-radius: 8px;
+  background: #fffdf8;
+  overflow: hidden;
+}
+
+.prompt-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(67, 83, 73, 0.12);
+  background: #eef6ed;
+}
+
+.prompt-block h3 {
+  color: #264c3a;
+}
+
+.copy-button {
+  min-width: 64px;
+  height: 32px;
+  border: 1px solid rgba(56, 91, 74, 0.25);
+  border-radius: 6px;
+  background: #fffdf7;
+  color: #24533f;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.copy-button:hover {
+  background: #f8f1df;
+}
+
+.prompt-block pre {
+  margin: 0;
+  padding: 14px;
+  color: #25342d;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+@media (max-width: 900px) {
+  .workspace-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .output-panel {
+    min-height: 420px;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    width: min(100vw - 20px, 1220px);
+    padding-top: 18px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  .style-row {
+    grid-template-columns: 1fr;
+  }
+
+  .secondary-button {
+    width: 100%;
+  }
+}
