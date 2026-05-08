@@ -17,6 +17,8 @@ export type RecipePromptInput = {
   recipeName: string;
   ingredients: string;
   steps: string;
+  flexibleTitle: string;
+  flexibleDescription: string;
   styleId: ArtStyleId;
 };
 
@@ -24,7 +26,7 @@ export type RecipePrompts = {
   cover: string;
   ingredients: string;
   steps: string;
-  sauce: string;
+  flexible: string;
 };
 
 export const ART_STYLES: ArtStyle[] = [
@@ -71,6 +73,8 @@ type PromptContext = {
   recipeName: string;
   ingredients: string;
   steps: string;
+  flexibleTitle: string;
+  flexibleDescription: string;
   style: ArtStyle;
 };
 
@@ -82,7 +86,7 @@ export function generateRecipePrompts(input: RecipePromptInput): RecipePrompts {
       cover: "",
       ingredients: "",
       steps: "",
-      sauce: ""
+      flexible: ""
     };
   }
 
@@ -90,6 +94,8 @@ export function generateRecipePrompts(input: RecipePromptInput): RecipePrompts {
     recipeName,
     ingredients: normalizeMultilineText(input.ingredients),
     steps: normalizeMultilineText(input.steps),
+    flexibleTitle: input.flexibleTitle.trim(),
+    flexibleDescription: normalizeMultilineText(input.flexibleDescription),
     style: getArtStyle(input.styleId)
   };
 
@@ -97,7 +103,7 @@ export function generateRecipePrompts(input: RecipePromptInput): RecipePrompts {
     cover: buildCoverPrompt(context),
     ingredients: buildIngredientsPrompt(context),
     steps: buildStepsPrompt(context),
-    sauce: buildSaucePrompt(context)
+    flexible: buildFlexiblePrompt(context)
   };
 }
 
@@ -163,15 +169,20 @@ function buildStepsPrompt(context: PromptContext): string {
   ].join("\n");
 }
 
-function buildSaucePrompt(context: PromptContext): string {
+function buildFlexiblePrompt(context: PromptContext): string {
+  const title = context.flexibleTitle || "灵活补充图";
+  const description =
+    context.flexibleDescription ||
+    "用户未提供灵活图说明，画面不得自行编造额外制作环节或未提及内容";
+
   return [
-    `【酱汁/汤底图 Prompt】`,
-    `标题结构：画面正上方正中央显示「酱汁汤底」，标题字体与液体、调味或容器内容有关联，可融入流体线条、汤勺、杯壁水滴或轻微搅拌纹理；标题清晰可读。`,
-    `风格描述：${context.style.name}；${context.style.description}。画面保持干净，强调液体层次和调味质感，避免过度反光。`,
-    `主体描述：只呈现用户提供食材中与酱汁、汤底、调味、液体或蘸料有关的内容：${context.ingredients || "用户未提供相关内容，画面不得自行添加酱汁或调味品"}。如果用户输入中没有明确酱汁或汤底，则以“未提供酱汁/汤底信息”的可视化备忘标签呈现，不编造额外配方。`,
-    `环境描述：使用简洁料理台、透明杯、调味碗或小锅作为辅助环境，背景弱化，不能抢主体。`,
-    `细节：表现液体透明度、浓稠度、分层、气泡或搅拌痕迹；所有可见调味元素必须来自用户输入；画面必须包含一个不抢主体的小姜饼人彩蛋。`,
-    `参数：完整中文 Prompt，严格忠于用户输入，不添加未提及调味或辅料，比例为 3:4。`
+    `【${title} Prompt】`,
+    `标题结构：画面正上方正中央显示「${title}」，标题字体必须与该环节内容有关联，可融入与动作、食材、器具或液体状态相关的元素；标题清晰可读，不遮挡主体。`,
+    `风格描述：${context.style.name}；${context.style.description}。画面保持干净，优先保证主体清晰，避免过度炫光和装饰噪声。`,
+    `主体描述：围绕「${title}」这个灵活补充环节进行视觉化呈现：${description}。画面必须忠于用户输入，不添加未提及的辅料、器具或制作逻辑。`,
+    `环境描述：根据该环节选择简洁的料理台、案板、容器、锅具、杯具或操作台环境；背景弱化，不能抢主体。`,
+    `细节：突出该环节最关键的动作、食材状态和材质变化，例如揉面、醒发、调酱、腌制、裹粉、摆盘或冷藏成型；人物只允许作为手部或局部辅助动作出现；画面必须包含一个不抢主体的小姜饼人彩蛋。`,
+    `参数：完整中文 Prompt，适合作为独立的一张补充流程图，比例为 3:4。`
   ].join("\n");
 }
 

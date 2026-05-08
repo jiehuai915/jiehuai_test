@@ -14,13 +14,18 @@ const SAMPLE_RECIPE = {
   ingredients:
     "芒果 80g\n椰奶 100ml\n茉莉绿茶 150ml\n白凉粉 10g\n白砂糖 20g\n冰块 适量",
   steps:
-    "1. 将白凉粉与白砂糖加入热水中搅拌溶解，倒入容器冷藏至凝固成果冻\n2. 将芒果切成小块备用\n3. 将茉莉绿茶放凉备用\n4. 将凝固好的果冻切块放入杯中\n5. 加入芒果块与冰块\n6. 倒入椰奶与茉莉绿茶混合液\n7. 轻轻搅拌即可饮用"
+    "1. 将白凉粉与白砂糖加入热水中搅拌溶解，倒入容器冷藏至凝固成果冻\n2. 将芒果切成小块备用\n3. 将茉莉绿茶放凉备用\n4. 将凝固好的果冻切块放入杯中\n5. 加入芒果块与冰块\n6. 倒入椰奶与茉莉绿茶混合液\n7. 轻轻搅拌即可饮用",
+  flexibleTitle: "冻冻制作",
+  flexibleDescription:
+    "白凉粉与白砂糖加入热水中搅拌溶解，倒入容器冷藏至凝固成果冻，再切成小块备用"
 };
 
 export default function HomePage() {
   const [recipeName, setRecipeName] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
+  const [flexibleTitle, setFlexibleTitle] = useState("灵活补充图");
+  const [flexibleDescription, setFlexibleDescription] = useState("");
   const [styleId, setStyleId] = useState<ArtStyleId>(ART_STYLES[0].id);
   const [prompts, setPrompts] = useState<RecipePrompts | null>(null);
   const [copiedTitle, setCopiedTitle] = useState("");
@@ -32,6 +37,8 @@ export default function HomePage() {
         recipeName,
         ingredients,
         steps,
+        flexibleTitle,
+        flexibleDescription,
         styleId
       })
     );
@@ -51,6 +58,8 @@ export default function HomePage() {
     setRecipeName(SAMPLE_RECIPE.recipeName);
     setIngredients(SAMPLE_RECIPE.ingredients);
     setSteps(SAMPLE_RECIPE.steps);
+    setFlexibleTitle(SAMPLE_RECIPE.flexibleTitle);
+    setFlexibleDescription(SAMPLE_RECIPE.flexibleDescription);
     setStyleId(
       recommendArtStyle({
         recipeName: SAMPLE_RECIPE.recipeName,
@@ -86,7 +95,7 @@ export default function HomePage() {
         ["封面 Prompt", prompts.cover],
         ["食材 Prompt", prompts.ingredients],
         ["步骤 Prompt", prompts.steps],
-        ["酱汁/汤底 Prompt", prompts.sauce]
+        [`${flexibleTitle || "灵活补充图"} Prompt`, prompts.flexible]
       ]
     : [];
 
@@ -136,6 +145,27 @@ export default function HomePage() {
             />
           </div>
 
+          <div className="field-group">
+            <label htmlFor="flexibleTitle">灵活图名称</label>
+            <input
+              id="flexibleTitle"
+              value={flexibleTitle}
+              onChange={(event) => setFlexibleTitle(event.target.value)}
+              placeholder="例如：和面、酱汁调制、腌制、摆盘"
+            />
+          </div>
+
+          <div className="field-group">
+            <label htmlFor="flexibleDescription">灵活图说明</label>
+            <textarea
+              id="flexibleDescription"
+              value={flexibleDescription}
+              onChange={(event) => setFlexibleDescription(event.target.value)}
+              placeholder="描述这张补充图要表现的环节，例如：面粉加水揉成光滑面团，盖上保鲜膜醒发"
+              rows={5}
+            />
+          </div>
+
           <div className="style-row">
             <div className="field-group">
               <label htmlFor="artStyle">绘画风格</label>
@@ -163,7 +193,7 @@ export default function HomePage() {
           )}
 
           <button className="primary-button" type="button" onClick={handleGenerate}>
-            生成四类 Prompt
+            生成四张图 Prompt
           </button>
         </form>
 
@@ -178,7 +208,7 @@ export default function HomePage() {
 
           {promptItems.length === 0 ? (
             <div className="empty-state">
-              输入菜谱后生成封面、食材、步骤、酱汁/汤底四类结构化中文 Prompt。
+              输入菜谱后生成封面、食材、步骤、灵活补充图四类结构化中文 Prompt。
             </div>
           ) : (
             <div className="prompt-list">
