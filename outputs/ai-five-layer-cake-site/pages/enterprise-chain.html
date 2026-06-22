@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>企业 AI 落地链 Enterprise AI Chain | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#chains"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="企业落地链导航">
+        <a href="../index.html#chains">返回产业链</a>
+        <a href="#status">行业现状</a>
+        <a href="#topology">拓扑流向</a>
+        <a href="#friction">接口摩擦</a>
+        <a href="#capex">价值捕获</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero layer-page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Horizontal Chain 03 · Enterprise AI</p>
+          <h1>企业 AI 落地链：把遗留数据、权限、模型和业务系统接成可审计的生产力</h1>
+          <p class="lead">核心矛盾：企业不缺 AI demo，缺的是能穿过 <button class="term" type="button" data-term="Data Governance">Data Governance</button>、权限隔离、系统集成、责任边界和 <button class="term" type="button" data-term="ROI">ROI</button> 审核的生产级工作流。</p>
+        </div>
+        <div class="cake-visual">
+          <div class="cake-layer layer-app"><strong>Workflow</strong><span>CRM、ERP、ITSM、HR、财务、客服</span></div>
+          <div class="cake-layer layer-model"><strong>Model</strong><span>RAG、行业模型、模型路由、Agent</span></div>
+          <div class="cake-layer layer-infra"><strong>Trust Layer</strong><span>权限、审计、连接器、观测、治理</span></div>
+          <div class="cake-layer layer-chip"><strong>Serving</strong><span>推理成本、私有部署、混合云、端侧</span></div>
+        </div>
+      </section>
+
+      <section id="status" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Industry Status</p>
+          <h2>当前行业现状</h2>
+          <p>企业 AI 正从“员工旁边的 Copilot”转向“系统里的数字劳动力”。胜负不只取决于模型能力，而取决于数据、权限、流程、审计和系统回写能否闭环。</p>
+        </div>
+        <div class="energy-dashboard">
+          <article class="energy-block">
+            <h3>已核验事实</h3>
+            <ul>
+              <li>Salesforce 在 2025 年推出 AgentExchange，官方称其扩展 Agentforce 生态，并把 Agentforce 定位为 digital labor platform。</li>
+              <li>Salesforce Agentforce 3 官方材料把规模化 AI agents 的最大阻碍定义为 visibility 与 control，并强调 unified agents、data、apps 与 metadata。</li>
+              <li>ServiceNow 2025 年发布新的 AI Platform，提出让 any AI、any agent、any model 在企业中协同工作；其 AI Agent Fabric 让 agents 和 orchestrators 共享上下文、协调任务并推动结果。</li>
+              <li>ServiceNow Yokohama release 宣布 AI Agent Orchestrator 与 AI Agent Studio GA，并扩展 Knowledge Graph 与 Common Service Data Model，以打通数据源壁垒。</li>
+              <li>Microsoft Research 开源 <button class="term" type="button" data-term="GraphRAG">GraphRAG</button> 项目，把 LLM 生成的知识图谱与图机器学习结合，用于提升私有数据集上的问答质量。</li>
+              <li>Databricks 社区 2026 年发布 Agent Bricks 新能力，定位为 governed enterprise agent platform，让 AI agents 在业务数据上运行，并带有权限和控制。</li>
+            </ul>
+          </article>
+          <article class="energy-block">
+            <h3>一句话现状</h3>
+            <p>企业 AI 的主战场已经从“模型 API 调用”转向 <button class="term" type="button" data-term="System of Record">System of Record</button> 连接、<button class="term" type="button" data-term="RBAC">RBAC</button>/<button class="term" type="button" data-term="ABAC">ABAC</button> 权限、<button class="term" type="button" data-term="RAG">RAG</button>/<button class="term" type="button" data-term="GraphRAG">GraphRAG</button>、<button class="term" type="button" data-term="Agent Orchestrator">Agent Orchestrator</button> 和可量化业务结果。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="topology" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Topology</p>
+          <h2>经典拓扑流向</h2>
+          <p>企业落地链本质是一条“从脏数据到可信动作”的管道：先把数据和权限整理好，再让模型在边界内执行，并把结果写回业务系统。</p>
+        </div>
+        <div class="chain-flow">
+          <a href="#legacy-data">企业数据</a>
+          <a href="#governance">数据治理</a>
+          <a href="#rag">RAG</a>
+          <a href="#permissions">权限系统</a>
+          <a href="#vertical-model">行业模型</a>
+          <a href="#agent">Agent</a>
+          <a href="#business-system">业务系统</a>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card" id="legacy-data">
+            <h3>1. 企业遗留数据</h3>
+            <p>数据分散在 CRM、ERP、ITSM、工单、邮箱、文档、BI、代码库和数据库里。真正难点是 <button class="term" type="button" data-term="Data Lineage">Data Lineage</button>、口径一致、权限继承和历史脏数据，而不是简单上传 PDF。</p>
+          </article>
+          <article class="detail-card" id="governance">
+            <h3>2. 数据治理 / 向量化</h3>
+            <p>企业需要 <button class="term" type="button" data-term="ETL/ELT">ETL/ELT</button>、脱敏、标签、权限映射、<button class="term" type="button" data-term="Embedding">Embedding</button>、向量索引和审计。没有治理层，RAG 会把错误、过期或越权信息放大。</p>
+          </article>
+          <article class="detail-card" id="rag">
+            <h3>3. RAG / GraphRAG</h3>
+            <p><button class="term" type="button" data-term="RAG">RAG</button> 把检索结果带入上下文，<button class="term" type="button" data-term="GraphRAG">GraphRAG</button> 用实体、关系和社区摘要提高复杂知识库问答质量。它们解决“模型不知道企业私有事实”的问题，但不自动解决权限和质量。</p>
+          </article>
+          <article class="detail-card" id="permissions">
+            <h3>4. 权限系统</h3>
+            <p>企业 AI 必须继承原系统权限：谁能看客户报价、谁能改订单、谁能查员工信息。<button class="term" type="button" data-term="RBAC">RBAC</button>、<button class="term" type="button" data-term="ABAC">ABAC</button>、<button class="term" type="button" data-term="PII">PII</button> 脱敏和 <button class="term" type="button" data-term="Data Residency">Data Residency</button> 是上线门槛。</p>
+          </article>
+          <article class="detail-card" id="vertical-model">
+            <h3>5. 行业模型 / 混合路由</h3>
+            <p>企业不会只用一个模型。常见架构是大模型处理复杂推理，小模型处理分类和抽取，私有模型处理敏感数据，<button class="term" type="button" data-term="Model Router">Model Router</button> 根据任务、成本和合规要求分流。</p>
+          </article>
+          <article class="detail-card" id="agent">
+            <h3>6. 多 Agent 工作流</h3>
+            <p>生产级 Agent 需要计划、工具调用、状态管理、审批、回滚和审计。<button class="term" type="button" data-term="Agent Orchestrator">Agent Orchestrator</button> 的价值是把多个专用 agent 编排成可控流程，而不是让模型自由行动。</p>
+          </article>
+          <article class="detail-card" id="business-system">
+            <h3>7. ERP / CRM / ITSM 回写</h3>
+            <p>价值最终发生在系统回写：创建报价、更新工单、生成采购申请、触发审批、修改客户记录。没有 <button class="term" type="button" data-term="System of Record">System of Record</button> 回写，AI 只是问答工具，不是生产系统。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="friction" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Interface Friction</p>
+          <h2>2026 年连接处核心痛点</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>数据与权限接口</h3>
+            <ul>
+              <li><strong>权限继承难</strong>：AI 检索结果必须遵守原系统权限，否则 RAG 会变成越权泄露通道。</li>
+              <li><strong>数据质量不稳定</strong>：企业文档过期、字段口径冲突、工单噪声、Excel 私有口径会让模型“认真地错”。</li>
+              <li><strong>多租户隔离</strong>：SaaS 平台要同时做缓存复用、成本优化和客户数据隔离，工程上很难两全。</li>
+              <li><strong>合规与数据驻留</strong>：金融、医疗、政企客户会要求私有部署、区域隔离、审计日志和供应商责任边界。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>工作流与 ROI 接口</h3>
+            <ul>
+              <li><strong>幻觉率和责任边界</strong>：企业最怕 AI 自信地写错系统记录，因此关键动作需要 HITL、阈值和回滚。</li>
+              <li><strong>系统集成 TCO</strong>：License 只是小头，连接器、权限映射、数据清洗、流程改造和运维才是大头。</li>
+              <li><strong>早期 ROI 低</strong>：很多项目停在试点，因为没有把 KPI 绑定到工单关闭率、销售转化、客服 AHT、财务关账周期等指标。</li>
+              <li><strong>组织采纳</strong>：AI 改变岗位边界，业务部门、IT、安全、法务和财务之间需要新的治理机制。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="capex" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">CAPEX & Value Capture</p>
+          <h2>长期价值捕获与资本开支变量</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card frontier">
+            <h3>1. 系统入口与数据所有权</h3>
+            <p>Salesforce、ServiceNow、Microsoft、SAP、Workday 的护城河来自系统入口、元数据、权限模型和业务对象。AI 越深入流程，越依赖这些 system of record。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>2. 数据平台与治理层</h3>
+            <p>Databricks、Snowflake、Microsoft Fabric、Google BigQuery 等捕获企业数据整理、权限、语义层、向量化和模型开发预算。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>3. 连接器与集成服务</h3>
+            <p>MuleSoft、Boomi、Workato、Zapier、n8n、iPaaS 和咨询集成商赚的是系统碎片化的钱。连接越深，切换成本越高。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>4. Agent 编排与治理</h3>
+            <p>Agent Studio、Agent Orchestrator、LangGraph、CrewAI、企业 sandbox 和 observability 工具捕获生产级 agent 的可控性预算。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>5. 行业数据与专业工作流</h3>
+            <p>医疗、法律、金融、制造、客服等行业软件公司拥有语料、流程和监管理解，可以把 AI 从通用助手变成垂直 autopilot。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>6. 安全、审计与合规</h3>
+            <p>身份治理、DLP、审计日志、prompt 防火墙、数据驻留和供应商风险管理会成为企业 AI 扩张的硬预算，而不是附加功能。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="players" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Eco-Map</p>
+          <h2>玩家图谱</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>绝对主导者</h3>
+            <ul>
+              <li><strong>Microsoft</strong>：M365、Azure、Copilot、Graph、Entra、Fabric，掌握企业身份、办公和云入口。</li>
+              <li><strong>Salesforce</strong>：Agentforce、Data Cloud、CRM 元数据和 AgentExchange，把 AI 绑定销售、服务、营销流程。</li>
+              <li><strong>ServiceNow</strong>：ITSM/ESM 工作流、AI Agent Orchestrator、AI Agent Fabric，定位企业 agent 控制塔。</li>
+              <li><strong>SAP / Workday / Oracle</strong>：ERP、HCM、财务和供应链核心系统，拥有高价值业务对象和权限边界。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>新晋和隐形冠军</h3>
+            <ul>
+              <li><strong>Databricks / Snowflake</strong>：企业数据平台、治理、向量检索、agent 开发和数据权限层。</li>
+              <li><strong>LangChain / LlamaIndex</strong>：RAG、agent 编排、连接器和开发者生态。</li>
+              <li><strong>Glean / Hebbia / Harvey / Abridge</strong>：以企业搜索、金融/法律/医疗工作流切入高价值场景。</li>
+              <li><strong>Okta / Palo Alto / CrowdStrike / Wiz</strong>：身份、安全、云风险和 AI 使用治理。</li>
+              <li><strong>Accenture / Deloitte / McKinsey</strong>：企业流程改造、系统集成和 ROI 落地服务。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>来源与持续核验</h2>
+        </div>
+        <div class="source-list">
+          <a href="https://investor.salesforce.com/news/news-details/2025/Salesforce-Launches-AgentExchange-the-Trusted-Marketplace-for-Agentforce/default.aspx" target="_blank" rel="noreferrer">Salesforce - AgentExchange for Agentforce</a>
+          <a href="https://investor.salesforce.com/news/news-details/2025/Salesforce-Launches-Agentforce-3-to-Solve-the-Biggest-Blockers-to-Scaling-AI-Agents-Visibility-and-Control/default.aspx" target="_blank" rel="noreferrer">Salesforce - Agentforce 3 visibility and control</a>
+          <a href="https://newsroom.servicenow.com/press-releases/details/2025/ServiceNow-Unveils-the-New-ServiceNow-AI-Platform-to-Put-Any-AI-Any-Agent-Any-Model-to-Work-Across-the-Enterprise/default.aspx" target="_blank" rel="noreferrer">ServiceNow - New AI Platform</a>
+          <a href="https://newsroom.servicenow.com/press-releases/details/2025/ServiceNows-latest-platform-release-adds-to-thousands-of-AI-agents-across-CRM-HR-IT-and-more-for-faster-smarter-workflows-and-maximum-business-impact-03-12-2025-traffic/default.aspx" target="_blank" rel="noreferrer">ServiceNow - Yokohama release</a>
+          <a href="https://github.com/microsoft/graphrag" target="_blank" rel="noreferrer">Microsoft - GraphRAG GitHub</a>
+          <a href="https://microsoft.github.io/graphrag/" target="_blank" rel="noreferrer">Microsoft GraphRAG Docs</a>
+          <a href="https://community.databricks.com/t5/announcements/agent-bricks-the-governed-enterprise-agent-platform/td-p/154674" target="_blank" rel="noreferrer">Databricks - Agent Bricks governed enterprise agent platform</a>
+        </div>
+      </section>
+    </main>
+    <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
+    <script src="../glossary.js"></script>
+    <script src="../page-glossary.js"></script>
+  </body>
+</html>

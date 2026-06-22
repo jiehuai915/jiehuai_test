@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>应用层 App | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#layers"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="应用层导航">
+        <a href="../index.html#layers">返回五层</a>
+        <a href="#status">行业现状</a>
+        <a href="#frontiers">前沿路线</a>
+        <a href="#bottlenecks">瓶颈</a>
+        <a href="#friction">接口摩擦</a>
+        <a href="#capex">CAPEX</a>
+        <a href="#players">玩家图谱</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero layer-page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Layer 05 · App</p>
+          <h1>应用层：从 Copilot 走向可审计的数字员工</h1>
+          <p class="lead">核心矛盾：模型能力已经足够制造惊艳 demo，但真正商业化取决于能否进入工作流、拿到数据闭环、控制权限风险，并稳定交付可计量 ROI。</p>
+        </div>
+        <div class="cake-visual">
+          <div class="cake-layer layer-app">
+            <strong>当前判断</strong>
+            <span>应用层的护城河不是“接入大模型”，而是工作流嵌入深度、私有数据反馈、权限审计、结果责任和分发入口。</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="status" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Industry Status</p>
+          <h2>当前行业现状</h2>
+        </div>
+        <div class="energy-dashboard">
+          <article class="energy-block">
+            <h3>已核验事实</h3>
+            <ul>
+              <li>OpenAI 2025 年推出 <button class="term" type="button" data-term="Codex">Codex</button> 云端软件工程 agent，官方称其可在独立环境中执行代码任务、修复 bug、运行测试并提交结果。</li>
+              <li>GitHub 发布 <button class="term" type="button" data-term="Copilot Coding Agent">Copilot coding agent</button>，把 Copilot 从补全工具推进到可分配 issue、创建 pull request 的异步开发代理。</li>
+              <li>Salesforce 推出 <button class="term" type="button" data-term="Agentforce">Agentforce</button>，定位为企业内可执行销售、服务、营销、商务等任务的数字劳动力平台。</li>
+              <li>ServiceNow 推出 AI Agent Orchestrator，强调跨 AI agent 与人类团队的多 agent 协作。</li>
+              <li>Google 推出 <button class="term" type="button" data-term="Agentspace">Agentspace</button>，面向企业搜索、数据连接与智能体工作流。</li>
+              <li>Abridge、Harvey、Sierra、Glean 等垂直应用分别在医疗记录、法律、客服、企业知识工作中形成早期商业化样板。</li>
+            </ul>
+            <div class="source-badges" data-source-ids="openai-codex, github-copilot-coding-agent, salesforce-agentforce-3, google-agentspace"></div>
+          </article>
+          <article class="energy-block">
+            <h3>一句话现状</h3>
+            <p>应用层正在从“AI 助手”进入“可授权、可观测、可回滚、可计费”的 <button class="term" type="button" data-term="Agentic Workflow">Agentic Workflow</button> 阶段，赢家将是掌握分发入口、业务系统连接和任务数据闭环的公司。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Fundamentals</p>
+          <h2>经典基础知识筑基</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card"><h3>软件工程与系统集成</h3><p>企业应用的难点不是把模型接进来，而是连接 <button class="term" type="button" data-term="ERP">ERP</button>、<button class="term" type="button" data-term="CRM">CRM</button>、工单、权限、数据仓库和审批流。</p></article>
+          <article class="detail-card"><h3>组织流程与责任边界</h3><p>AI 应用进入真实业务后，必须明确谁授权、谁审批、谁承担错误后果。<button class="term" type="button" data-term="HITL">HITL</button> 是生产环境的保险丝。</p></article>
+          <article class="detail-card"><h3>用户体验与任务完成率</h3><p>聊天体验不是最终目标。关键指标是任务完成率、节省时间、错误率、用户留存和业务结果，而不是模型回答是否漂亮。</p></article>
+          <article class="detail-card"><h3>数据闭环与学习飞轮</h3><p>高价值应用会记录任务、反馈、修改、审批和结果，形成私有 <button class="term" type="button" data-term="Data Flywheel">Data Flywheel</button>，反过来强化模型和产品。</p></article>
+        </div>
+      </section>
+
+      <section id="frontiers" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">2026 Frontiers</p>
+          <h2>前沿应用路线</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card frontier" id="agentic-workflow"><h3><button class="term" type="button" data-term="Agentic Workflow">Agentic Workflow</button></h3><p>应用从“人问 AI 答”变成目标拆解、工具调用、状态记忆、审批、执行和审计的闭环系统。核心能力是可控执行，而不是聊天。</p></article>
+          <article class="detail-card frontier" id="coding-agent"><h3>AI 编程工作台</h3><p><button class="term" type="button" data-term="Codex">Codex</button>、<button class="term" type="button" data-term="Copilot Coding Agent">Copilot coding agent</button>、Cursor、Devin 等工具把软件生产从补全推进到 issue 级任务执行。</p></article>
+          <article class="detail-card frontier" id="enterprise-agent"><h3>企业 Agent 平台</h3><p>Microsoft Copilot Studio、Salesforce Agentforce、ServiceNow、Google Agentspace 把企业应用入口、权限和数据连接封装成 agent 平台。</p></article>
+          <article class="detail-card frontier" id="vertical-ai"><h3>垂直行业 Autopilot</h3><p>医疗、法律、客服、销售、财务、HR 等场景从 Copilot 走向半自动执行，商业模式从 seat 费转向任务量、结果和节省成本。</p></article>
+          <article class="detail-card frontier" id="multimodal-app"><h3>多模态工作流</h3><p>语音、图像、屏幕、文档、视频和代码进入统一工作流，推动会议记录、医疗文书、设计、客服、教育和工业巡检重构。</p></article>
+          <article class="detail-card frontier" id="embodied-app"><h3>具身智能应用</h3><p>机器人、自动驾驶、仓储、制造和巡检把 AI 应用从数字世界推向物理世界，门槛转向安全、实时性、硬件成本和场景数据。</p></article>
+        </div>
+      </section>
+
+      <section id="bottlenecks" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Bottlenecks</p>
+          <h2>卡脖子瓶颈</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>产品与交付瓶颈</h3>
+            <ul>
+              <li><strong><button class="term" type="button" data-term="ROI">ROI</button> 不稳定</strong>：demo 容易，持续节省人力和提升收入难。</li>
+              <li><strong><button class="term" type="button" data-term="TCO">TCO</button> 高</strong>：企业数据治理、权限、集成和定制服务会吞噬早期收益。</li>
+              <li><strong>系统集成复杂</strong>：真实企业系统老旧、数据脏、流程碎，连接器和权限映射成本高。</li>
+              <li><strong>长任务失败恢复</strong>：Agent 执行多步任务时容易中断、循环或走错分支。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>安全与责任瓶颈</h3>
+            <ul>
+              <li><strong><button class="term" type="button" data-term="Hallucination">Hallucination</button></strong>：错误输出会直接影响业务结果和信任。</li>
+              <li><strong><button class="term" type="button" data-term="Action Permissioning">Action Permissioning</button></strong>：Agent 能做什么、谁批准、如何回滚，决定能否上线。</li>
+              <li><strong>数据合规</strong>：企业私有数据、客户隐私、行业监管和跨境数据限制。</li>
+              <li><strong>审计与可解释</strong>：生产系统必须知道 Agent 为什么做、做了什么、谁批准。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="friction" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Interface Friction</p>
+          <h2>应用层与底层能力的接口摩擦</h2>
+          <p>应用层最容易出现“演示很强、落地很慢”：底层模型能力要穿过权限、数据、工作流、责任和 ROI 才能变成商业价值。</p>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card">
+            <h3>用户任务 vs 模型输出</h3>
+            <p>用户买的不是回答，而是任务结果。应用必须把模型输出接到工具、审批、系统记录和回滚机制，才能从 Copilot 走向数字员工。</p>
+          </article>
+          <article class="detail-card">
+            <h3>业务系统 vs Agent 行动</h3>
+            <p>Agent 要进入 ERP、CRM、ITSM、财务和代码仓库，必须解决 <button class="term" type="button" data-term="Action Permissioning">Action Permissioning</button>、RBAC/ABAC、审计和多租户隔离。</p>
+          </article>
+          <article class="detail-card">
+            <h3>模型成本 vs 产品定价</h3>
+            <p>应用按 seat、任务量或结果收费，但底层成本按 token、上下文、工具调用和推理时间增长。reasoning 越强，毛利管理越重要。</p>
+          </article>
+          <article class="detail-card">
+            <h3>试点 ROI vs 组织采纳</h3>
+            <p>早期试点常被集成、培训、权限治理和流程改造成本吞噬。真正可扩张的应用要能证明节省时间、减少错误或提升收入。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="capex" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">CAPEX / Value Capture</p>
+          <h2>资本开支与价值捕获</h2>
+          <p>应用层本身轻资产，但会把底层 token、数据治理、集成服务和安全审计转化为客户 TCO；赢家靠分发入口和工作流深度捕获价值。</p>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>核心成本变量</h3>
+            <ul>
+              <li><strong>推理成本</strong>：输入/输出/reasoning token、上下文长度、模型路由和缓存命中率。</li>
+              <li><strong>系统集成</strong>：连接器、权限映射、数据清洗、工作流重构和客户化交付。</li>
+              <li><strong>治理与安全</strong>：日志、审计、人类在环、guardrails、红队和合规报告。</li>
+              <li><strong>获客与变更管理</strong>：企业培训、流程迁移、席位扩张和组织阻力。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>价值捕获位置</h3>
+            <ul>
+              <li><strong>系统记录入口</strong>：CRM、ITSM、办公套件、代码仓库掌握日常任务入口。</li>
+              <li><strong>垂直工作流</strong>：医疗、法律、客服、编程等高价值场景可按结果或任务收费。</li>
+              <li><strong>数据闭环</strong>：用户修改、审批、反馈和任务结果构成私有训练/评测资产。</li>
+              <li><strong>平台生态</strong>：插件、连接器、Agent 市场和开发者工具形成切换成本。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="players" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Eco-Map</p>
+          <h2>全球玩家图谱</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>平台级巨头</h3>
+            <ul>
+              <li><strong>Microsoft / GitHub</strong>：Office、Teams、Copilot、GitHub、Azure 分发入口。</li>
+              <li><strong>Google</strong>：Workspace、Agentspace、Gemini、Search 和企业数据连接。</li>
+              <li><strong>Salesforce</strong>：Agentforce、CRM 数据、销售服务工作流。</li>
+              <li><strong>ServiceNow</strong>：ITSM、企业流程、AI Agent Orchestrator。</li>
+              <li><strong>Adobe</strong>：创意工作流、内容生产、Firefly 和设计工具分发。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>垂直与新晋玩家</h3>
+            <ul>
+              <li><strong>OpenAI</strong>：ChatGPT、Codex、Agents SDK 与开发者生态。</li>
+              <li><strong>Cursor / Cognition</strong>：AI 编程和软件工程 agent。</li>
+              <li><strong>Harvey</strong>：法律 AI 工作流。</li>
+              <li><strong>Abridge</strong>：医疗临床文档和 ambient AI。</li>
+              <li><strong>Sierra / Glean</strong>：客服 agent、企业搜索和知识工作流。</li>
+              <li><strong>Figure AI / Physical Intelligence</strong>：具身智能应用和机器人数据闭环。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>来源与持续核验</h2>
+        </div>
+        <div class="source-list">
+          <a href="https://openai.com/index/introducing-codex/" target="_blank" rel="noreferrer">OpenAI - Codex</a>
+          <a href="https://github.blog/news-insights/product-news/github-copilot-coding-agent/" target="_blank" rel="noreferrer">GitHub - Copilot coding agent</a>
+          <a href="https://www.salesforce.com/agentforce/" target="_blank" rel="noreferrer">Salesforce - Agentforce</a>
+          <a href="https://www.servicenow.com/products/ai-agents.html" target="_blank" rel="noreferrer">ServiceNow - AI Agents</a>
+          <a href="https://cloud.google.com/products/agentspace" target="_blank" rel="noreferrer">Google - Agentspace</a>
+          <a href="https://www.abridge.com/" target="_blank" rel="noreferrer">Abridge - Clinical AI</a>
+        </div>
+      </section>
+    </main>
+    <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
+    <script src="../glossary.js"></script>
+    <script src="../sources-data.js"></script>
+    <script src="../source-badges.js"></script>
+    <script src="../page-glossary.js"></script>
+  </body>
+</html>

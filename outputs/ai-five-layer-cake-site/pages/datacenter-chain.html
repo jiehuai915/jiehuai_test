@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI 数据中心建设链 Data Center Chain | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#chains"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="数据中心链导航">
+        <a href="../index.html#chains">返回产业链</a>
+        <a href="#status">行业现状</a>
+        <a href="#topology">拓扑流向</a>
+        <a href="#friction">接口摩擦</a>
+        <a href="#capex">价值捕获</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero layer-page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Horizontal Chain 04 · AI Data Center</p>
+          <h1>AI 数据中心建设链：把土地、电力、冷却和机柜工程变成可交付算力</h1>
+          <p class="lead">核心矛盾：AI 算力需求以软件速度扩张，但数据中心受 <button class="term" type="button" data-term="Interconnection Queue">Interconnection Queue</button>、变电设备、施工许可、<button class="term" type="button" data-term="Liquid Cooling">Liquid Cooling</button>、高密机柜和运维可靠性这些工业周期约束。</p>
+        </div>
+        <div class="cake-visual">
+          <div class="cake-layer layer-energy"><strong>Power</strong><span>土地、电网、PPA、变电站、储能</span></div>
+          <div class="cake-layer layer-infra"><strong>Facility</strong><span>机房、UPS、母线、CDU、消防、运维</span></div>
+          <div class="cake-layer layer-chip"><strong>Rack</strong><span>GB200/Rubin、服务器、网络、液冷回路</span></div>
+          <div class="cake-layer layer-model"><strong>Workload</strong><span>训练、推理、SLA、PUE/WUE</span></div>
+        </div>
+      </section>
+
+      <section id="status" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Industry Status</p>
+          <h2>当前行业现状</h2>
+          <p>AI 数据中心建设已经从传统机房扩容，变成“电力开发 + 高密液冷 + 机柜级系统 + 工业运维”的综合工程。真正稀缺的是可按期交付的 MW，而不是PPT上的算力规划。</p>
+        </div>
+        <div class="energy-dashboard">
+          <article class="energy-block">
+            <h3>已核验事实</h3>
+            <ul>
+              <li>IEA 2026 报告指出，2025 年全球数据中心用电增长 17%，AI-focused data centres 增长更快，明显高于全球电力需求 3% 的增速。</li>
+              <li>Uptime Intelligence 指出，2025 代 AI 系统会出现超过 100kW/rack 的实现，高密 AI 机柜推动 <button class="term" type="button" data-term="Direct-to-Chip Cooling">Direct-to-Chip Cooling</button>、<button class="term" type="button" data-term="CDU">CDU</button> 和白区管路改造。</li>
+              <li>Vertiv 与 NVIDIA 联合发布 GB200 NVL72 7MW 参考架构，支持最高 132kW/rack，说明 AI 工厂设计已经进入超高密标准化蓝图阶段。</li>
+              <li>Schneider Electric 发布支持 NVIDIA GB300 NVL72 的参考设计，强调集成电力管理和液冷控制，帮助运营商提前规划下一代 AI 基础设施。</li>
+              <li>Eaton 2025 年提出 grid-to-chip 数据中心方案，覆盖智能配电、备用电源、数字化运维和液冷系统，反映电力与冷却正在一体化。</li>
+              <li>NVIDIA 将 GB200 NVL72 机柜、计算/交换 tray 机械设计、液冷和热环境规范贡献给 OCP，推动高密 AI 机柜与数据中心标准接口对齐。</li>
+            </ul>
+          </article>
+          <article class="energy-block">
+            <h3>一句话现状</h3>
+            <p>AI 数据中心的核心指标已经从“机房面积”和“PUE”升级为可交付 MW、<button class="term" type="button" data-term="Rack Density">Rack Density</button>、液冷可靠性、<button class="term" type="button" data-term="MTTR">MTTR</button>、并网周期、供应链交期和客户 GPU 上架速度。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="topology" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Topology</p>
+          <h2>经典拓扑流向</h2>
+          <p>这条链是从“选址能不能拿到电”一路传导到“机柜能不能稳定产 token”。任何一环慢，GPU 都会变成仓库里的资本占用。</p>
+        </div>
+        <div class="chain-flow">
+          <a href="#site-selection">土地/选址</a>
+          <a href="#grid-ppa">电力/PPA</a>
+          <a href="#building">建筑</a>
+          <a href="#rack-power">机柜配电</a>
+          <a href="#liquid-cooling">液冷</a>
+          <a href="#servers">服务器</a>
+          <a href="#network">网络</a>
+          <a href="#operations">运维</a>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card" id="site-selection">
+            <h3>1. 土地 / 选址</h3>
+            <p>AI 项目选址不只是便宜土地，而是电网节点容量、输电走廊、用水、税收、延迟、自然灾害、社区接受度和客户合规要求的组合优化。</p>
+          </article>
+          <article class="detail-card" id="grid-ppa">
+            <h3>2. 变电站接入 / PPA</h3>
+            <p>核心是拿到可交付电力容量。<button class="term" type="button" data-term="Substation">Substation</button>、<button class="term" type="button" data-term="Power Transformer">Power Transformer</button>、输电扩容、<button class="term" type="button" data-term="PPA">PPA</button> 和并网协议共同决定项目开工与投产节奏。</p>
+          </article>
+          <article class="detail-card" id="building">
+            <h3>3. 机房建筑 / EPC</h3>
+            <p><button class="term" type="button" data-term="EPC">EPC</button> 要把土建、消防、安防、楼板承重、白区/灰区、管路、电缆桥架和设备运输路径一次性设计进来。AI 机柜重量、热负荷和交付节奏都比传统机房更苛刻。</p>
+          </article>
+          <article class="detail-card" id="rack-power">
+            <h3>4. 高压配电 / UPS / 机柜母线</h3>
+            <p>电力从电网进入数据中心后，要经过高压开关柜、变压器、<button class="term" type="button" data-term="UPS">UPS</button>、<button class="term" type="button" data-term="Switchgear">Switchgear</button>、<button class="term" type="button" data-term="Busway">Busway</button>、PDU 到机柜。高密 AI 负载使配电系统从后勤设施变成核心产能。</p>
+          </article>
+          <article class="detail-card" id="liquid-cooling">
+            <h3>5. CDU / 液冷系统</h3>
+            <p>100kW+ 级机柜必须依赖 <button class="term" type="button" data-term="Cold Plate">Cold Plate</button>、CDU、manifold、quick disconnect、泄漏检测和水处理。液冷把 IT 与 Facility 的责任边界重新打散。</p>
+          </article>
+          <article class="detail-card" id="servers">
+            <h3>6. AI 服务器 / 机柜级系统</h3>
+            <p>GB200/GB300/Rubin 类系统不是“服务器上架”，而是机柜级 AI supercomputer 落地：电源、液冷、NVLink、交换 tray、线缆、网卡和管理软件必须一起验收。</p>
+          </article>
+          <article class="detail-card" id="network">
+            <h3>7. 网络 / 光模块</h3>
+            <p>训练集群需要后端训练网络，推理服务需要低延迟服务网络。InfiniBand、Ethernet、光模块、布线半径、机柜排布和网络冗余共同影响吞吐与故障域。</p>
+          </article>
+          <article class="detail-card" id="operations">
+            <h3>8. 运维 / SLA</h3>
+            <p>AI 数据中心运维要同时管电力、冷却液、GPU、网络、存储和客户作业。关键指标包括 <button class="term" type="button" data-term="SLA">SLA</button>、MTBF、MTTR、PUE/WUE、漏液事件、热失控和交付周期。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="friction" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Interface Friction</p>
+          <h2>2026 年连接处核心痛点</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>电力与建设接口</h3>
+            <ul>
+              <li><strong>并网排队</strong>：土地和资金到位不等于能投产，电网接入和变电站扩容常常决定项目实际时间表。</li>
+              <li><strong>长周期设备</strong>：变压器、高压开关柜、UPS、发电机、冷水机、CDU 和电缆等设备交期会拖慢交付。</li>
+              <li><strong>PPA 与负载匹配</strong>：训练负载波峰明显，推理负载更连续；购电合同、备用电源和储能需要按负载形态设计。</li>
+              <li><strong>水资源与许可</strong>：液冷不必然高耗水，但园区冷却、补水、排热和环境许可会影响选址。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>液冷与运维接口</h3>
+            <ul>
+              <li><strong>漏液风险</strong>：液冷把液体带入白区，泄漏检测、快接头、维护 SOP 和责任划分成为上线门槛。</li>
+              <li><strong>风冷改造成本</strong>：传统机房不一定能承载 100kW+ 机柜，楼板、电力、管路、消防和运维都要改。</li>
+              <li><strong>IT/Facility 边界模糊</strong>：CDU、冷板、服务器托盘和机房水路跨越供应商边界，SLA 归责更复杂。</li>
+              <li><strong>高密故障放大</strong>：单柜功率越高，局部故障对客户集群和训练作业的影响越大。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="capex" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">CAPEX & Value Capture</p>
+          <h2>长期价值捕获与资本开支变量</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card frontier">
+            <h3>1. 电力接入与土地卡位</h3>
+            <p>最强护城河来自可交付电力、变电站位置、土地许可和长期 PPA。未来数据中心估值会越来越像“电力资产 + 算力交付权”。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>2. 高压配电与备用电源</h3>
+            <p>Schneider、Eaton、Siemens、ABB、Vertiv 捕获开关柜、UPS、母线、PDU、监控和电气系统集成价值。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>3. 液冷与热管理</h3>
+            <p>CDU、冷板、快接头、manifold、漏液检测、水处理和热交换器成为高密 AI 机柜的必需品，供应商认证和规模制造形成壁垒。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>4. AI 机柜与整机集成</h3>
+            <p>Supermicro、Dell、HPE、Wiwynn、Quanta、Foxconn 等赚取机柜级系统集成、液冷适配、客户验收和售后运维的钱。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>5. 数据中心开发商和 GPU 云</h3>
+            <p>Equinix、Digital Realty、QTS、Compass、CoreWeave 等用电力、机房和客户合约锁定长期现金流。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>6. 数字孪生与运维软件</h3>
+            <p>AI 工厂复杂度上升后，容量规划、热仿真、故障预测、能耗优化和 SLA 可观测会成为新的软件层。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="players" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Eco-Map</p>
+          <h2>玩家图谱</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>绝对主导者</h3>
+            <ul>
+              <li><strong>Equinix / Digital Realty / QTS / CyrusOne</strong>：数据中心土地、电力、客户合同和运维经验。</li>
+              <li><strong>Microsoft / Google / AWS / Meta</strong>：自建超大 AI campus，直接锁定电力、土地和设备供应。</li>
+              <li><strong>Schneider / Eaton / Siemens / ABB</strong>：电气系统、UPS、开关柜、母线、配电自动化和电力管理。</li>
+              <li><strong>Vertiv</strong>：UPS、热管理、CDU、液冷和 AI reference architecture。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>新晋和隐形冠军</h3>
+            <ul>
+              <li><strong>CoreWeave / Crusoe / Lambda</strong>：GPU 云与 AI 数据中心开发绑定，速度和客户需求牵引强。</li>
+              <li><strong>nVent / Boyd / Motivair / CoolIT</strong>：液冷回路、CDU、冷板、快接头和热管理组件。</li>
+              <li><strong>Supermicro / Dell / HPE / Wiwynn / Quanta</strong>：AI 服务器、机柜级系统和液冷整合。</li>
+              <li><strong>GE Vernova / Caterpillar / Cummins</strong>：燃机、备用发电、微电网和电力设备。</li>
+              <li><strong>NVIDIA</strong>：通过 rack-scale 平台和参考设计反向定义数据中心物理接口。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>来源与持续核验</h2>
+        </div>
+        <div class="source-list">
+          <a href="https://www.iea.org/news/data-centre-electricity-use-surged-in-2025-even-with-tightening-bottlenecks-driving-a-scramble-for-solutions" target="_blank" rel="noreferrer">IEA - Data centre electricity use surged in 2025</a>
+          <a href="https://www.iea.org/reports/key-questions-on-energy-and-ai/executive-summary" target="_blank" rel="noreferrer">IEA - Key Questions on Energy and AI</a>
+          <a href="https://intelligence.uptimeinstitute.com/resource/ai-and-cooling-methods-and-capacities" target="_blank" rel="noreferrer">Uptime Intelligence - AI and cooling methods</a>
+          <a href="https://investors.vertiv.com/financial-news/news-details/2024/Vertiv-Codevelops-with-NVIDIA-Complete-Power-and-Cooling-Blueprint-for-NVIDIA-GB200-NVL72-Platform/default.aspx" target="_blank" rel="noreferrer">Vertiv - NVIDIA GB200 NVL72 power and cooling blueprint</a>
+          <a href="https://www.se.com/ww/en/about-us/newsroom/news/press-releases/schneider-electric-announces-new-reference-designs-featuring-integrated-power-management-and-liquid-cooling-controls-supporting-nvidia-mission-control-and-nvidia-gb300-nvl72-68ca8fdd5e6c6f9d3a096133" target="_blank" rel="noreferrer">Schneider Electric - AI reference designs for NVIDIA GB300 NVL72</a>
+          <a href="https://www.eaton.com/us/en-us/company/news-insights/news-releases/2025/eaton-accelerates-data-center-infrastrructure-in-ai-era-with-nvidia.html" target="_blank" rel="noreferrer">Eaton - Grid-to-chip AI data center infrastructure</a>
+          <a href="https://developer.nvidia.com/blog/?p=90182" target="_blank" rel="noreferrer">NVIDIA - GB200 NVL72 designs to OCP</a>
+          <a href="https://www.nvidia.com/en-us/data-center/gb200-nvl72/" target="_blank" rel="noreferrer">NVIDIA - GB200 NVL72</a>
+        </div>
+      </section>
+    </main>
+    <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
+    <script src="../glossary.js"></script>
+    <script src="../page-glossary.js"></script>
+  </body>
+</html>

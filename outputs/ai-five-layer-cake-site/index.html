@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI 五层蛋糕产业知识体系</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#overview" aria-label="AI 五层蛋糕产业知识体系首页">
+        <span class="brand-mark"></span>
+        <span>AI 五层蛋糕产业知识体系</span>
+      </a>
+      <nav class="nav" aria-label="主导航">
+        <a href="#logic" data-category-link="overview">总览</a>
+        <a href="#layers" data-category-link="layers">五层</a>
+        <a href="#chains" data-category-link="chains">产业链</a>
+        <a href="#companies" data-category-link="companies">公司研究</a>
+        <a href="#search" data-category-link="search">搜索</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="overview" class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Research Terminal · 2026-06-18</p>
+          <h1>把 AI 从“模型热潮”拆成一张可持续更新的产业地图</h1>
+          <p class="lead">
+            这是 AI 双维矩阵产业链知识体系的研究终端：纵向用五层蛋糕看价值传导，横向用八条产业链看接口摩擦、代表公司、关键指标和资本开支。当前版本已完成主框架、公司池、矩阵交点、来源注册和搜索入口，适合用于重点赛道拆解、标的比较和事实持续校准。
+          </p>
+          <div class="hero-actions">
+            <a class="primary-action" href="#matrix" data-category-link="matrix">进入双维矩阵</a>
+            <a class="secondary-action" href="#layers" data-category-link="layers">查看五层框架</a>
+          </div>
+        </div>
+        <div class="cake-visual" aria-label="AI 五层蛋糕结构图">
+          <div class="cake-layer layer-app">
+            <strong>应用层</strong>
+            <span>Agent · 办公 · 编程 · 医疗 · 金融 · 工业 · 机器人 · 自动驾驶</span>
+          </div>
+          <div class="cake-layer layer-model">
+            <strong>模型层</strong>
+            <span>基础模型 · 多模态 · 小模型 · 行业模型 · 推理模型 · 具身智能模型</span>
+          </div>
+          <div class="cake-layer layer-infra">
+            <strong>基础设施层</strong>
+            <span>数据中心 · 云平台 · AI 工厂 · 网络 · 存储 · 液冷 · 调度 · 运维</span>
+          </div>
+          <div class="cake-layer layer-chip">
+            <strong>芯片层</strong>
+            <span>GPU · CPU · ASIC · HBM · 网络芯片 · 光模块 · 服务器 · 半导体设备</span>
+          </div>
+          <div class="cake-layer layer-energy">
+            <strong>能源层</strong>
+            <span>电力 · 电网 · 储能 · 天然气 · 核能 · 可再生能源 · 土地 · 水资源</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="logic" class="section category-panel" data-category-panel="overview" aria-labelledby="logic-title">
+        <div class="section-heading">
+          <p class="eyebrow">Core Logic</p>
+          <h2 id="logic-title">两条主线</h2>
+        </div>
+        <div class="logic-grid">
+          <article class="logic-panel">
+            <h3>纵向传导</h3>
+            <p>能源决定算力上限，芯片决定计算效率，基础设施决定规模化能力，模型决定智能能力，应用决定商业价值。</p>
+          </article>
+          <article class="logic-panel">
+            <h3>横向展开</h3>
+            <p>每一层都拆成供应链、技术栈、代表公司、成本结构、瓶颈环节、监管变量和商业模式。</p>
+          </article>
+        </div>
+        <nav class="terminal-subnav framework-subnav" aria-label="框架二级入口">
+          <span>深入查看</span>
+          <a href="#matrix" data-category-link="matrix">双维矩阵</a>
+          <a href="#links" data-category-link="links">层间联系</a>
+          <a href="pages/sources.html">来源</a>
+        </nav>
+      </section>
+
+      <section id="search" class="section section-tint category-panel" data-category-panel="search" aria-labelledby="search-title" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">Investment Terminal · Epic 6</p>
+          <h2 id="search-title">全局搜索</h2>
+          <p>跨五层、八链、40 个矩阵交点、公司卡、KPI 和来源进行统一检索。</p>
+        </div>
+        <div class="global-search-panel">
+          <label class="search-input-wrap" for="globalSearchInput">
+            <span>Search</span>
+            <input id="globalSearchInput" type="search" placeholder="搜索 HBM4、PUE、NVIDIA、推理链、Agent..." autocomplete="off" />
+          </label>
+          <div class="terminal-toolbar" id="searchFilters" aria-label="搜索分类筛选"></div>
+          <div class="search-results" id="searchResults"></div>
+        </div>
+      </section>
+
+      <section id="matrix" class="section section-tint category-panel" data-category-panel="matrix" aria-labelledby="matrix-title" hidden>
+        <button class="back-link" type="button" data-category-link="overview">返回总览</button>
+        <div class="section-heading">
+          <p class="eyebrow">Dual Matrix</p>
+          <h2 id="matrix-title">纵横交织的研究矩阵</h2>
+          <p>每个交点都是一个独立研究单元：它既属于某一层，也嵌入某条产业链。点击交点可查看关键问题、接口摩擦、代表公司和研究入口。</p>
+        </div>
+        <div class="matrix-wrap" aria-label="AI 双维产业链矩阵">
+          <div class="matrix-grid" id="matrixGrid"></div>
+        </div>
+      </section>
+
+      <section id="layers" class="section category-panel" data-category-panel="layers" aria-labelledby="layers-title" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">Vertical Map</p>
+          <h2 id="layers-title">五层主框架</h2>
+          <p>每层默认只保留行业现状、核心瓶颈、代表公司和关键链条入口；基础知识与术语折叠保留。</p>
+        </div>
+        <div class="layer-grid" id="layerGrid"></div>
+      </section>
+
+      <section id="chains" class="section section-tint category-panel" data-category-panel="chains" aria-labelledby="chains-title" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">Horizontal Chains</p>
+          <h2 id="chains-title">横向产业链库</h2>
+          <p>每条链默认保留拓扑流向、接口摩擦、CAPEX/价值捕获和代表公司入口；完整节点继续放在深度页。</p>
+        </div>
+        <div class="chain-board" id="chainBoard"></div>
+      </section>
+
+      <section id="companies" class="section category-panel" data-category-panel="companies" aria-labelledby="companies-title" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">Investment Terminal · Epic 1</p>
+          <h2 id="companies-title">系统化公司卡片</h2>
+          <p>把玩家图谱升级为可筛选的投资研究卡：公司状态、核心护城河、目标层级与链条、受益逻辑、风险和代表产品统一结构化。</p>
+        </div>
+        <nav class="terminal-subnav" aria-label="公司投研工具">
+          <span>投研工具</span>
+          <a href="#peer-comparison" data-category-link="comparison">同业对照</a>
+          <a href="#kpis" data-category-link="kpis">量化 KPI</a>
+          <a href="#sensitivity" data-category-link="sensitivity">估值敏感性</a>
+        </nav>
+        <div class="portfolio-dashboard" id="portfolioDashboard" aria-label="标的看板"></div>
+        <label class="company-search-wrap" for="companySearchInput">
+          <span>公司搜索</span>
+          <input id="companySearchInput" type="search" placeholder="搜索 NVIDIA、中际旭创、HBM、液冷、Agent、TSLA..." autocomplete="off" />
+        </label>
+        <div class="terminal-toolbar" id="companyFilters" aria-label="公司卡筛选"></div>
+        <div class="company-terminal" id="companyTerminal"></div>
+      </section>
+
+      <section id="peer-comparison" class="section section-tint category-panel" data-category-panel="comparison" aria-labelledby="comparison-title" hidden>
+        <button class="back-link" type="button" data-category-link="companies">返回公司研究</button>
+        <div class="section-heading">
+          <p class="eyebrow">Investment Terminal · P1</p>
+          <h2 id="comparison-title">同业对照表</h2>
+          <p>把同一价值节点下的公司放进高密度表格，比较产业位置、AI 价值节点、护城河、关键 KPI、风险、催化剂和来源。</p>
+        </div>
+        <div class="comparison-terminal" id="comparisonTerminal"></div>
+      </section>
+
+      <section id="kpis" class="section section-tint category-panel" data-category-panel="kpis" aria-labelledby="kpis-title" hidden>
+        <button class="back-link" type="button" data-category-link="companies">返回公司研究</button>
+        <div class="section-heading">
+          <p class="eyebrow">Investment Terminal · Epic 2</p>
+          <h2 id="kpis-title">量化 KPI 表</h2>
+          <p>围绕 CAPEX、工程瓶颈和商业化效率，沉淀硬件/基础设施与软件/模型两组核心指标。</p>
+        </div>
+        <div class="terminal-toolbar" id="kpiFilters" aria-label="KPI 筛选"></div>
+        <div class="kpi-terminal" id="kpiTerminal"></div>
+      </section>
+
+      <section id="sensitivity" class="section category-panel" data-category-panel="sensitivity" aria-labelledby="sensitivity-title" hidden>
+        <button class="back-link" type="button" data-category-link="companies">返回公司研究</button>
+        <div class="section-heading">
+          <p class="eyebrow">Investment Terminal · P2.2</p>
+          <h2 id="sensitivity-title">估值 / CAPEX 敏感性</h2>
+          <p>把影响 AI 产业链估值的关键变量拆成可追踪研究台：每个变量都连接产业痛点、正负向读法、受益标的、观察 KPI 和来源。</p>
+        </div>
+        <div class="terminal-toolbar" id="sensitivityFilters" aria-label="敏感性主题筛选"></div>
+        <div class="sensitivity-terminal" id="sensitivityTerminal"></div>
+      </section>
+
+      <section id="links" class="section category-panel" data-category-panel="links" aria-labelledby="links-title" hidden>
+        <button class="back-link" type="button" data-category-link="overview">返回总览</button>
+        <div class="section-heading">
+          <p class="eyebrow">Inter-layer Links</p>
+          <h2 id="links-title">层与层之间的联系</h2>
+        </div>
+        <div class="link-matrix" id="linkMatrix"></div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <span>AI 五层蛋糕产业知识体系 · 研究终端版</span>
+      <span>核心判断需持续核验来源与时间。</span>
+    </footer>
+
+    <div class="detail-modal" id="detailModal" aria-hidden="true">
+      <div class="detail-backdrop" data-close-detail></div>
+      <article class="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+        <button class="detail-close" type="button" data-close-detail aria-label="关闭详情">×</button>
+        <p class="eyebrow" id="detailKicker">Knowledge Card</p>
+        <h2 id="detailTitle">知识卡片</h2>
+        <p class="detail-summary" id="detailSummary"></p>
+        <div class="detail-body" id="detailBody"></div>
+      </article>
+    </div>
+
+    <div class="term-popup" id="termPopup" aria-hidden="true">
+      <strong id="termTitle"></strong>
+      <p id="termBody"></p>
+    </div>
+
+    <script src="./glossary.js"></script>
+    <script src="./investment-data.js"></script>
+    <script src="./company-deepdives.js"></script>
+    <script src="./company-expansion-data.js"></script>
+    <script src="./matrix-deepdives.js"></script>
+    <script src="./sources-data.js"></script>
+    <script src="./source-badges.js"></script>
+    <script src="./peer-comparison-data.js"></script>
+    <script src="./valuation-sensitivity-data.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

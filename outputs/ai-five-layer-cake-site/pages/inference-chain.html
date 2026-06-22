@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI 推理服务链 Inference Chain | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#chains"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="推理链导航">
+        <a href="../index.html#chains">返回产业链</a>
+        <a href="#status">行业现状</a>
+        <a href="#topology">拓扑流向</a>
+        <a href="#friction">接口摩擦</a>
+        <a href="#capex">价值捕获</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero layer-page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Horizontal Chain 02 · Inference</p>
+          <h1>AI 推理服务链：把模型能力压成低延迟、可计费、可扩展的 token 服务</h1>
+          <p class="lead">核心矛盾：<button class="term" type="button" data-term="Reasoning Model">Reasoning Model</button> 与 Agent 让每个任务消耗更多 <button class="term" type="button" data-term="Reasoning Token">Reasoning Token</button>，但用户和企业同时要求更低 <button class="term" type="button" data-term="TTFT">TTFT</button>、更稳 <button class="term" type="button" data-term="P99 延迟">P99 延迟</button> 和更低单位 token 成本。</p>
+        </div>
+        <div class="cake-visual">
+          <div class="cake-layer layer-app"><strong>Request</strong><span>用户请求、Agent 调用、企业工作流</span></div>
+          <div class="cake-layer layer-model"><strong>Model</strong><span>模型路由、reasoning、工具调用、上下文</span></div>
+          <div class="cake-layer layer-infra"><strong>Runtime</strong><span>推理引擎、KV Cache、批处理、调度</span></div>
+          <div class="cake-layer layer-chip"><strong>Silicon</strong><span>GPU/ASIC/TPU、HBM、互联、能耗</span></div>
+        </div>
+      </section>
+
+      <section id="status" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Industry Status</p>
+          <h2>当前行业现状</h2>
+          <p>推理链已经成为 AI 商业化的主战场。训练决定模型上限，推理决定毛利、体验和能否大规模进入企业流程。</p>
+        </div>
+        <div class="energy-dashboard">
+          <article class="energy-block">
+            <h3>已核验事实</h3>
+            <ul>
+              <li>NVIDIA 将 <button class="term" type="button" data-term="Dynamo">Dynamo</button> 定位为面向多节点数据中心环境的开源分布式推理服务框架，用于低延迟扩展 reasoning AI 模型。</li>
+              <li>NVIDIA 新闻室披露 Dynamo 用于在 AI factories 中以更低成本和更高效率加速、扩展 AI reasoning models；其架构包含智能路由和 <button class="term" type="button" data-term="Disaggregated Inference">Disaggregated Inference</button>。</li>
+              <li>Google 发布 Ironwood TPU，官方称其是第七代 TPU，也是第一款专门面向推理时代设计的 TPU；Google Cloud 披露 Ironwood 相比 TPU v5p 峰值性能提升 10 倍，相比 TPU v6e 单芯片训练和推理性能提升超过 4 倍。</li>
+              <li>OpenAI 官方 API 文档说明 <button class="term" type="button" data-term="Prompt Caching">Prompt Caching</button> 会把请求路由到近期处理过相同 prompt 的服务器，以降低延迟和成本；OpenAI 公开说明长于 1,024 token 的 prompt 会自动受益于缓存。</li>
+              <li>Anthropic 文档说明 extended thinking 的 thinking budget tokens 会计入输出 token、计费和速率限制；这直接说明 reasoning 模型的“思考”会变成推理链真实成本。</li>
+            </ul>
+          </article>
+          <article class="energy-block">
+            <h3>一句话现状</h3>
+            <p>推理链的关键不是“能不能跑模型”，而是能否把 <button class="term" type="button" data-term="Prefill/Decode">Prefill/Decode</button>、<button class="term" type="button" data-term="KV Cache">KV Cache</button>、<button class="term" type="button" data-term="Continuous Batching">Continuous Batching</button>、模型路由和芯片利用率组织成稳定的单位经济模型。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="topology" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Topology</p>
+          <h2>经典拓扑流向</h2>
+          <p>推理链是从用户任务到 token 响应的实时生产线，每一环都在质量、延迟、成本和安全之间做动态权衡。</p>
+        </div>
+        <div class="chain-flow">
+          <a href="#request">用户请求</a>
+          <a href="#application">应用入口</a>
+          <a href="#router">模型路由</a>
+          <a href="#engine">推理引擎</a>
+          <a href="#silicon">GPU/ASIC</a>
+          <a href="#cloud">推理云</a>
+          <a href="#response">响应</a>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card" id="request">
+            <h3>1. 用户请求</h3>
+            <p>请求不再只是聊天文本，而是长上下文、文件、多模态输入、Agent 工具调用和企业权限上下文。输入越长，<button class="term" type="button" data-term="Prefill">Prefill</button> 与 <button class="term" type="button" data-term="KV Cache">KV Cache</button> 压力越大。</p>
+          </article>
+          <article class="detail-card" id="application">
+            <h3>2. 应用入口</h3>
+            <p>应用负责鉴权、限流、审计、提示词拼接、上下文压缩和安全策略。真正成熟的 AI 应用会先在这里判断任务复杂度，而不是把所有请求都扔给最贵模型。</p>
+          </article>
+          <article class="detail-card" id="router">
+            <h3>3. 模型路由</h3>
+            <p><button class="term" type="button" data-term="Model Router">Model Router</button> 根据任务难度、SLA、预算、安全等级和上下文长度选择大模型、小模型、reasoning 模型、RAG 或工具调用路径。</p>
+          </article>
+          <article class="detail-card" id="engine">
+            <h3>4. 推理引擎</h3>
+            <p><button class="term" type="button" data-term="vLLM">vLLM</button>、<button class="term" type="button" data-term="SGLang">SGLang</button>、TensorRT-LLM、Dynamo 等围绕 <button class="term" type="button" data-term="PagedAttention">PagedAttention</button>、<button class="term" type="button" data-term="Prefix Cache">Prefix Cache</button>、batch 调度和 kernel 优化提高吞吐。</p>
+          </article>
+          <article class="detail-card" id="silicon">
+            <h3>5. GPU/ASIC</h3>
+            <p>推理硬件的关键不是单纯 FLOPS，而是显存容量、HBM 带宽、能耗、batch 下的利用率、长上下文 cache 承载能力和每瓦 token 产出。</p>
+          </article>
+          <article class="detail-card" id="cloud">
+            <h3>6. 推理云</h3>
+            <p>推理云把多模型、多租户、多地域和多硬件组织成服务。核心能力是 <button class="term" type="button" data-term="Autoscaling">Autoscaling</button>、限流、灰度、SLA、成本可观测和故障隔离。</p>
+          </article>
+          <article class="detail-card" id="response">
+            <h3>7. 响应</h3>
+            <p>用户感知的是首字延迟、流式输出、稳定性和正确率；企业感知的是任务完成率、审计、成本上限和是否能被纳入生产流程。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="friction" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Interface Friction</p>
+          <h2>2026 年连接处核心痛点</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>延迟与成本接口</h3>
+            <ul>
+              <li><strong>TTFT 与 ITL</strong>：用户先感知首字等待，再感知 token 间延迟；reasoning 模型会把内部思考放大成等待时间。</li>
+              <li><strong>Prefill vs Decode 资源错配</strong>：prefill 偏并行吞吐，decode 偏串行低延迟；混跑会造成 GPU 利用率和尾延迟互相伤害。</li>
+              <li><strong>KV Cache 显存黑洞</strong>：长上下文、多轮会话和并发用户会让 cache 占用比权重本身更像瓶颈。</li>
+              <li><strong>Batching 与 SLA 冲突</strong>：batch 越大吞吐越好，但等待拼 batch 会伤害 P99，企业场景不能只看平均成本。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>模型与业务接口</h3>
+            <ul>
+              <li><strong>Reasoning token 爆炸</strong>：复杂任务质量提升来自更多 test-time compute，但 token 持有成本、速率限制和排队时间都会上升。</li>
+              <li><strong>模型路由误判</strong>：把简单任务给大模型会烧钱，把复杂任务给小模型会失败；路由器本身需要 eval 和反馈闭环。</li>
+              <li><strong>缓存命中率不稳定</strong>：Prompt Caching 和 Prefix Cache 依赖稳定前缀、会话模式和租户隔离，业务 prompt 随意拼接会破坏缓存。</li>
+              <li><strong>多租户隔离</strong>：企业推理云必须在缓存复用、数据隔离、成本优化和安全审计之间做工程取舍。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="capex" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">CAPEX & Value Capture</p>
+          <h2>长期价值捕获与资本开支变量</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card frontier">
+            <h3>1. 推理芯片与内存带宽</h3>
+            <p>NVIDIA Blackwell/Rubin、Google TPU Ironwood、AWS Inferentia、定制 ASIC 的价值来自每瓦 token、显存容量、缓存承载和软件栈适配。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>2. 推理运行时</h3>
+            <p>Dynamo、vLLM、SGLang、TensorRT-LLM、Triton Inference Server 捕获的是 GPU 利用率提升与延迟稳定性，护城河来自 kernel、调度、cache 和生态适配。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>3. 模型路由与成本控制</h3>
+            <p>模型网关、router、observability、cost guardrail 会变成企业 AI 支出控制层。它们决定每个任务该用哪个模型、多少 reasoning budget、是否走缓存。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>4. 推理云与区域部署</h3>
+            <p>云厂商和 GPU 云用 SLA、多区域、私有连接、合规和稳定卡源锁定企业客户；推理负载持续化后，电力成本会长期进入 token 毛利。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>5. 缓存与上下文基础设施</h3>
+            <p>Prefix Cache、Prompt Caching、向量检索、上下文压缩和会话记忆降低重复计算，是长上下文和 Agent 工作流的真实成本控制点。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>6. 评测与上线治理</h3>
+            <p>企业愿意为“可控完成任务”付费，而不是为裸 token 付费。推理链末端的 eval、审计、回滚和权限控制会捕获应用层预算。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="players" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Eco-Map</p>
+          <h2>玩家图谱</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>绝对主导者</h3>
+            <ul>
+              <li><strong>NVIDIA</strong>：Blackwell/Rubin、TensorRT-LLM、Triton、Dynamo、NIM，把硬件和推理软件捆成 AI factory 平台。</li>
+              <li><strong>Google</strong>：Gemini、TPU/Ironwood、AI Hypercomputer 和自研服务栈，推理软硬一体化。</li>
+              <li><strong>OpenAI / Anthropic</strong>：前沿模型 API、reasoning 能力、缓存和企业平台，是推理需求的直接制造者。</li>
+              <li><strong>AWS / Azure / Google Cloud</strong>：云推理服务、私有连接、合规、账单和企业渠道。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>新晋和隐形冠军</h3>
+            <ul>
+              <li><strong>vLLM / SGLang 社区</strong>：开源推理引擎生态，推动 PagedAttention、structured output 和高吞吐 serving 成为行业基线。</li>
+              <li><strong>Groq / Cerebras / Sambanova</strong>：用专用推理架构争夺低延迟、高吞吐和企业部署窗口。</li>
+              <li><strong>Together AI / Fireworks AI / Baseten</strong>：模型托管、推理 API、企业部署和开源模型 serving。</li>
+              <li><strong>Datadog / LangSmith / Helicone / Arize</strong>：推理可观测、成本追踪、eval 和生产质量监控。</li>
+              <li><strong>Cloudflare / Fastly / Akamai</strong>：边缘推理、缓存和低延迟分发的潜在入口。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>来源与持续核验</h2>
+        </div>
+        <div class="source-list">
+          <a href="https://www.nvidia.com/en-us/ai/dynamo/" target="_blank" rel="noreferrer">NVIDIA - Dynamo</a>
+          <a href="https://docs.nvidia.com/dynamo/dev/design_docs/architecture.html" target="_blank" rel="noreferrer">NVIDIA Dynamo Docs - High Level Architecture</a>
+          <a href="https://nvidianews.nvidia.com/news/nvidia-dynamo-open-source-library-accelerates-and-scales-ai-reasoning-models" target="_blank" rel="noreferrer">NVIDIA Newsroom - Dynamo for reasoning models</a>
+          <a href="https://blog.google/products/google-cloud/ironwood-tpu-age-of-inference/" target="_blank" rel="noreferrer">Google - Ironwood TPU for inference</a>
+          <a href="https://cloud.google.com/blog/products/compute/ironwood-tpus-and-new-axion-based-vms-for-your-ai-workloads" target="_blank" rel="noreferrer">Google Cloud - Ironwood TPUs and Axion VMs</a>
+          <a href="https://platform.openai.com/docs/guides/prompt-caching" target="_blank" rel="noreferrer">OpenAI API Docs - Prompt Caching</a>
+          <a href="https://openai.com/index/api-prompt-caching/" target="_blank" rel="noreferrer">OpenAI - Prompt Caching in the API</a>
+          <a href="https://docs.anthropic.com/en/docs/build-with-claude/context-windows" target="_blank" rel="noreferrer">Anthropic Docs - Context windows and thinking tokens</a>
+          <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/extended-thinking-tips" target="_blank" rel="noreferrer">Anthropic Docs - Extended thinking tips</a>
+        </div>
+      </section>
+    </main>
+    <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
+    <script src="../glossary.js"></script>
+    <script src="../page-glossary.js"></script>
+  </body>
+</html>

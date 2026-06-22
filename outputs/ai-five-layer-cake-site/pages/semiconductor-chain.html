@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI 芯片供应链 Semiconductor Chain | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#chains"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="芯片供应链导航">
+        <a href="../index.html#chains">返回产业链</a>
+        <a href="#status">行业现状</a>
+        <a href="#topology">拓扑流向</a>
+        <a href="#friction">接口摩擦</a>
+        <a href="#capex">价值捕获</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero layer-page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Horizontal Chain 05 · Semiconductor</p>
+          <h1>AI 芯片供应链：从 EDA 到 CoWoS/HBM，把设计变成交付的 AI 加速器</h1>
+          <p class="lead">核心矛盾：AI 加速器需求爆发，但真正卡住供给的不是单点晶体管，而是 <button class="term" type="button" data-term="EDA">EDA</button>/<button class="term" type="button" data-term="IP">IP</button>、先进制程、<button class="term" type="button" data-term="CoWoS">CoWoS</button>、<button class="term" type="button" data-term="HBM4">HBM4</button>、基板、测试和系统集成的复合产能。</p>
+        </div>
+        <div class="cake-visual">
+          <div class="cake-layer layer-chip"><strong>Design</strong><span>EDA、IP、PDK、Tape-out、DFT</span></div>
+          <div class="cake-layer layer-chip"><strong>Wafer</strong><span>先进制程、EUV、GAA、良率</span></div>
+          <div class="cake-layer layer-chip"><strong>Package</strong><span>CoWoS/SoIC、HBM、interposer、基板</span></div>
+          <div class="cake-layer layer-infra"><strong>System</strong><span>测试、板卡、服务器、液冷、网络</span></div>
+        </div>
+      </section>
+
+      <section id="status" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Industry Status</p>
+          <h2>当前行业现状</h2>
+          <p>AI 芯片供应链已经从“先进制程竞赛”升级为“先进制程 + 先进封装 + HBM + 系统级互联”的协同竞赛。GPU 做出来不等于可以交付，只有通过封装、测试、整机和软件适配后才变成可售算力。</p>
+        </div>
+        <div class="energy-dashboard">
+          <article class="energy-block">
+            <h3>已核验事实</h3>
+            <ul>
+              <li>TSMC 2025 年报明确将 CoWoS、InFO、SoIC 和 COUPE 等先进封装/3D 堆叠技术列为支持 AI 客户需求的关键技术，服务大规模互联与低功耗需求。</li>
+              <li>Synopsys 与 TSMC 2025 年宣布为 TSMC A16、N2P 和 CoWoS 等 advanced process / advanced packaging 提供认证 EDA flows 和 IP，并强调 3DIC Compiler 支持 5.5x-reticle interposer 的 CoWoS 设计。</li>
+              <li>Cadence 与 TSMC 2025 年宣布在 AI-driven EDA、3D-IC、IP 和 photonics 上深化合作，面向 AI/HPC 客户加速先进半导体设计。</li>
+              <li>Micron 2026 年宣布面向 NVIDIA Vera Rubin 的 12 层 36GB HBM4 已开始量产出货，单 stack 带宽超过 2.8TB/s。</li>
+              <li>Samsung 2026 年宣布开始量产并向客户出货 HBM4，预计 2026 年 HBM 销售额将较 2025 年增长超过三倍。</li>
+              <li>SK hynix 2025 年宣布完成 HBM4 开发并建立量产体系，强调其 2,048-bit I/O 和超过 40% 的功耗效率提升。</li>
+              <li>Applied Materials 2025 年发布面向 AI 芯片的新一代制造设备，覆盖 GAA 逻辑、HBM DRAM 和先进封装三大关键领域。</li>
+            </ul>
+          </article>
+          <article class="energy-block">
+            <h3>一句话现状</h3>
+            <p>AI 芯片供应链最硬的瓶颈不是“谁会设计芯片”，而是谁能拿到先进制程产能、HBM 客户认证、CoWoS/基板/测试产能，并把它们按节拍组合成合格系统。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="topology" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Topology</p>
+          <h2>经典拓扑流向</h2>
+          <p>这条链是 AI 硬件的真实生产线：从设计意图到 GDSII，再到晶圆、封装、HBM、测试、板卡和服务器。任何一环良率不足，都会变成出货瓶颈。</p>
+        </div>
+        <div class="chain-flow">
+          <a href="#eda-ip">EDA/IP</a>
+          <a href="#design">芯片设计</a>
+          <a href="#foundry">晶圆制造</a>
+          <a href="#packaging">先进封装</a>
+          <a href="#hbm">HBM</a>
+          <a href="#board">板卡/基板</a>
+          <a href="#server">服务器</a>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card" id="eda-ip">
+            <h3>1. EDA / IP</h3>
+            <p><button class="term" type="button" data-term="EDA">EDA</button> 决定芯片能否完成综合、布局布线、时序收敛、功耗分析、验证和 sign-off。<button class="term" type="button" data-term="IP">IP</button> 则提供 PCIe、SerDes、HBM PHY、UCIe 等可复用模块，直接影响 time-to-market。</p>
+          </article>
+          <article class="detail-card" id="design">
+            <h3>2. 芯片设计 / Tape-out</h3>
+            <p>AI 加速器设计围绕算力阵列、HBM 控制器、<button class="term" type="button" data-term="NoC">NoC</button>、die-to-die 互联、功耗墙、DFT 和软件栈协同。<button class="term" type="button" data-term="Tape-out">Tape-out</button> 失败的代价是数千万美元和数月窗口。</p>
+          </article>
+          <article class="detail-card" id="foundry">
+            <h3>3. 先进制程晶圆代工</h3>
+            <p>TSMC、Samsung Foundry、Intel Foundry 负责把设计变成晶圆。关键是 <button class="term" type="button" data-term="PDK">PDK</button>、EUV/High-NA EUV、良率、产能分配和客户优先级。</p>
+          </article>
+          <article class="detail-card" id="packaging">
+            <h3>4. 先进封装 / CoWoS / 3D 堆叠</h3>
+            <p>AI GPU 需要把 compute die、I/O die、HBM 和基板整合成一个系统。<button class="term" type="button" data-term="Interposer">Interposer</button>、<button class="term" type="button" data-term="RDL">RDL</button>、CoWoS、SoIC、热应力和 warpage 是出货闸门。</p>
+          </article>
+          <article class="detail-card" id="hbm">
+            <h3>5. HBM 颗粒 / Base Die / 主控</h3>
+            <p>HBM4 不只是 DRAM 堆叠，还涉及 <button class="term" type="button" data-term="TSV">TSV</button>、base die、2,048-bit 接口、客户认证、热管理和与 GPU 封装节拍匹配。HBM 是 AI 芯片毛利与供给的核心博弈点。</p>
+          </article>
+          <article class="detail-card" id="board">
+            <h3>6. 基板 / 测试 / 板卡</h3>
+            <p><button class="term" type="button" data-term="ABF 基板">ABF 基板</button>、probe card、burn-in、<button class="term" type="button" data-term="Known Good Die">Known Good Die</button> 和系统级测试决定良品能否进入板卡。测试时间本身也会成为产能瓶颈。</p>
+          </article>
+          <article class="detail-card" id="server">
+            <h3>7. 模组集成 / AI 服务器</h3>
+            <p>最终交付不是芯片，而是可部署模块、板卡、机柜级系统和软件栈。电源、液冷、NVLink/以太网、BMC、固件和客户验收共同决定收入确认。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="friction" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Interface Friction</p>
+          <h2>2026 年连接处核心痛点</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>设计到制造接口</h3>
+            <ul>
+              <li><strong>PDK / EDA 认证</strong>：先进节点和 CoWoS/3DIC 需要完整工具链认证，否则设计不能可靠收敛。</li>
+              <li><strong>Reticle 与 interposer 尺寸</strong>：AI 加速器越来越大，5.5x reticle interposer 类封装挑战布线、翘曲和良率。</li>
+              <li><strong>Power integrity</strong>：高功耗 AI die 的 IR drop、热热点和信号完整性需要 EDA、封装和板级协同。</li>
+              <li><strong>软件栈绑定</strong>：芯片设计必须同步编译器、kernel、通信库和部署工具，否则硬件 FLOPS 不能兑现。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>封装到系统接口</h3>
+            <ul>
+              <li><strong>CoWoS/HBM 配套</strong>：HBM 颗粒、base die、interposer、基板、封装产线和测试必须同步，否则任何一环都卡最终出货。</li>
+              <li><strong>热管理</strong>：HBM4、GPU die 和电源模块热密度上升，封装材料、TIM、冷板和机柜液冷必须一起设计。</li>
+              <li><strong>良率与测试时间</strong>：先进封装组合了多个昂贵 die，任何 die 或连接缺陷都放大损失，known good die 和系统级测试成为护城河。</li>
+              <li><strong>出口管制与地缘政治</strong>：EDA、先进设备、HBM、高端 GPU 和封装产能都可能受到区域政策影响。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="capex" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">CAPEX & Value Capture</p>
+          <h2>长期价值捕获与资本开支变量</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card frontier">
+            <h3>1. EDA / IP 垄断租金</h3>
+            <p>Synopsys、Cadence、Siemens EDA 的价值来自不可替代的设计流程、foundry certification、IP 库和工程师习惯，切换成本极高。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>2. 先进代工与封装闸门</h3>
+            <p>TSMC 不只赚晶圆钱，也通过 CoWoS、SoIC、3DFabric 捕获 AI 系统级集成价值。客户排产权本身就是战略资产。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>3. HBM 超额利润</h3>
+            <p>SK hynix、Micron、Samsung 通过 HBM4 带宽、容量、良率、热管理和客户认证获取高毛利，AI 周期把 DRAM 从周期品推向战略供应。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>4. 半导体设备与材料</h3>
+            <p>ASML、Applied Materials、Lam、KLA、TEL、ASM 捕获先进制程、HBM DRAM 和先进封装扩产资本开支。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>5. 基板 / OSAT / 测试</h3>
+            <p>Ibiden、Unimicron、Shinko、ASE、Amkor、Advantest、Teradyne 等隐形环节决定封装良率和最终交付节拍。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>6. 整机系统与客户认证</h3>
+            <p>Supermicro、Dell、HPE、Wiwynn、Quanta、Foxconn 等把芯片转化为可部署 AI 服务器，价值来自客户认证、供应链协调和售后运维。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="players" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Eco-Map</p>
+          <h2>玩家图谱</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>绝对主导者</h3>
+            <ul>
+              <li><strong>NVIDIA</strong>：AI GPU 平台、NVLink、CUDA、整机柜系统和供应链议价权。</li>
+              <li><strong>TSMC</strong>：先进制程、CoWoS、SoIC、3DFabric 与客户排产权。</li>
+              <li><strong>SK hynix / Micron / Samsung</strong>：HBM4 量产、良率、认证和下一代 HBM roadmap。</li>
+              <li><strong>Synopsys / Cadence / Siemens EDA</strong>：EDA、IP、验证、3DIC 设计和 sign-off 工具链。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>新晋和隐形冠军</h3>
+            <ul>
+              <li><strong>Broadcom / Marvell</strong>：定制 ASIC、SerDes、网络芯片和 hyperscaler silicon。</li>
+              <li><strong>ASML / Applied Materials / Lam / KLA / TEL</strong>：EUV、沉积、刻蚀、量测、HBM 与先进封装设备。</li>
+              <li><strong>Ibiden / Unimicron / Shinko</strong>：ABF 基板和高端封装承载能力。</li>
+              <li><strong>ASE / Amkor / JCET</strong>：OSAT 封测和先进封装协同。</li>
+              <li><strong>Advantest / Teradyne</strong>：ATE 测试设备，受益于高价值 AI 芯片测试复杂度提升。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>来源与持续核验</h2>
+        </div>
+        <div class="source-list">
+          <a href="https://investor.tsmc.com/static/annualReports/2025/english/index.html" target="_blank" rel="noreferrer">TSMC - 2025 Annual Report</a>
+          <a href="https://investor.synopsys.com/news/news-details/2025/Synopsys-and-TSMC-Usher-In-Angstrom-Scale-Designs-with-Certified-EDA-Flows-on-Advanced-TSMC-A16-and-N2P-Processes/default.aspx" target="_blank" rel="noreferrer">Synopsys - Certified EDA flows for TSMC A16/N2P and CoWoS</a>
+          <a href="https://www.cadence.com/en_US/home/company/newsroom/press-releases/pr/2025/cadence-partners-with-tsmc-to-power-next-generation-innovations.html" target="_blank" rel="noreferrer">Cadence - TSMC AI flows, 3D-IC, IP and photonics</a>
+          <a href="https://investors.micron.com/news-releases/news-release-details/meiguangzhuanwei-nvidia-vera-rubin-dazaode-hbm4" target="_blank" rel="noreferrer">Micron - HBM4 for NVIDIA Vera Rubin</a>
+          <a href="https://semiconductor.samsung.com/news-events/news/samsung-ships-industry-first-commercial-hbm4-with-ultimate-performance-for-ai-computing/" target="_blank" rel="noreferrer">Samsung Semiconductor - HBM4 mass production</a>
+          <a href="https://news.skhynix.com/sk-hynix-completes-worlds-first-hbm4-development-and-readies-mass-production/" target="_blank" rel="noreferrer">SK hynix - HBM4 development and mass production system</a>
+          <a href="https://ir.appliedmaterials.com/news-releases/news-release-details/applied-materials-unveils-next-gen-chipmaking-products/" target="_blank" rel="noreferrer">Applied Materials - Next-gen chipmaking products for AI</a>
+          <a href="https://www.asml.com/en/investors/annual-report/2025" target="_blank" rel="noreferrer">ASML - 2025 Annual Report</a>
+        </div>
+      </section>
+    </main>
+    <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
+    <script src="../glossary.js"></script>
+    <script src="../page-glossary.js"></script>
+  </body>
+</html>

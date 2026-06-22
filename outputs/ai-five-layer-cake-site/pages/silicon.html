@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>芯片层 Silicon | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#layers"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="芯片层导航">
+        <a href="../index.html#layers">返回五层</a>
+        <a href="#status">行业现状</a>
+        <a href="#frontiers">前沿路线</a>
+        <a href="#bottlenecks">瓶颈</a>
+        <a href="#friction">接口摩擦</a>
+        <a href="#capex">CAPEX</a>
+        <a href="#players">玩家图谱</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero layer-page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Layer 02 · Silicon</p>
+          <h1>芯片层：从单卡竞争进入机柜级系统战</h1>
+          <p class="lead">核心矛盾：模型和 Agent 的算力需求继续指数级膨胀，但真正限制供给的已经不只是 GPU 芯片，而是 HBM、先进封装、互联、基板、电源、液冷和软件生态的整机柜系统能力。</p>
+        </div>
+        <div class="cake-visual">
+          <div class="cake-layer layer-chip">
+            <strong>当前判断</strong>
+            <span>NVIDIA 的壁垒正在从 GPU 单芯片扩大到 Vera CPU、Rubin GPU、NVLink 6、ConnectX-9、BlueField-4、Spectrum-6 和软件栈共同构成的 AI factory 平台。</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="status" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Industry Status</p>
+          <h2>当前行业现状</h2>
+        </div>
+        <div class="energy-dashboard">
+          <article class="energy-block">
+            <h3>已核验事实</h3>
+            <ul>
+              <li>NVIDIA 2026 年发布 Vera Rubin 平台，官方称其把 <button class="term" type="button" data-term="Vera CPU">Vera CPU</button>、Rubin <button class="term" type="button" data-term="GPU">GPU</button>、<button class="term" type="button" data-term="NVLink 6">NVLink 6</button> Switch、ConnectX-9 SuperNIC、BlueField-4 <button class="term" type="button" data-term="DPU">DPU</button>、<button class="term" type="button" data-term="Spectrum-6">Spectrum-6</button> Ethernet Switch 等组件进行极限协同设计。</li>
+              <li>Vera Rubin NVL72 机柜级系统整合 72 个 Rubin <button class="term" type="button" data-term="GPU">GPU</button> 和 36 个 Vera CPU，并面向大规模 <button class="term" type="button" data-term="AI Factory">AI factory</button> 的训练与低延迟推理。</li>
+              <li>Micron 宣布 2026 年第一季度开始量产出货面向 NVIDIA Vera Rubin 的 12 层 36GB <button class="term" type="button" data-term="HBM4">HBM4</button>。</li>
+              <li>Samsung 宣布已开始 <button class="term" type="button" data-term="HBM4">HBM4</button> 量产并向客户出货，称 2026 年将主动扩充 HBM4 产能。</li>
+              <li>TSMC 2025 年报继续强调 <button class="term" type="button" data-term="CoWoS">CoWoS</button>、<button class="term" type="button" data-term="InFO">InFO</button>、<button class="term" type="button" data-term="SoIC">SoIC</button> 与 COUPE 光子技术，以支撑 HPC/AI 对大规模互联和低功耗的需求。</li>
+              <li>ASML 2025 年报将 0.33 NA <button class="term" type="button" data-term="EUV">EUV</button> 与 0.55 NA <button class="term" type="button" data-term="High-NA EUV">High-NA EUV</button> 列为推动更先进图形化能力的关键技术。</li>
+            </ul>
+            <div class="source-badges" data-source-ids="nvidia-rubin-2026, micron-hbm4-vera-rubin, samsung-hbm4, tsmc-2025-annual, asml-2025-annual"></div>
+          </article>
+          <article class="energy-block">
+            <h3>一句话现状</h3>
+            <p>芯片层已经从“谁的 <button class="term" type="button" data-term="GPU">GPU</button> 算力最高”升级为“谁能把逻辑芯片、<button class="term" type="button" data-term="HBM">HBM</button>、<button class="term" type="button" data-term="先进封装">封装</button>、网络、电源、<button class="term" type="button" data-term="液冷">液冷</button>和软件生态一起交付成可运行的 rack-scale AI supercomputer”。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Fundamentals</p>
+          <h2>经典基础知识筑基</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card"><h3>摩尔定律与 Dennard Scaling 失效</h3><p>晶体管数量仍可增加，但电压和功耗不再同步下降，AI 芯片竞争转向架构、封装、并行ism、数据搬运和系统级能效。</p></article>
+          <article class="detail-card"><h3>冯·诺依曼瓶颈与存储墙</h3><p>AI 训练/推理不是只缺 FLOPS，而是大量时间耗在数据从 <button class="term" type="button" data-term="HBM">HBM</button>、SRAM、PCIe/<button class="term" type="button" data-term="NVLink">NVLink</button>、网络之间搬运。</p></article>
+          <article class="detail-card"><h3><button class="term" type="button" data-term="DRAM">DRAM</button> 刷新与 <button class="term" type="button" data-term="HBM">HBM</button> 堆叠</h3><p><button class="term" type="button" data-term="DRAM">DRAM</button> 需要刷新，传统 DIMM 带宽不足。<button class="term" type="button" data-term="HBM">HBM</button> 通过 <button class="term" type="button" data-term="TSV">TSV</button> 垂直堆叠和超宽总线把显存放到 <button class="term" type="button" data-term="GPU">GPU</button> 封装旁边。</p></article>
+          <article class="detail-card"><h3>光刻、良率与<button class="term" type="button" data-term="先进封装">先进封装</button></h3><p><button class="term" type="button" data-term="EUV">EUV</button> 决定先进制程图形化能力，良率决定经济性；<button class="term" type="button" data-term="CoWoS">CoWoS</button>/<button class="term" type="button" data-term="SoIC">SoIC</button> 等封装决定多芯粒和 <button class="term" type="button" data-term="HBM">HBM</button> 能否在一个系统内高带宽互联。</p></article>
+        </div>
+      </section>
+
+      <section id="frontiers" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">2026 Frontiers</p>
+          <h2>前沿技术路线</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card frontier" id="rubin"><h3>Rubin / Vera Rubin 机柜级平台</h3><p>Vera Rubin 把 CPU、<button class="term" type="button" data-term="GPU">GPU</button>、<button class="term" type="button" data-term="NVLink 6">NVLink 6</button>、SuperNIC、<button class="term" type="button" data-term="DPU">DPU</button>、Ethernet switch、软件栈和<button class="term" type="button" data-term="液冷">液冷</button>系统作为一个整体设计。AI 芯片竞争的单位从“卡”变成“rack / pod”。</p></article>
+          <article class="detail-card frontier" id="hbm4"><h3><button class="term" type="button" data-term="HBM4">HBM4</button> 与内存系统重构</h3><p><button class="term" type="button" data-term="HBM4">HBM4</button> 面向更宽接口、更高带宽和更复杂 base die。Micron、Samsung、SK hynix 的 <button class="term" type="button" data-term="HBM">HBM</button> 产能、良率和客户认证成为 AI <button class="term" type="button" data-term="GPU">GPU</button> 供给天花板。</p></article>
+          <article class="detail-card frontier" id="cowos"><h3><button class="term" type="button" data-term="CoWoS-L/R">CoWoS-L/R</button> 与 3D 封装</h3><p><button class="term" type="button" data-term="先进封装">先进封装</button>把 <button class="term" type="button" data-term="GPU">GPU</button> chiplet、I/O die、<button class="term" type="button" data-term="HBM">HBM</button> 和<button class="term" type="button" data-term="ABF 基板">基板</button>连接成可制造系统。<button class="term" type="button" data-term="CoWoS">CoWoS</button> 不再是后段工艺，而是 AI 算力交付的核心瓶颈。</p></article>
+          <article class="detail-card frontier" id="silicon-photonics"><h3>硅光 / <button class="term" type="button" data-term="CPO">CPO</button> / <button class="term" type="button" data-term="Spectrum-6">Spectrum-6</button></h3><p>跨机柜、跨集群互联的功耗和延迟开始逼近电互联极限，硅光和共封装光学成为 <button class="term" type="button" data-term="AI Factory">AI factory</button> 网络路线的核心变量。</p></article>
+          <article class="detail-card frontier" id="inference-asic"><h3>推理 <button class="term" type="button" data-term="ASIC">ASIC</button> 与数据流架构</h3><p><button class="term" type="button" data-term="Reasoning Model">Reasoning 模型</button>带来推理 token 爆炸，Cerebras、Groq、Etched、SambaNova 等路线押注低延迟、低成本、专用化推理。</p></article>
+          <article class="detail-card frontier" id="high-na-euv"><h3><button class="term" type="button" data-term="High-NA EUV">High-NA EUV</button> 与先进节点</h3><p>ASML 0.55 NA <button class="term" type="button" data-term="High-NA EUV">High-NA EUV</button> 是先进节点继续缩放的重要工具，但短期 AI 供给仍更受 <button class="term" type="button" data-term="HBM">HBM</button>、封装和系统集成约束。</p></article>
+        </div>
+      </section>
+
+      <section id="bottlenecks" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Bottlenecks</p>
+          <h2>卡脖子瓶颈</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>绝对硬瓶颈</h3>
+            <ul>
+              <li><strong>HBM 产能与良率</strong>：不是所有 DRAM 产能都能切换成高良率 HBM。</li>
+              <li><strong>CoWoS / 先进封装产能</strong>：GPU 逻辑芯片做好后，还必须排队封装才能交付。</li>
+              <li><strong>ABF 基板与测试</strong>：大尺寸封装对基板、翘曲控制和测试时间要求极高。</li>
+              <li><strong>光模块 / SerDes / Retimer</strong>：网络不是附属品，而是 AI 集群扩展性的关键。</li>
+              <li><strong>功耗与散热</strong>：TDP 上升后，芯片性能最终受电源和液冷系统约束。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>战略瓶颈</h3>
+            <ul>
+              <li><strong>CUDA 与软件生态迁移成本</strong>：硬件替代者最难跨越的软件壁垒。</li>
+              <li><strong>客户认证周期</strong>：HBM、ASIC、服务器平台都要经过超大云客户验证。</li>
+              <li><strong>资本开支节奏</strong>：先进制程、封装、HBM、EUV 都是超重资产扩张。</li>
+              <li><strong>地缘政治</strong>：先进制程、EUV、HBM、出口管制影响全球 AI 算力分布。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="friction" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Interface Friction</p>
+          <h2>芯片层与上下游的接口摩擦</h2>
+          <p>芯片层的摩擦集中在“模型需求变化太快、半导体供给太慢、系统集成太复杂”。单点芯片性能不再等于可售算力。</p>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card">
+            <h3>模型架构 vs 硬件路线</h3>
+            <p><button class="term" type="button" data-term="Reasoning Model">Reasoning Model</button>、长上下文和 MoE 会改变显存容量、<button class="term" type="button" data-term="KV Cache">KV Cache</button>、互联与 batch 形态，硬件 tape-out 周期却以年计。</p>
+          </article>
+          <article class="detail-card">
+            <h3>GPU 逻辑 die vs HBM/封装</h3>
+            <p>先进制程产出不等于 AI 芯片产出。<button class="term" type="button" data-term="HBM">HBM</button>、<button class="term" type="button" data-term="CoWoS-L/R">CoWoS-L/R</button>、<button class="term" type="button" data-term="ABF 基板">ABF 基板</button>、known good die 和测试任何一个环节掉速，都会拖慢整卡交付。</p>
+          </article>
+          <article class="detail-card">
+            <h3>芯片峰值算力 vs 集群可用吞吐</h3>
+            <p>训练侧真正看 <button class="term" type="button" data-term="MFU">MFU</button>，推理侧真正看 TTFT、P99 与每 token 成本。芯片厂必须把网络、驱动、编译器、runtime 和整机系统一起交付。</p>
+          </article>
+          <article class="detail-card">
+            <h3>自研 ASIC vs 软件生态迁移</h3>
+            <p>云厂商自研 ASIC 能压低推理成本，但会牺牲通用性、开发者生态和模型快速迁移能力。<button class="term" type="button" data-term="CUDA">CUDA</button> 迁移成本仍是最强软壁垒。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="capex" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">CAPEX / Value Capture</p>
+          <h2>资本开支与价值捕获</h2>
+          <p>芯片层的价值捕获从 die 面积扩展到 HBM、先进封装、互联、软件栈和机柜级系统，利润池沿着“不可替代的瓶颈”分配。</p>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>核心 CAPEX 变量</h3>
+            <ul>
+              <li><strong>先进制程 wafer</strong>：N3/N2/A16 等节点的 wafer 价格、良率和客户排产。</li>
+              <li><strong>HBM 配套</strong>：HBM4 容量、12Hi/16Hi 堆叠、功耗、良率和客户认证。</li>
+              <li><strong>先进封装</strong>：CoWoS-L/R、SoIC、interposer 尺寸、基板与测试时间。</li>
+              <li><strong>系统物料</strong>：SuperNIC、switch、retimer、光模块、电源、液冷和整机柜集成。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>价值捕获位置</h3>
+            <ul>
+              <li><strong>平台型芯片商</strong>：通过 GPU + 网络 + 软件 + 整柜绑定捕获系统毛利。</li>
+              <li><strong>Foundry / HBM / 封装</strong>：用稀缺产能获得更强定价和客户预付款。</li>
+              <li><strong>高速互联链</strong>：以太网/InfiniBand、SerDes、CPO、光模块受益于集群扩展。</li>
+              <li><strong>EDA/IP 与设备</strong>：先进节点和先进封装复杂度越高，设计验证和工艺设备越不可替代。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="players" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Eco-Map</p>
+          <h2>全球玩家图谱</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>老牌公认巨头</h3>
+            <ul>
+              <li><strong>NVIDIA</strong>：GPU、NVLink、网络、CUDA、NIM/Dynamo、机柜级平台全栈生态。</li>
+              <li><strong>TSMC</strong>：先进制程、CoWoS、SoIC 与 HPC/AI foundry 主导地位。</li>
+              <li><strong>ASML</strong>：EUV/High-NA EUV 光刻系统的绝对关键供应商。</li>
+              <li><strong>SK hynix / Samsung / Micron</strong>：HBM 供应三巨头。</li>
+              <li><strong>Broadcom / Marvell</strong>：定制 ASIC、交换芯片、SerDes 和高速互联。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>隐形冠军与颠覆者</h3>
+            <ul>
+              <li><strong>Coherent / Lumentum</strong>：高速光模块、激光器与光互联部件。</li>
+              <li><strong>Astera Labs</strong>：PCIe/CXL 连接、retimer 与 AI 服务器信号链。</li>
+              <li><strong>Ibiden / Unimicron / Shinko</strong>：ABF 基板与先进封装材料链。</li>
+              <li><strong>Cerebras / Groq / Etched / SambaNova</strong>：推理 ASIC、wafer-scale、LPU 和数据流架构。</li>
+              <li><strong>Synopsys / Cadence</strong>：EDA、IP、验证和先进封装设计工具。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>来源与持续核验</h2>
+        </div>
+        <div class="source-list">
+          <a href="https://www.nvidia.com/en-us/data-center/technologies/rubin/" target="_blank" rel="noreferrer">NVIDIA - Vera Rubin Platform</a>
+          <a href="https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Kicks-Off-the-Next-Generation-of-AI-With-Rubin--Six-New-Chips-One-Incredible-AI-Supercomputer/default.aspx" target="_blank" rel="noreferrer">NVIDIA - Rubin press release</a>
+          <a href="https://investors.micron.com/news-releases/news-release-details/micron-high-volume-production-hbm4-designed-nvidia-vera-rubin" target="_blank" rel="noreferrer">Micron - HBM4 for Vera Rubin</a>
+          <a href="https://news.samsung.com/global/samsung-ships-industry-first-commercial-hbm4-with-ultimate-performance-for-ai-computing" target="_blank" rel="noreferrer">Samsung - HBM4 mass production</a>
+          <a href="https://investor.tsmc.com/static/annualReports/2025/english/index.html" target="_blank" rel="noreferrer">TSMC - 2025 Annual Report</a>
+          <a href="https://www.asml.com/en/investors/annual-report/2025" target="_blank" rel="noreferrer">ASML - 2025 Annual Report</a>
+        </div>
+      </section>
+    </main>
+    <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
+    <script src="../glossary.js"></script>
+    <script src="../sources-data.js"></script>
+    <script src="../source-badges.js"></script>
+    <script src="../page-glossary.js"></script>
+  </body>
+</html>

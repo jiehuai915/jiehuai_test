@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Agent 智能体协同链 Agentic Workflow Chain | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#chains"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="Agent 链导航">
+        <a href="../index.html#chains">返回产业链</a>
+        <a href="#status">行业现状</a>
+        <a href="#topology">拓扑流向</a>
+        <a href="#friction">接口摩擦</a>
+        <a href="#capex">价值捕获</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero layer-page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Horizontal Chain 07 · Agentic Workflow</p>
+          <h1>AI Agent 智能体协同链：把模型、记忆、工具、权限和审计编排成可控执行系统</h1>
+          <p class="lead">核心矛盾：Agent 的价值来自“能行动”，风险也来自“能行动”。生产级 Agent 必须解决 <button class="term" type="button" data-term="Planning">Planning</button>、<button class="term" type="button" data-term="Memory">Memory</button>、<button class="term" type="button" data-term="Tool Use">Tool Use</button>、<button class="term" type="button" data-term="Action Permissioning">Action Permissioning</button>、<button class="term" type="button" data-term="HITL">HITL</button> 和可审计执行。</p>
+        </div>
+        <div class="cake-visual">
+          <div class="cake-layer layer-model"><strong>Brain</strong><span>基础模型、reasoning、tool calling</span></div>
+          <div class="cake-layer layer-infra"><strong>Runtime</strong><span>memory、MCP、sandbox、workflow、trace</span></div>
+          <div class="cake-layer layer-app"><strong>Action</strong><span>API、业务系统、人类审批、审计</span></div>
+          <div class="cake-layer layer-chip"><strong>Cost</strong><span>长上下文、推理 token、并发、缓存</span></div>
+        </div>
+      </section>
+
+      <section id="status" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Industry Status</p>
+          <h2>当前行业现状</h2>
+          <p>Agent 已从“提示词玩法”进入平台化阶段：模型厂商提供 tool use 和 tracing，协议层出现 MCP，工程框架开始强调 durable execution、human-in-the-loop 和生产观测。</p>
+        </div>
+        <div class="energy-dashboard">
+          <article class="energy-block">
+            <h3>已核验事实</h3>
+            <ul>
+              <li>OpenAI 2025 年发布 Responses API、内置工具和 Agents SDK，并说明 Responses API 是构建 agents 的新 API primitive，Agents SDK 支持 tracing。</li>
+              <li>OpenAI Agents SDK 官方文档将 agents 定义为可使用额外上下文和工具、可 handoff 给专门 agents、可流式输出并保留完整 trace 的 agentic application 构建库。</li>
+              <li>Anthropic 2024 年开源 <button class="term" type="button" data-term="MCP">MCP</button>，用于把 AI assistants 连接到数据、业务工具和开发环境；2025 年 Anthropic 将 MCP 捐给 Linux Foundation 的 Agentic AI Foundation。</li>
+              <li>MCP 官方 tools 文档说明 MCP 允许 servers 暴露可被语言模型调用的工具，这是 Agent 工具层标准化的关键。</li>
+              <li>LangGraph 官方文档把自己定位为 low-level orchestration framework，支持 durable execution、human-in-the-loop、memory 和 production agent 部署。</li>
+              <li>2026 年 MCP 安全事件和研究讨论显示，Agent 工具连接标准化会带来新的供应链和权限风险，企业需要 sandbox、allowlist 和运行时审计。</li>
+            </ul>
+          </article>
+          <article class="energy-block">
+            <h3>一句话现状</h3>
+            <p>Agent 的商业化关键不是“自动点几个工具”，而是 <button class="term" type="button" data-term="Agent Runtime">Agent Runtime</button> 能否把任务拆解、状态记忆、工具选择、权限边界、失败重试、人类审批和审计日志稳定地组织起来。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="topology" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Topology</p>
+          <h2>经典拓扑流向</h2>
+          <p>Agent 链不是一个模型，而是一套运行时：模型负责推理，runtime 负责状态、工具、权限、回滚和人类协作。</p>
+        </div>
+        <div class="chain-flow">
+          <a href="#foundation-model">基础模型</a>
+          <a href="#planning">Planning</a>
+          <a href="#memory">Memory</a>
+          <a href="#tools">Tools/MCP</a>
+          <a href="#sandbox">Sandbox</a>
+          <a href="#hitl">HITL</a>
+          <a href="#audit">Audit</a>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card" id="foundation-model">
+            <h3>1. 基础模型</h3>
+            <p>Agent 的能力上限来自 <button class="term" type="button" data-term="Reasoning Model">Reasoning Model</button>、tool calling、多模态理解和长上下文。模型越强，规划和工具使用越可靠，但成本和延迟也会上升。</p>
+          </article>
+          <article class="detail-card" id="planning">
+            <h3>2. 目标拆解与规划</h3>
+            <p><button class="term" type="button" data-term="Planning">Planning</button> 把用户目标拆成步骤、依赖、工具调用和验收条件。生产环境常用 workflow graph、state machine 或 planner/executor 架构限制 Agent 任意发挥。</p>
+          </article>
+          <article class="detail-card" id="memory">
+            <h3>3. 长期 / 短期记忆</h3>
+            <p><button class="term" type="button" data-term="Memory">Memory</button> 包括短期上下文、长期用户偏好、项目状态、向量检索和结构化状态。核心难点是记得有用信息，同时避免污染、过期和越权。</p>
+          </article>
+          <article class="detail-card" id="tools">
+            <h3>4. 工具调用与 API 连接</h3>
+            <p><button class="term" type="button" data-term="MCP">MCP</button>、function calling、API connectors、database tools 和 browser/computer use 让 Agent 能行动。工具 schema、权限、输入校验和结果验证决定执行质量。</p>
+          </article>
+          <article class="detail-card" id="sandbox">
+            <h3>5. Sandbox / 隔离执行</h3>
+            <p><button class="term" type="button" data-term="Sandbox">Sandbox</button> 把代码执行、文件操作、浏览器控制和第三方 API 调用限制在隔离环境中。Agent 越能行动，sandbox 和权限越重要。</p>
+          </article>
+          <article class="detail-card" id="hitl">
+            <h3>6. 多 Agent 协同 / 人类在环</h3>
+            <p>复杂任务常由 planner、researcher、coder、reviewer、operator 等专用 agent 协作。高风险动作需要 <button class="term" type="button" data-term="HITL">HITL</button> 审批、阈值控制和可回滚机制。</p>
+          </article>
+          <article class="detail-card" id="audit">
+            <h3>7. Trace / Audit / 评测</h3>
+            <p><button class="term" type="button" data-term="Tracing">Tracing</button> 记录每一步输入、工具调用、模型输出、审批和错误。没有 trace，就无法调试、归责、评测或满足企业合规。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="friction" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Interface Friction</p>
+          <h2>2026 年连接处核心痛点</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>模型到工具接口</h3>
+            <ul>
+              <li><strong>长上下文衰减</strong>：上下文越长，模型越容易漏看关键约束；工具列表过多也会挤占注意力和 token 预算。</li>
+              <li><strong>工具选择错误</strong>：Agent 调错 API、传错参数、误解返回值，都会把语言错误变成业务系统错误。</li>
+              <li><strong>Looping / 死循环</strong>：Agent 在规划、检索、修复、重试之间循环，烧 token 但不推进任务。</li>
+              <li><strong>非确定性</strong>：同一目标多次运行可能走不同路径，企业难以保证 SLA、成本和责任边界。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>行动到治理接口</h3>
+            <ul>
+              <li><strong>权限边界</strong>：读取、写入、支付、发送、删除、部署等动作风险不同，必须分级授权。</li>
+              <li><strong>MCP 供应链风险</strong>：工具 server、SDK、stdio 本地进程和第三方连接器都可能成为攻击面。</li>
+              <li><strong>状态恢复</strong>：长任务会跨分钟、小时甚至天运行，runtime 必须支持 checkpoint、resume 和 idempotency。</li>
+              <li><strong>可解释审计</strong>：企业不只要结果，还要知道 Agent 为什么这么做、调用了什么、谁批准了什么。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="capex" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">CAPEX & Value Capture</p>
+          <h2>长期价值捕获与资本开支变量</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card frontier">
+            <h3>1. Agent Runtime</h3>
+            <p>Agent runtime 负责状态、工具、记忆、权限、重试、trace 和部署。它是把模型 API 变成生产系统的中间层。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>2. 工具协议与连接器</h3>
+            <p>MCP、function calling、iPaaS、SaaS connectors 和企业 API 网关捕获“让 Agent 接入业务系统”的预算。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>3. 记忆与知识层</h3>
+            <p>向量库、GraphRAG、项目状态存储、用户偏好和会话摘要决定 Agent 能否长期工作，而不是每次从零开始。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>4. 安全与权限控制</h3>
+            <p>企业愿意为 allowlist、sandbox、secret vault、DLP、approval workflow、audit log 和 policy engine 付费。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>5. 评测与可观测性</h3>
+            <p>LangSmith、OpenAI tracing、Arize、Helicone、Datadog 等捕获 Agent 运行质量、成本和失败复盘预算。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>6. 垂直 Agent 应用</h3>
+            <p>代码、销售、客服、IT 运维、财务、法律和数据分析 Agent 最容易形成专有工作流和数据闭环。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="players" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Eco-Map</p>
+          <h2>玩家图谱</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>绝对主导者</h3>
+            <ul>
+              <li><strong>OpenAI</strong>：Responses API、Agents SDK、built-in tools、tracing、Codex 和 ChatGPT 分发。</li>
+              <li><strong>Anthropic</strong>：Claude、MCP、Computer Use、长上下文和企业安全定位。</li>
+              <li><strong>Microsoft / GitHub</strong>：Copilot、GitHub coding agents、M365、Azure、企业身份和开发者入口。</li>
+              <li><strong>Google</strong>：Gemini、Agentspace、A2A/企业 agent 生态和云工具链。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>新晋和隐形冠军</h3>
+            <ul>
+              <li><strong>LangChain / LangGraph</strong>：agent orchestration、durable execution、memory、human-in-the-loop 和 observability。</li>
+              <li><strong>Workato / Zapier / Boomi</strong>：企业连接器、workflow automation 和 MCP/iPaaS 入口。</li>
+              <li><strong>Cognition / Cursor / Replit / Sourcegraph</strong>：软件工程 agent、代码库上下文和开发工作流。</li>
+              <li><strong>Arize / LangSmith / Helicone / Datadog</strong>：agent observability、eval、trace 和成本监控。</li>
+              <li><strong>Browserbase / E2B / Modal / Vercel Sandbox</strong>：sandbox、browser automation 和安全执行环境。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>来源与持续核验</h2>
+        </div>
+        <div class="source-list">
+          <a href="https://openai.com/index/new-tools-for-building-agents/" target="_blank" rel="noreferrer">OpenAI - New tools for building agents</a>
+          <a href="https://platform.openai.com/docs/guides/agents-sdk/" target="_blank" rel="noreferrer">OpenAI - Agents SDK</a>
+          <a href="https://platform.openai.com/docs/api-reference/responses" target="_blank" rel="noreferrer">OpenAI API - Responses</a>
+          <a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noreferrer">Anthropic - Introducing MCP</a>
+          <a href="https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation" target="_blank" rel="noreferrer">Anthropic - Donating MCP to Agentic AI Foundation</a>
+          <a href="https://modelcontextprotocol.io/docs/concepts/tools" target="_blank" rel="noreferrer">MCP Docs - Tools</a>
+          <a href="https://docs.langchain.com/oss/python/langgraph/overview" target="_blank" rel="noreferrer">LangGraph - Overview</a>
+          <a href="https://docs.langchain.com/langgraph-platform/" target="_blank" rel="noreferrer">LangGraph Platform</a>
+        </div>
+      </section>
+    </main>
+    <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
+    <script src="../glossary.js"></script>
+    <script src="../page-glossary.js"></script>
+  </body>
+</html>

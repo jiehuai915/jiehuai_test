@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>基础设施层 Infra | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#layers"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="基础设施层导航">
+        <a href="../index.html#layers">返回五层</a>
+        <a href="#status">行业现状</a>
+        <a href="#frontiers">前沿路线</a>
+        <a href="#bottlenecks">瓶颈</a>
+        <a href="#friction">接口摩擦</a>
+        <a href="#capex">CAPEX</a>
+        <a href="#players">玩家图谱</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero layer-page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Layer 03 · Infra</p>
+          <h1>基础设施层：把 GPU 变成可售卖的 AI 工厂</h1>
+          <p class="lead">核心矛盾：资本市场看到的是多少张卡，产业真正比拼的是这些卡能否在电力、网络、液冷、调度和推理服务中持续产出高利用率 token。</p>
+        </div>
+        <div class="cake-visual">
+          <div class="cake-layer layer-infra">
+            <strong>当前判断</strong>
+            <span>基础设施层正在从传统云计算升级为 AI Factory：训练要解决万卡并行效率，推理要解决 prefill/decode、KV cache、P99 延迟和单位 token 成本。</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="status" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Industry Status</p>
+          <h2>当前行业现状</h2>
+        </div>
+        <div class="energy-dashboard">
+          <article class="energy-block">
+            <h3>已核验事实</h3>
+            <ul>
+              <li>NVIDIA 的 <button class="term" type="button" data-term="GB200 NVL72">GB200 NVL72</button> 机柜级系统连接 36 个 Grace CPU 和 72 个 Blackwell GPU，官方称其以液冷 rack-scale 设计服务万亿参数模型。</li>
+              <li>NVIDIA 宣布 <button class="term" type="button" data-term="Spectrum-XGS">Spectrum-XGS</button> Ethernet 能把多个分布式数据中心连接成 gigascale AI super-factory。</li>
+              <li>NVIDIA <button class="term" type="button" data-term="Dynamo">Dynamo</button> 是面向 reasoning 模型和推理服务的开放式分布式运行时，核心方向包括 <button class="term" type="button" data-term="Prefill/Decode">prefill/decode</button> 解耦和 <button class="term" type="button" data-term="KV Cache">KV Cache</button> 优化。</li>
+              <li>Meta 官方披露其两个 24,576 GPU 集群用于 Llama 3 训练，并把网络、存储、功耗和硬件故障作为大规模训练关键问题。</li>
+              <li>xAI 官方称 Colossus 是 100K Hopper GPU 超级计算机，并已扩展至 200K GPU 规模，凸显 AI infra 的军备竞赛。</li>
+              <li>OpenAI 宣布 Stargate 计划，未来四年拟投资 5000 亿美元建设美国 AI 基础设施，初始部署 1000 亿美元。</li>
+            </ul>
+            <div class="source-badges" data-source-ids="nvidia-gb200-nvl72, nvidia-dynamo, meta-llama-24k, xai-colossus, openai-stargate"></div>
+          </article>
+          <article class="energy-block">
+            <h3>一句话现状</h3>
+            <p>AI 基础设施的竞争已从“云上有没有 GPU”变成“谁能以更低故障率、更低延迟、更高 <button class="term" type="button" data-term="MFU">MFU</button> 和更低单位 token 成本，把训练集群与推理集群工业化运营”。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Fundamentals</p>
+          <h2>经典基础知识筑基</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card"><h3>分布式系统与容错</h3><p>万卡集群中任何一台服务器、光模块、网卡、存储节点或任务调度失败，都会被放大成训练中断。<button class="term" type="button" data-term="MTBF">MTBF</button>、checkpoint、恢复时间和作业编排是基础功。</p></article>
+          <article class="detail-card"><h3>网络拓扑与集体通信</h3><p>大模型训练依赖 <button class="term" type="button" data-term="AllReduce">AllReduce</button>、AllGather、ReduceScatter 等 <button class="term" type="button" data-term="Collective Communication">Collective Communication</button>。网络不是配件，而是训练效率的一部分。</p></article>
+          <article class="detail-card"><h3>排队论与资源调度</h3><p>GPU、CPU、存储、网络和显存都可能成为瓶颈。调度系统要在吞吐、延迟、优先级、租户隔离和硬件利用率之间权衡。</p></article>
+          <article class="detail-card"><h3>热设计与液冷运维</h3><p>高密 rack 将热设计从服务器问题升级为园区工程。<button class="term" type="button" data-term="CDU">CDU</button>、冷板、漏液检测、水处理和维护 SOP 决定可用算力。</p></article>
+        </div>
+      </section>
+
+      <section id="frontiers" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">2026 Frontiers</p>
+          <h2>前沿技术路线</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card frontier" id="ai-factory"><h3>100K 卡级 <button class="term" type="button" data-term="AI Factory">AI Factory</button></h3><p>AI 数据中心从“服务器托管”升级为智能生产工厂。核心指标不是 GPU 数量，而是训练吞吐、推理吞吐、故障恢复和可售 token 产能。</p></article>
+          <article class="detail-card frontier" id="scale-network"><h3>Scale-up / Scale-out 双网络</h3><p>机柜内靠 <button class="term" type="button" data-term="NVLink">NVLink</button> 等 scale-up 互联，机柜间靠 <button class="term" type="button" data-term="InfiniBand">InfiniBand</button>、<button class="term" type="button" data-term="Spectrum-X">Spectrum-X</button>、<button class="term" type="button" data-term="Ultra Ethernet">Ultra Ethernet</button> 等 scale-out 网络。</p></article>
+          <article class="detail-card frontier" id="liquid-rack"><h3>全液冷高密机柜</h3><p><button class="term" type="button" data-term="GB200 NVL72">GB200 NVL72</button> 这类 rack-scale 系统使液冷成为高端 AI infra 的默认路线，电力、冷却和机柜交付开始绑定。</p></article>
+          <article class="detail-card frontier" id="disaggregated-inference"><h3>解耦式推理服务</h3><p><button class="term" type="button" data-term="Prefill/Decode">Prefill/Decode</button> 解耦、<button class="term" type="button" data-term="KV Cache">KV Cache</button> 管理、prefix cache、speculative decoding 和模型路由共同决定推理云毛利。</p></article>
+          <article class="detail-card frontier" id="cross-dc"><h3>跨数据中心 AI super-factory</h3><p><button class="term" type="button" data-term="Spectrum-XGS">Spectrum-XGS</button> 代表的跨域互联路线，试图把多个数据中心作为一个更大的训练/推理资源池。</p></article>
+          <article class="detail-card frontier" id="gpu-cloud"><h3>GPU 云与算力金融化</h3><p>CoreWeave、Lambda、Crusoe 等 GPU 云用长期 GPU 采购、电力资源和客户租约，把 AI infra 变成资本密集型的算力资产运营生意。</p></article>
+        </div>
+      </section>
+
+      <section id="bottlenecks" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Bottlenecks</p>
+          <h2>卡脖子瓶颈</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>训练侧瓶颈</h3>
+            <ul>
+              <li><strong><button class="term" type="button" data-term="MFU">MFU</button> / <button class="term" type="button" data-term="MBU">MBU</button></strong>：昂贵 GPU 是否真正用于有效训练。</li>
+              <li><strong>Collective Communication</strong>：多机多卡通信开销吃掉扩展收益。</li>
+              <li><strong>Checkpoint I/O</strong>：大模型保存和恢复状态会冲击存储系统。</li>
+              <li><strong><button class="term" type="button" data-term="MTBF">MTBF</button></strong>：卡越多，硬件故障越频繁，恢复机制越关键。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>推理侧瓶颈</h3>
+            <ul>
+              <li><strong><button class="term" type="button" data-term="TTFT">TTFT</button></strong>：首字延迟决定用户体验和实时场景可用性。</li>
+              <li><strong><button class="term" type="button" data-term="P99 延迟">P99 延迟</button></strong>：企业 SLA 看尾延迟，不看平均延迟。</li>
+              <li><strong><button class="term" type="button" data-term="KV Cache">KV Cache</button></strong>：长上下文和多轮对话的显存黑洞。</li>
+              <li><strong>Reasoning token</strong>：长时思考模型让单位任务 token 消耗大幅上升。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="friction" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Interface Friction</p>
+          <h2>基础设施层与上下游的接口摩擦</h2>
+          <p>基础设施层是五层蛋糕里最容易“纸面算力虚高”的地方：采购 GPU 不等于获得稳定、可售、可计费的 AI 产能。</p>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card">
+            <h3>电力交付 vs GPU 到货</h3>
+            <p>GPU 服务器到货以后，还要等待机房电力、液冷、母线、CDU 和网络联调。AI 工厂的产能爬坡往往被设施侧节奏拖住。</p>
+          </article>
+          <article class="detail-card">
+            <h3>训练网络 vs 推理网络</h3>
+            <p>训练追求 <button class="term" type="button" data-term="Collective Communication">Collective Communication</button> 效率，推理追求 <button class="term" type="button" data-term="TTFT">TTFT</button>、P99 和高并发隔离。一个集群很难同时对两类负载都最优。</p>
+          </article>
+          <article class="detail-card">
+            <h3>GPU 利用率 vs 企业 SLA</h3>
+            <p>更 aggressive 的 batching 可以提高吞吐和利用率，但会伤害尾延迟。企业 SLA 要的是稳定 P99，不是平均成本最低。</p>
+          </article>
+          <article class="detail-card">
+            <h3>云平台抽象 vs 物理故障</h3>
+            <p>云客户看到的是实例和 API，底层真实面对的是光模块故障、网卡抖动、液冷告警、checkpoint I/O 和调度碎片化。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="optical-pcb" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Optical / PCB Fabric</p>
+          <h2>光互联、光模块、光芯片与高速 PCB</h2>
+          <p>AI 基础设施的网络瓶颈正在从“交换机有没有”升级为“每 bit 的功耗、误码率、良率、布线半径和信号完整性”。这条链是训练 MFU、推理 P99 和 AI 工厂交付节奏的共同底座。</p>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card frontier">
+            <h3><button class="term" type="button" data-term="光模块">光模块</button> 800G / 1.6T</h3>
+            <p>400G/800G 之后，1.6T 成为 AI 后端网络升级的核心迁移方向。模块厂的竞争不只看出货，还要看 <button class="term" type="button" data-term="DSP">DSP</button> 功耗、激光器良率、客户认证和散热。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3><button class="term" type="button" data-term="CPO">CPO</button> / <button class="term" type="button" data-term="硅光">硅光</button></h3>
+            <p>当交换芯片速率继续上探，传统可插拔光模块的功耗和面板密度会受压。CPO 与硅光尝试把光互联更靠近交换芯片，但运维、可替换性和封装良率仍是工程摩擦。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3><button class="term" type="button" data-term="AEC">AEC</button> / 高速铜缆</h3>
+            <p>在 rack 内短距连接里，有源铜缆和 retimer/SerDes 可以用更低成本承接部分光模块需求。它是光模块与 CPO 之间的过渡路线，也会影响 Credo、Amphenol、Astera 等连接链价值。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3><button class="term" type="button" data-term="PCB">PCB</button> / <button class="term" type="button" data-term="CCL">CCL</button> / 背板</h3>
+            <p>112G/224G <button class="term" type="button" data-term="SerDes">SerDes</button> 会把信号完整性压力传导到低损耗 CCL、高多层 PCB、背钻、阻抗控制和连接器。AI 服务器、交换机和背板的材料等级开始成为网络性能瓶颈。</p>
+          </article>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>代表标的</h3>
+            <ul>
+              <li><strong>光模块/光器件</strong>：Coherent、Lumentum、Fabrinet、中际旭创、新易盛、光迅科技。</li>
+              <li><strong>SerDes/DSP/连接</strong>：Broadcom、Marvell、Credo、Astera Labs、Amphenol。</li>
+              <li><strong>PCB/CCL/背板</strong>：生益科技、沪电股份、深南电路、Unimicron、Ibiden、Shinko。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>核心 KPI</h3>
+            <ul>
+              <li><strong>光模块速率</strong>：400G/800G/1.6T，决定带宽密度与模块价值量。</li>
+              <li><strong>每 bit 功耗</strong>：网络功耗会进入 AI 数据中心 PUE 与 rack thermal budget。</li>
+              <li><strong>SerDes lane rate</strong>：112G/224G 决定交换芯片、PCB、连接器和 DSP 难度。</li>
+              <li><strong>PCB 插入损耗</strong>：低损耗材料、层数、背钻和阻抗控制决定高速信号可用性。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="capex" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">CAPEX / Value Capture</p>
+          <h2>资本开支与价值捕获</h2>
+          <p>基础设施层把硬件资本开支转化为可售 token 和模型能力，真正的护城河来自利用率、可靠性、交付速度和客户负载绑定。</p>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>核心 CAPEX 变量</h3>
+            <ul>
+              <li><strong>GPU/整柜采购</strong>：NVL72、HGX、网络、存储和机柜级系统共同决定单 MW 算力产出。</li>
+              <li><strong>网络与光互联</strong>：InfiniBand、Spectrum-X、Ultra Ethernet、光模块和交换机是训练效率的放大器。</li>
+              <li><strong>液冷与电力设施</strong>：高密 rack 把 CDU、冷板、UPS、母线和水处理纳入 IT capex。</li>
+              <li><strong>调度与可观测性</strong>：降低空转、故障恢复和多租户碎片化，决定同样硬件能卖出多少有效 token。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>价值捕获位置</h3>
+            <ul>
+              <li><strong>超大云与 GPU 云</strong>：靠规模采购、电力卡位、客户合约和平台服务赚取算力租金。</li>
+              <li><strong>网络/存储/服务器链</strong>：AI 集群越大，非 GPU 设备价值量越不可忽视。</li>
+              <li><strong>推理 runtime</strong>：Prefill/decode、KV cache、路由、batching 直接改善毛利。</li>
+              <li><strong>运维自动化</strong>：MTBF/MTTR、checkpoint、故障隔离和容量规划构成长期经验曲线。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="players" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Eco-Map</p>
+          <h2>全球玩家图谱</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>老牌公认巨头</h3>
+            <ul>
+              <li><strong>NVIDIA</strong>：DGX、NVL72、Spectrum-X、Dynamo、NIM 和全栈 AI factory 平台。</li>
+              <li><strong>Microsoft Azure / AWS / Google Cloud / Oracle Cloud</strong>：超大规模云、客户负载、资本开支和全球数据中心网络。</li>
+              <li><strong>Meta / xAI / OpenAI</strong>：超大训练集群需求方，同时也是 AI infra 架构推动者。</li>
+              <li><strong>Arista / Broadcom / Marvell</strong>：交换芯片、以太网网络、SerDes 和高速互联。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>隐形冠军与新晋玩家</h3>
+            <ul>
+              <li><strong>CoreWeave</strong>：专业 GPU 云和 AI infra 资产运营。</li>
+              <li><strong>Lambda / Crusoe / Voltage Park</strong>：GPU 云、电力共址和专业 AI 集群。</li>
+              <li><strong>Vertiv / Schneider Electric / Eaton</strong>：UPS、配电、液冷和热管理。</li>
+              <li><strong>Supermicro / Dell / HPE / Wiwynn / Quanta</strong>：AI 服务器、机柜和 ODM 集成。</li>
+              <li><strong>Weka / VAST Data / DDN</strong>：高性能训练数据存储与 checkpoint I/O。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>来源与持续核验</h2>
+        </div>
+        <div class="source-list">
+          <a href="https://www.nvidia.com/en-us/data-center/gb200-nvl72/" target="_blank" rel="noreferrer">NVIDIA - GB200 NVL72</a>
+          <a href="https://nvidianews.nvidia.com/news/nvidia-spectrum-xgs-ethernet" target="_blank" rel="noreferrer">NVIDIA - Spectrum-XGS Ethernet</a>
+          <a href="https://developer.nvidia.com/blog/introducing-nvidia-dynamo-a-low-latency-distributed-inference-framework-for-scaling-reasoning-ai-models/" target="_blank" rel="noreferrer">NVIDIA - Dynamo</a>
+          <a href="https://engineering.fb.com/2024/03/12/data-infrastructure/training-llama-3-with-24k-gpu-clusters/" target="_blank" rel="noreferrer">Meta - 24K GPU clusters</a>
+          <a href="https://x.ai/news/colossus" target="_blank" rel="noreferrer">xAI - Colossus</a>
+          <a href="https://openai.com/index/announcing-the-stargate-project/" target="_blank" rel="noreferrer">OpenAI - Stargate Project</a>
+        </div>
+      </section>
+    </main>
+    <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
+    <script src="../glossary.js"></script>
+    <script src="../sources-data.js"></script>
+    <script src="../source-badges.js"></script>
+    <script src="../page-glossary.js"></script>
+  </body>
+</html>

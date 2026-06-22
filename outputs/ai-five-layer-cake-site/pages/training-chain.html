@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>大模型训练链 Training Chain | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#chains"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="训练链导航">
+        <a href="../index.html#chains">返回产业链</a>
+        <a href="#status">行业现状</a>
+        <a href="#topology">拓扑流向</a>
+        <a href="#friction">接口摩擦</a>
+        <a href="#capex">价值捕获</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero layer-page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Horizontal Chain 01 · Training</p>
+          <h1>大模型训练链：把数据、电力、HBM、网络和调度压缩成基础模型能力</h1>
+          <p class="lead">核心矛盾：前沿模型继续吃更多数据和算力，但训练瓶颈已经从“买 GPU”升级为电力、<button class="term" type="button" data-term="HBM">HBM</button>、<button class="term" type="button" data-term="CoWoS">CoWoS</button>、集体通信、故障恢复和数据质量的系统级竞赛。</p>
+        </div>
+        <div class="cake-visual">
+          <div class="cake-layer layer-energy"><strong>Power</strong><span>电力容量、PPA、并网、冷却</span></div>
+          <div class="cake-layer layer-chip"><strong>Silicon</strong><span>GPU、HBM、先进封装、网络芯片</span></div>
+          <div class="cake-layer layer-infra"><strong>Infra</strong><span>AI Factory、网络、存储、调度、MTBF</span></div>
+          <div class="cake-layer layer-model"><strong>Model</strong><span>预训练、后训练、合成数据、评测闭环</span></div>
+        </div>
+      </section>
+
+      <section id="status" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Industry Status</p>
+          <h2>当前行业现状</h2>
+          <p>训练链正在从单一 GPU 采购竞争，变成全栈工程能力竞争：谁能更快拿到电、更稳定地跑万卡/十万卡作业、更低成本地把 token 转化成能力，谁就拥有模型层的主动权。</p>
+        </div>
+        <div class="energy-dashboard">
+          <article class="energy-block">
+            <h3>已核验事实</h3>
+            <ul>
+              <li>Meta 公开其两个 24,576 GPU 训练集群，并同时验证 <button class="term" type="button" data-term="RoCE">RoCE</button> 与 <button class="term" type="button" data-term="InfiniBand">InfiniBand</button> 路线；Meta 称这些集群用于 Llama 3 训练，并分享了硬件、网络、存储、性能和可靠性经验。</li>
+              <li>Meta 2026 年披露 Prometheus 将走向 1GW 容量，并用 backend aggregation 连接跨数据中心 GPU，说明训练链正在进入 GW 级区域集群时代。</li>
+              <li>NVIDIA GB200 NVL72 是液冷 rack-scale 系统，官方称其连接 36 个 Grace CPU 与 72 个 Blackwell GPU，并形成 72-GPU <button class="term" type="button" data-term="NVLink">NVLink</button> 域。</li>
+              <li>OpenAI 宣布 Stargate 项目，计划未来四年投资 5000 亿美元建设 AI 基础设施，初始部署 1000 亿美元，训练链的资本开支规模已经接近国家级工业工程。</li>
+              <li>xAI Colossus 官方页面称其已达到 200K GPUs，并披露存储容量超过 1EB、每服务器网络带宽 3.6Tbps、总内存带宽 194PB/s；2026 年 xAI 还称 Colossus 1 拥有超过 220,000 NVIDIA GPUs。</li>
+            </ul>
+          </article>
+          <article class="energy-block">
+            <h3>一句话现状</h3>
+            <p>训练链的前沿战场不是“模型参数竞赛”本身，而是 <button class="term" type="button" data-term="MFU">MFU</button>、<button class="term" type="button" data-term="MTBF">MTBF</button>、<button class="term" type="button" data-term="Checkpoint I/O">Checkpoint I/O</button>、数据配比、网络拓扑和电力交付共同决定的“有效训练吞吐”。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="topology" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Topology</p>
+          <h2>经典拓扑流向</h2>
+          <p>这条链的价值传导不是线性的采购清单，而是一个有反馈的生产系统：应用数据反哺模型，模型结构反向定义硬件，硬件功耗再反向定义数据中心选址。</p>
+        </div>
+        <div class="chain-flow">
+          <a href="#data">数据/标注</a>
+          <a href="#silicon">HBM/先进封装</a>
+          <a href="#servers">高密 AI 服务器</a>
+          <a href="#network">高速交换机/光模块</a>
+          <a href="#datacenter">超大集群与数据中心</a>
+          <a href="#distributed-training">分布式训练调度</a>
+          <a href="#foundation-model">基础模型</a>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card" id="data">
+            <h3>1. 数据/标注</h3>
+            <p>训练不是把互联网文本倒进模型。前沿团队真正争夺的是 <button class="term" type="button" data-term="Data Curation">Data Curation</button>、<button class="term" type="button" data-term="Data Mixture">Data Mixture</button>、去重、过滤、版权、代码/数学/多模态任务比例，以及后训练用的偏好数据和高难度推理数据。</p>
+          </article>
+          <article class="detail-card" id="silicon">
+            <h3>2. HBM/先进封装</h3>
+            <p><button class="term" type="button" data-term="GPU">GPU</button> 的理论 FLOPS 只有在 <button class="term" type="button" data-term="HBM">HBM</button> 带宽和容量跟上时才有价值。<button class="term" type="button" data-term="CoWoS-L/R">CoWoS-L/R</button>、基板、良率和测试时间决定高端加速器能否交付。</p>
+          </article>
+          <article class="detail-card" id="servers">
+            <h3>3. 高密 AI 服务器</h3>
+            <p>服务器从单机交付进入 rack-scale 交付，电源、背板、液冷、网卡、光模块和整机认证共同决定集群可用性。GB200/Rubin 类系统把训练链从芯片采购推进到机柜级系统工程。</p>
+          </article>
+          <article class="detail-card" id="network">
+            <h3>4. 高速网络</h3>
+            <p>训练集群依赖 <button class="term" type="button" data-term="Collective Communication">Collective Communication</button>，包括 <button class="term" type="button" data-term="AllReduce">AllReduce</button>、<button class="term" type="button" data-term="AllGather">AllGather</button>、<button class="term" type="button" data-term="ReduceScatter">ReduceScatter</button>。网络不是配件，而是决定扩展效率的核心计算部件。</p>
+          </article>
+          <article class="detail-card" id="datacenter">
+            <h3>5. 超大集群与数据中心</h3>
+            <p>训练链需要 <button class="term" type="button" data-term="AI Factory">AI Factory</button>：电力、液冷、存储、前端网络、后端训练网络和运维系统一起设计。GW 级项目的核心变量是电力接入、液冷可靠性、土地和建设周期。</p>
+          </article>
+          <article class="detail-card" id="distributed-training">
+            <h3>6. 分布式训练调度</h3>
+            <p>大模型训练通过 <button class="term" type="button" data-term="Data Parallelism">Data Parallelism</button>、<button class="term" type="button" data-term="Tensor Parallelism">Tensor Parallelism</button>、<button class="term" type="button" data-term="Pipeline Parallelism">Pipeline Parallelism</button>、<button class="term" type="button" data-term="ZeRO">ZeRO</button> 和 <button class="term" type="button" data-term="Gradient Checkpointing">Gradient Checkpointing</button> 把模型切到多机多卡上。</p>
+          </article>
+          <article class="detail-card" id="foundation-model">
+            <h3>7. 基础模型</h3>
+            <p>训练产物不是一个孤立权重文件，而是 base model、post-training 数据、评测体系、推理优化、模型路由和应用反馈数据的组合资产。最终价值在模型能力、API 毛利、生态分发和专有数据飞轮中兑现。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="friction" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Interface Friction</p>
+          <h2>2026 年连接处核心痛点</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>硬件-系统接口</h3>
+            <ul>
+              <li><strong>集体通信开销</strong>：GPU 数量增加后，通信等待会吞掉理论算力，训练吞吐由网络拓扑、拥塞控制和通信库共同决定。</li>
+              <li><strong>HBM/CoWoS 供给</strong>：晶圆产出不等于 AI 加速器出货，HBM、先进封装、基板和测试任何一环卡住都会传导到训练排期。</li>
+              <li><strong>Checkpoint I/O</strong>：模型越大，checkpoint 越重；写入、复制、恢复和一致性会冲击存储系统与训练效率。</li>
+              <li><strong>MTBF 被规模放大</strong>：十万卡集群中故障是常态，训练系统必须围绕硬件故障、silent data corruption 和自动恢复设计。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>数据-模型接口</h3>
+            <ul>
+              <li><strong>高质量 token 稀缺</strong>：公开文本边际价值下降，代码、数学、多模态、企业数据和人类偏好数据更稀缺。</li>
+              <li><strong>数据配比不可迁移</strong>：同样 token 数，不同 mixture 会导致完全不同能力曲线，数据配方本身成为机密资产。</li>
+              <li><strong>合成数据污染</strong>：<button class="term" type="button" data-term="Synthetic Data">Synthetic Data</button> 能提升特定能力，也可能造成模型近亲繁殖、偏见放大和 benchmark 过拟合。</li>
+              <li><strong>后训练与评测闭环</strong>：训练链末端越来越依赖可复现实验、动态评测和真实用户反馈，而不只是 pretraining loss。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="capex" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">CAPEX & Value Capture</p>
+          <h2>长期价值捕获与资本开支变量</h2>
+          <p>训练链的钱主要沉淀在供给最稀缺、转换成本最高、客户最难替换的节点。</p>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card frontier">
+            <h3>1. GPU/HBM/先进封装</h3>
+            <p>NVIDIA、TSMC、SK hynix、Micron、Samsung 捕获最厚价值。护城河来自架构、软件生态、HBM 客户认证、CoWoS 产能和多年资本开支节奏。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>2. 网络与光互联</h3>
+            <p>NVIDIA Networking、Broadcom、Marvell、Arista、光模块和硅光供应链受益于训练集群从 24K、100K 走向 GW 级区域互联。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>3. AI 数据中心与电力</h3>
+            <p>电力接入、PPA、液冷、变电站、UPS、CDU 和数据中心 EPC 变成训练链的硬约束。长期合同与地理卡位会形成资产型护城河。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>4. GPU 云与模型实验平台</h3>
+            <p>CoreWeave、Oracle Cloud、AWS、Azure、Google Cloud 等把 GPU 集群包装成可租赁训练产能，价值来自可用卡源、交付速度、SLA 和客户锁定。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>5. 数据工程与标注反馈</h3>
+            <p>Scale AI、Surge AI、Snorkel、数据版权方和行业数据持有者捕获模型能力的“燃料价值”。真正稀缺的是可授权、可追踪、可评测的高质量数据。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>6. 训练框架与通信软件</h3>
+            <p>PyTorch、Megatron-LM、DeepSpeed、JAX/XLA、NCCL、调度和可观测性工具决定昂贵硬件能否转化为 <button class="term" type="button" data-term="MFU">MFU</button>。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="players" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Eco-Map</p>
+          <h2>玩家图谱</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>绝对主导者</h3>
+            <ul>
+              <li><strong>NVIDIA</strong>：GPU、NVLink、网络、CUDA/NCCL、DGX/GB200/Rubin 机柜级系统。</li>
+              <li><strong>TSMC</strong>：先进制程与 CoWoS/3DFabric，是前沿 AI 加速器交付的封装闸门。</li>
+              <li><strong>SK hynix / Micron / Samsung</strong>：HBM 产能、良率、堆叠和客户认证决定训练集群扩容节奏。</li>
+              <li><strong>Microsoft / Google / AWS / Meta</strong>：自建 AI infra、模型训练、云平台和应用分发闭环。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>新晋和隐形冠军</h3>
+            <ul>
+              <li><strong>xAI</strong>：以 Colossus 速度和规模冲击训练集群建设范式。</li>
+              <li><strong>CoreWeave / Lambda</strong>：GPU 云从租卡服务升级为训练产能金融化和交付平台。</li>
+              <li><strong>Broadcom / Marvell / Arista</strong>：交换芯片、定制 ASIC、SerDes 和 AI 网络系统。</li>
+              <li><strong>Vertiv / Schneider / Eaton</strong>：高密供配电、UPS、液冷和数据中心电气系统。</li>
+              <li><strong>Scale AI / Surge AI / Snorkel</strong>：数据标注、反馈、人类专家数据和企业数据管线。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>来源与持续核验</h2>
+        </div>
+        <div class="source-list">
+          <a href="https://engineering.fb.com/2024/03/12/data-center-engineering/building-metas-genai-infrastructure/" target="_blank" rel="noreferrer">Meta Engineering - Building Meta's GenAI Infrastructure</a>
+          <a href="https://engineering.fb.com/2026/02/09/data-center-engineering/building-prometheus-how-backend-aggregation-enables-gigawatt-scale-ai-clusters/" target="_blank" rel="noreferrer">Meta Engineering - Prometheus and gigawatt-scale AI clusters</a>
+          <a href="https://www.nvidia.com/en-us/data-center/gb200-nvl72/" target="_blank" rel="noreferrer">NVIDIA - GB200 NVL72</a>
+          <a href="https://openai.com/index/announcing-the-stargate-project/" target="_blank" rel="noreferrer">OpenAI - The Stargate Project</a>
+          <a href="https://x.ai/colossus" target="_blank" rel="noreferrer">xAI - Colossus</a>
+          <a href="https://x.ai/news/anthropic-compute-partnership" target="_blank" rel="noreferrer">xAI - Colossus 1 compute partnership</a>
+          <a href="https://engineering.fb.com/2025/07/22/data-infrastructure/how-meta-keeps-its-ai-hardware-reliable/" target="_blank" rel="noreferrer">Meta Engineering - AI hardware reliability</a>
+        </div>
+      </section>
+    </main>
+    <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
+    <script src="../glossary.js"></script>
+    <script src="../page-glossary.js"></script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# OS/editor files
+.DS_Store
+.vscode/
+.idea/
+
+# Dependencies and caches
+node_modules/
+.cache/
+.tmp/
+tmp/
+logs/
+
+# Generated review artifacts
+outputs/*/review-shots/
+
+# Misc local files
+*.log

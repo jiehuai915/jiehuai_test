@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>模型层 Model | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#layers"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="模型层导航">
+        <a href="../index.html#layers">返回五层</a>
+        <a href="#status">行业现状</a>
+        <a href="#frontiers">前沿路线</a>
+        <a href="#bottlenecks">瓶颈</a>
+        <a href="#friction">接口摩擦</a>
+        <a href="#capex">CAPEX</a>
+        <a href="#players">玩家图谱</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero layer-page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Layer 04 · Model</p>
+          <h1>模型层：从参数规模转向推理深度与单位经济性</h1>
+          <p class="lead">核心矛盾：模型能力继续提升，但每一次“更会思考、更长上下文、更强多模态”都会转化为更高推理成本、更复杂系统工程和更严苛评测。</p>
+        </div>
+        <div class="cake-visual">
+          <div class="cake-layer layer-model">
+            <strong>当前判断</strong>
+            <span>模型层的竞争焦点已经从 pretrain scaling 转向 inference-time compute、tool use、long context、multimodal grounding 与单位 token 经济性。</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="status" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Industry Status</p>
+          <h2>当前行业现状</h2>
+        </div>
+        <div class="energy-dashboard">
+          <article class="energy-block">
+            <h3>已核验事实</h3>
+            <ul>
+              <li>OpenAI 2025 年发布 <button class="term" type="button" data-term="o3">o3</button> 与 o4-mini，官方称其是最先进的 <button class="term" type="button" data-term="Reasoning Model">reasoning models</button>，能够在回答前“思考”并结合工具执行复杂任务。</li>
+              <li>Google 发布 Gemini 2.5 Pro，官方称其是“thinking model”，在回答前进行思考，并显著提升推理与代码能力。</li>
+              <li>Anthropic 发布 Claude 3.7 Sonnet，官方称其是混合推理模型，支持普通回答与 <button class="term" type="button" data-term="Extended Thinking">extended thinking</button> 两种模式。</li>
+              <li>推理服务层面，NVIDIA <button class="term" type="button" data-term="Dynamo">Dynamo</button>、<button class="term" type="button" data-term="vLLM">vLLM</button>、<button class="term" type="button" data-term="SGLang">SGLang</button> 等系统围绕 <button class="term" type="button" data-term="KV Cache">KV Cache</button>、<button class="term" type="button" data-term="Prefill/Decode">Prefill/Decode</button> 和 batch 调度优化。</li>
+              <li>Google DeepMind 发布 Gemini Robotics，把 <button class="term" type="button" data-term="VLA">VLA</button> 模型能力推向机器人控制；NVIDIA 发布 GR00T N1，面向人形机器人基础模型。</li>
+            </ul>
+            <div class="source-badges" data-source-ids="openai-o3-o4-mini, google-gemini-25, anthropic-claude-37, nvidia-dynamo, google-gemini-robotics, nvidia-gr00t-n1"></div>
+          </article>
+          <article class="energy-block">
+            <h3>一句话现状</h3>
+            <p>模型公司不再只比谁参数更多，而是在比谁能用更低 <button class="term" type="button" data-term="Inference Cost">Inference Cost</button> 提供更强的 <button class="term" type="button" data-term="Test-Time Compute">Test-Time Compute</button>、更可靠 <button class="term" type="button" data-term="Tool Use">Tool Use</button> 和更真实的多模态世界理解。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Fundamentals</p>
+          <h2>经典基础知识筑基</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card"><h3>概率建模与最大似然</h3><p><button class="term" type="button" data-term="LLM">LLM</button> 本质上学习数据分布，在给定上下文下预测下一个 token。模型能力来自数据分布、参数容量、优化过程和后训练反馈的共同作用。</p></article>
+          <article class="detail-card"><h3><button class="term" type="button" data-term="Transformer">Transformer</button> 与注意力机制</h3><p>注意力机制让模型在上下文内动态建立 token 关系，但上下文越长，计算与 <button class="term" type="button" data-term="KV Cache">KV Cache</button> 成本越高。</p></article>
+          <article class="detail-card"><h3>预训练、后训练与对齐</h3><p><button class="term" type="button" data-term="Pretraining">Pretraining</button> 学世界知识与语言结构，<button class="term" type="button" data-term="SFT">SFT</button> 学任务格式，<button class="term" type="button" data-term="RLHF">RLHF</button>/<button class="term" type="button" data-term="RLAIF">RLAIF</button> 调整偏好与安全边界。</p></article>
+          <article class="detail-card"><h3>评测与泛化</h3><p>模型上线不是只看 benchmark 分数，而要看真实任务成功率、幻觉率、工具调用可靠性、安全性、成本和延迟。</p></article>
+        </div>
+      </section>
+
+      <section id="frontiers" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">2026 Frontiers</p>
+          <h2>前沿技术路线</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card frontier" id="reasoning"><h3>o1/o3 类 <button class="term" type="button" data-term="Reasoning Model">Reasoning Model</button></h3><p>模型在回答前消耗更多推理计算进行内部规划、验证和工具调用。能力提升的代价是 <button class="term" type="button" data-term="Reasoning Token">Reasoning Token</button> 爆炸和推理成本上升。</p></article>
+          <article class="detail-card frontier" id="inference-optimization"><h3><button class="term" type="button" data-term="Prefill/Decode">Prefill/Decode</button> 分离与 <button class="term" type="button" data-term="KV Cache">KV Cache</button> 工程</h3><p>长上下文读入和逐 token 生成是两类负载。推理系统通过解耦、缓存、路由和批处理优化 <button class="term" type="button" data-term="TTFT">TTFT</button>、吞吐与成本。</p></article>
+          <article class="detail-card frontier" id="multimodal"><h3>原生多模态模型</h3><p>文本、图像、语音、视频、屏幕、空间和动作轨迹逐步进入统一模型，推动搜索、办公、编程、机器人和自动驾驶应用重构。</p></article>
+          <article class="detail-card frontier" id="world-model"><h3><button class="term" type="button" data-term="World Model">World Model</button> 与物理 AI</h3><p>Genie、Gemini Robotics、GR00T 等路线把模型从语言空间推向可预测、可交互的物理世界表征。</p></article>
+          <article class="detail-card frontier" id="small-model"><h3>小模型、蒸馏与路由</h3><p>大模型做 teacher，小模型做高频执行，<button class="term" type="button" data-term="Model Router">Model Router</button> 在能力、成本、延迟之间动态分配任务。</p></article>
+          <article class="detail-card frontier" id="synthetic-data"><h3>合成数据与自我改进</h3><p><button class="term" type="button" data-term="Synthetic Data">Synthetic Data</button> 能扩充稀缺任务数据，但会带来数据污染、模式坍塌和系统性偏见。</p></article>
+        </div>
+      </section>
+
+      <section id="bottlenecks" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Bottlenecks</p>
+          <h2>卡脖子瓶颈</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>能力与成本瓶颈</h3>
+            <ul>
+              <li><strong>Reasoning token 爆炸</strong>：长时思考模型提高正确率，同时把单位任务成本推高。</li>
+              <li><strong><button class="term" type="button" data-term="Context Wall">Context Wall</button></strong>：上下文窗口增大不等于可无限有效使用，注意力、缓存和检索质量都会退化。</li>
+              <li><strong><button class="term" type="button" data-term="KV Cache">KV Cache</button></strong>：长上下文、多轮对话和多用户并发的显存黑洞。</li>
+              <li><strong>高质量数据枯竭</strong>：公开互联网文本边际质量下降，私有数据与合成数据成为竞争焦点。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>可靠性与商业化瓶颈</h3>
+            <ul>
+              <li><strong><button class="term" type="button" data-term="Hallucination">Hallucination</button></strong>：企业落地最直接的信任成本。</li>
+              <li><strong>工具调用可靠性</strong>：模型说对不等于能安全执行，Agent 需要可控状态机和权限边界。</li>
+              <li><strong>评测污染</strong>：公开 benchmark 容易被训练数据污染，真实任务评测更重要。</li>
+              <li><strong>安全与版权</strong>：数据来源、输出责任、隐藏思考链和合规风险仍在快速变化。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="friction" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Interface Friction</p>
+          <h2>模型层与上下游的接口摩擦</h2>
+          <p>模型层的摩擦来自“能力提升”和“生产可用”之间的差距：更强模型常常同时带来更高成本、更高延迟和更难解释的行为。</p>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card">
+            <h3>模型能力 vs 推理成本</h3>
+            <p>Reasoning、长上下文和多模态提升任务完成率，但会推高 <button class="term" type="button" data-term="TTFT">TTFT</button>、<button class="term" type="button" data-term="KV Cache">KV Cache</button> 占用、P99 和单任务 token 成本。</p>
+          </article>
+          <article class="detail-card">
+            <h3>通用模型 vs 企业私有数据</h3>
+            <p>企业要的是基于权限、来源和业务语义的可信答案。模型必须通过 <button class="term" type="button" data-term="RAG">RAG</button>、GraphRAG、微调和评测接入企业数据，不能只靠通用能力。</p>
+          </article>
+          <article class="detail-card">
+            <h3>Benchmark 高分 vs 真实任务成功</h3>
+            <p>公开评测容易被污染或过拟合，真实业务看 Agent Success Rate、幻觉率、工具调用成功率、可回滚性和人工介入比例。</p>
+          </article>
+          <article class="detail-card">
+            <h3>隐藏思考链 vs 安全审计</h3>
+            <p>推理模型的内部思考不一定完全暴露，给 jailbreak、越权工具调用和事故归因带来新难题。安全评测必须从输出审查升级到行为审计。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="capex" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">CAPEX / Value Capture</p>
+          <h2>资本开支与价值捕获</h2>
+          <p>模型层的资本开支正在从一次性训练军备竞赛，转向训练、后训练、推理优化、评测和数据飞轮的长期复合投入。</p>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>核心 CAPEX / OPEX 变量</h3>
+            <ul>
+              <li><strong>训练算力</strong>：GPU/HBM、网络、存储、数据管线和失败重跑成本。</li>
+              <li><strong>后训练与数据</strong>：SFT、RLHF/RLAIF、人类反馈、合成数据和领域评测集。</li>
+              <li><strong>推理 OPEX</strong>：reasoning token、上下文长度、batching、cache 命中率和区域部署。</li>
+              <li><strong>安全评测</strong>：红队、动态 benchmark、运行时监控、内容安全和事故响应。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>价值捕获位置</h3>
+            <ul>
+              <li><strong>前沿模型 API</strong>：靠能力领先、开发者生态和企业信任获得溢价。</li>
+              <li><strong>高效小模型/路由</strong>：用成本优势吃掉高频任务，保护应用毛利。</li>
+              <li><strong>专有数据飞轮</strong>：行业数据、用户反馈和任务结果形成差异化能力。</li>
+              <li><strong>模型运维与评测</strong>：企业上线需要持续 eval、guardrails、监控和合规报告。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="players" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Eco-Map</p>
+          <h2>全球玩家图谱</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>老牌公认巨头</h3>
+            <ul>
+              <li><strong>OpenAI</strong>：reasoning model、工具调用、API 平台和 ChatGPT 分发。</li>
+              <li><strong>Google DeepMind</strong>：Gemini、长上下文、多模态、机器人和世界模型。</li>
+              <li><strong>Anthropic</strong>：Claude、constitutional AI、extended thinking 与企业安全定位。</li>
+              <li><strong>Meta</strong>：Llama 开源生态、训练基础设施和模型社区分发。</li>
+              <li><strong>NVIDIA</strong>：模型不是主产品，但 NIM、Dynamo、NeMo、GR00T 把模型和基础设施绑定。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>新晋与垂直玩家</h3>
+            <ul>
+              <li><strong>Mistral / DeepSeek / Cohere</strong>：高效模型、开源/企业部署和成本效率。</li>
+              <li><strong>xAI</strong>：大规模训练集群与 Grok 产品分发。</li>
+              <li><strong>Together AI / Fireworks / GroqCloud</strong>：推理服务、开源模型托管和部署效率。</li>
+              <li><strong>Scale AI / Surge AI / Snorkel</strong>：数据、标注、反馈和企业数据工程。</li>
+              <li><strong>Physical Intelligence / Figure AI</strong>：具身基础模型和机器人数据闭环。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>来源与持续核验</h2>
+        </div>
+        <div class="source-list">
+          <a href="https://openai.com/index/introducing-o3-and-o4-mini/" target="_blank" rel="noreferrer">OpenAI - o3 and o4-mini</a>
+          <a href="https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/" target="_blank" rel="noreferrer">Google - Gemini 2.5 Pro</a>
+          <a href="https://www.anthropic.com/news/claude-3-7-sonnet" target="_blank" rel="noreferrer">Anthropic - Claude 3.7 Sonnet</a>
+          <a href="https://developer.nvidia.com/blog/introducing-nvidia-dynamo-a-low-latency-distributed-inference-framework-for-scaling-reasoning-ai-models/" target="_blank" rel="noreferrer">NVIDIA - Dynamo</a>
+          <a href="https://blog.google/technology/google-deepmind/gemini-robotics/" target="_blank" rel="noreferrer">Google DeepMind - Gemini Robotics</a>
+          <a href="https://blogs.nvidia.com/blog/gr00t-n1-isaac-gr00t/" target="_blank" rel="noreferrer">NVIDIA - GR00T N1</a>
+        </div>
+      </section>
+    </main>
+    <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
+    <script src="../glossary.js"></script>
+    <script src="../sources-data.js"></script>
+    <script src="../source-badges.js"></script>
+    <script src="../page-glossary.js"></script>
+  </body>
+</html>

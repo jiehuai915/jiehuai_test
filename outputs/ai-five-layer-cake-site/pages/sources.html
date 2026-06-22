@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>来源库 Source Registry | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#overview"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="来源库导航">
+        <a href="../index.html#overview">首页</a>
+        <a href="../index.html#search">全局搜索</a>
+        <a href="../index.html#companies">公司卡</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero layer-page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Source Registry</p>
+          <h1>来源库：把判断放回证据链里</h1>
+          <p class="lead">这里沉淀 AI 五层蛋糕网站使用的官方公告、年报、机构报告、工程博客和安全框架。每条来源都标注用途、可信度和覆盖主题。</p>
+        </div>
+        <div class="cake-visual">
+          <div class="cake-layer layer-infra">
+            <strong>研究原则</strong>
+            <span>事实优先使用官方/一手来源；预测节点明确标记为 E；缺少公开数据的环节保留“需渠道验证”的研究口径。</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-tint" aria-labelledby="sources-title">
+        <div class="section-heading">
+          <p class="eyebrow">Evidence Layer</p>
+          <h2 id="sources-title">可检索来源索引</h2>
+          <p>按发布方、来源类型、可信度和使用主题筛选，用于追踪关键事实的出处、适用范围和核验边界。</p>
+        </div>
+        <div class="global-search-panel">
+          <label class="search-input-wrap" for="sourceSearchInput">
+            <span>Sources</span>
+            <input id="sourceSearchInput" type="search" placeholder="搜索 NVIDIA、HBM4、PPA、Agentforce..." autocomplete="off" />
+          </label>
+          <div class="terminal-toolbar" id="sourceFilters" aria-label="来源分类筛选"></div>
+          <div class="glossary-index-summary" id="sourceSummary"></div>
+          <div class="source-index-grid" id="sourceIndexGrid"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>AI 五层蛋糕产业知识体系 · 来源库</span>
+      <span>来源库会随研究更新持续扩展。</span>
+    </footer>
+
+    <script src="../sources-data.js"></script>
+    <script src="../page-sources.js"></script>
+  </body>
+</html>

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI 安全与评测链 Safety & Evaluation Chain | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#chains"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="安全评测链导航">
+        <a href="../index.html#chains">返回产业链</a>
+        <a href="#status">行业现状</a>
+        <a href="#topology">拓扑流向</a>
+        <a href="#friction">接口摩擦</a>
+        <a href="#capex">价值捕获</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero layer-page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Horizontal Chain 08 · Safety & Evaluation</p>
+          <h1>AI 安全与评测链：把模型能力关进可测、可控、可审计的上线边界</h1>
+          <p class="lead">核心矛盾：模型越会推理、越会调用工具、越能行动，风险也越从“错误回答”升级为越权操作、隐私泄露、隐藏对抗攻击和系统性失控。安全评测链要把能力、风险和责任边界量化成发布门槛。</p>
+        </div>
+        <div class="cake-visual">
+          <div class="cake-layer layer-model"><strong>Model</strong><span>对齐、红队、隐藏 CoT、能力阈值</span></div>
+          <div class="cake-layer layer-infra"><strong>Runtime</strong><span>guardrails、审计、sandbox、监控</span></div>
+          <div class="cake-layer layer-app"><strong>Policy</strong><span>合规、责任、版权、内容安全</span></div>
+          <div class="cake-layer layer-energy"><strong>Governance</strong><span>标准、监管、事故响应、溯源</span></div>
+        </div>
+      </section>
+
+      <section id="status" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Industry Status</p>
+          <h2>当前行业现状</h2>
+          <p>AI 安全已经从“过滤敏感词”升级为从数据、训练、对齐、发布、运行时和事故响应贯穿全生命周期的治理体系。</p>
+        </div>
+        <div class="energy-dashboard">
+          <article class="energy-block">
+            <h3>已核验事实</h3>
+            <ul>
+              <li>OpenAI 发布 Preparedness Framework，并建立 Safety Evaluations Hub，围绕 frontier capabilities、policy 和发布前后评测形成体系化治理。</li>
+              <li>Anthropic 更新 Responsible Scaling Policy，使用 AI Safety Levels 对模型能力与安全措施进行分级管理。</li>
+              <li>NIST 发布 AI Risk Management Framework，并推出 Generative AI Profile，为治理、映射、衡量和管理生成式 AI 风险提供框架。</li>
+              <li>Google DeepMind 发布 Frontier Safety Framework，聚焦前沿模型的严重风险、能力阈值和缓解措施。</li>
+              <li>MLCommons 推出 AILuminate 基准，面向通用聊天模型的安全风险评测；METR、HELM 等机构持续推进模型能力和风险评估。</li>
+              <li>推理模型、Agent 和工具调用让安全边界从输出文本扩展到隐藏思考、外部工具、长期任务和实际行动。</li>
+            </ul>
+          </article>
+          <article class="energy-block">
+            <h3>一句话现状</h3>
+            <p>安全评测链的核心不是“让模型更保守”，而是建立 <button class="term" type="button" data-term="Eval Harness">Eval Harness</button>、<button class="term" type="button" data-term="Red Teaming">Red Teaming</button>、<button class="term" type="button" data-term="Guardrails">Guardrails</button>、运行时审计和事故响应的闭环。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="topology" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Topology</p>
+          <h2>经典拓扑流向</h2>
+          <p>安全不是上线前的一次测试，而是从数据进入训练集之前就开始，直到模型运行中不断监控和复盘。</p>
+        </div>
+        <div class="chain-flow">
+          <a href="#data-compliance">数据合规</a>
+          <a href="#guardrails">Guardrails</a>
+          <a href="#alignment">RLHF/RLAIF</a>
+          <a href="#red-team">Red Teaming</a>
+          <a href="#benchmark">Benchmark</a>
+          <a href="#runtime">Runtime 审查</a>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card" id="data-compliance">
+            <h3>1. 原始数据合规 / 版权洗净</h3>
+            <p>训练前要处理版权、隐私、PII、数据授权、数据驻留和可追溯。<button class="term" type="button" data-term="Data Provenance">Data Provenance</button> 决定模型生命周期中能否解释数据来源和合规边界。</p>
+          </article>
+          <article class="detail-card" id="guardrails">
+            <h3>2. 预训练和运行时护栏</h3>
+            <p><button class="term" type="button" data-term="Guardrails">Guardrails</button> 包括系统提示、安全分类器、策略模型、工具权限、内容审查和拒答边界。Agent 时代护栏必须覆盖“动作”，不仅是“文本”。</p>
+          </article>
+          <article class="detail-card" id="alignment">
+            <h3>3. RLHF / RLAIF 对齐</h3>
+            <p><button class="term" type="button" data-term="RLHF">RLHF</button>/<button class="term" type="button" data-term="RLAIF">RLAIF</button> 通过人类或 AI 偏好反馈调整模型行为。难点是偏好数据质量、奖励黑客、过度拒答和多文化/多行业标准冲突。</p>
+          </article>
+          <article class="detail-card" id="red-team">
+            <h3>4. 红队测试</h3>
+            <p><button class="term" type="button" data-term="Red Teaming">Red Teaming</button> 主动攻击模型，包括 jailbreak、prompt injection、数据泄露、恶意工具调用、社会工程和领域高风险任务。</p>
+          </article>
+          <article class="detail-card" id="benchmark">
+            <h3>5. 动态 Benchmarking</h3>
+            <p>公开 benchmark 容易被训练污染，安全评测需要动态任务、私有测试集、场景化 eval、能力阈值和回归测试。<button class="term" type="button" data-term="Benchmark Contamination">Benchmark Contamination</button> 是核心风险。</p>
+          </article>
+          <article class="detail-card" id="runtime">
+            <h3>6. 实时内容合规审查</h3>
+            <p>上线后要监控输入、输出、工具调用、用户反馈、异常成本和事故。<button class="term" type="button" data-term="Runtime Monitoring">Runtime Monitoring</button>、审计日志和快速回滚决定安全治理是否可执行。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="friction" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Interface Friction</p>
+          <h2>2026 年连接处核心痛点</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>模型能力与安全接口</h3>
+            <ul>
+              <li><strong>隐藏 CoT 攻击</strong>：reasoning 模型的思考过程不可完全展示，攻击和操控可能发生在不可见推理阶段。</li>
+              <li><strong>Jailbreak 与 Prompt Injection</strong>：用户输入、网页内容、工具返回值都可能诱导模型越过系统指令。</li>
+              <li><strong>合成数据近亲繁殖</strong>：Synthetic Data 规模化后可能放大偏见、降低多样性并造成模型退化。</li>
+              <li><strong>能力阈值不稳定</strong>：同一模型在不同提示、工具和上下文下能力跳变，发布门槛很难用单一分数表达。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>治理与商业接口</h3>
+            <ul>
+              <li><strong>安全与可用性冲突</strong>：护栏太弱会出事，护栏太强会伤害用户体验和业务转化。</li>
+              <li><strong>评测污染</strong>：公开测试集泄漏到训练数据后，benchmark 分数不再代表真实能力或安全性。</li>
+              <li><strong>责任归属</strong>：模型厂商、应用开发者、企业客户和最终用户之间的责任边界仍在变化。</li>
+              <li><strong>跨区域合规</strong>：欧盟、美国、中国和行业监管对隐私、版权、透明度和高风险 AI 的要求不同。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="capex" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">CAPEX & Value Capture</p>
+          <h2>长期价值捕获与资本开支变量</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card frontier">
+            <h3>1. 安全评测平台</h3>
+            <p>Eval harness、私有 benchmark、回归测试、红队任务库和场景化测试会成为模型发布和企业采购的基础设施。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>2. 运行时护栏与内容安全</h3>
+            <p>输入/输出过滤、策略模型、工具权限、DLP、PII 检测和内容审查捕获上线后的安全预算。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>3. 数据溯源与版权治理</h3>
+            <p>数据授权、内容 provenance、水印、版权识别和训练集治理将影响模型公司法律风险和企业采购。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>4. Agent 行动审计</h3>
+            <p>Agent 越能执行，越需要审计日志、审批流、回滚、sandbox 和 policy engine，安全预算会从模型层迁移到 runtime 层。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>5. 第三方认证与监管服务</h3>
+            <p>企业客户会要求独立评测、合规报告、风险分级和审计证明，催生 AI assurance 市场。</p>
+          </article>
+          <article class="detail-card frontier">
+            <h3>6. 事故响应和保险</h3>
+            <p>安全事故复盘、模型回滚、用户通知、法律责任和 AI 风险保险会成为成熟市场后的新价值层。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="players" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Eco-Map</p>
+          <h2>玩家图谱</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>绝对主导者</h3>
+            <ul>
+              <li><strong>OpenAI / Anthropic / Google DeepMind</strong>：前沿模型安全框架、内部红队、发布门槛和模型卡。</li>
+              <li><strong>Microsoft / AWS / Google Cloud</strong>：企业 AI 安全、身份、日志、内容安全和合规云服务。</li>
+              <li><strong>NIST / MLCommons / Stanford CRFM</strong>：标准、benchmark、风险框架和行业共识。</li>
+              <li><strong>METR / Apollo Research</strong>：前沿模型能力、自治风险和欺骗性行为评测。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>新晋和隐形冠军</h3>
+            <ul>
+              <li><strong>Scale AI / Surge AI</strong>：红队、偏好数据、安全标注和高质量 eval 数据。</li>
+              <li><strong>Arize / LangSmith / Weights & Biases</strong>：LLMOps、eval、trace 和运行时监控。</li>
+              <li><strong>Protect AI / HiddenLayer / Lakera</strong>：AI security、模型供应链、防护和 prompt injection 防御。</li>
+              <li><strong>Credo AI / Holistic AI / Fairly AI</strong>：AI governance、合规和模型风险管理。</li>
+              <li><strong>法律与版权数据方</strong>：数据授权、版权清洗、内容溯源和争议解决。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>来源与持续核验</h2>
+        </div>
+        <div class="source-list">
+          <a href="https://openai.com/safety/preparedness" target="_blank" rel="noreferrer">OpenAI - Preparedness Framework</a>
+          <a href="https://openai.com/safety/evaluations-hub/" target="_blank" rel="noreferrer">OpenAI - Safety Evaluations Hub</a>
+          <a href="https://www.anthropic.com/news/anthropics-responsible-scaling-policy" target="_blank" rel="noreferrer">Anthropic - Responsible Scaling Policy</a>
+          <a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noreferrer">NIST - AI Risk Management Framework</a>
+          <a href="https://www.nist.gov/itl/ai-risk-management-framework/generative-ai-profile" target="_blank" rel="noreferrer">NIST - Generative AI Profile</a>
+          <a href="https://deepmind.google/discover/blog/introducing-our-frontier-safety-framework/" target="_blank" rel="noreferrer">Google DeepMind - Frontier Safety Framework</a>
+          <a href="https://mlcommons.org/ailuminate/" target="_blank" rel="noreferrer">MLCommons - AILuminate</a>
+          <a href="https://metr.org/" target="_blank" rel="noreferrer">METR - AI evaluations</a>
+          <a href="https://crfm.stanford.edu/helm/" target="_blank" rel="noreferrer">Stanford CRFM - HELM</a>
+        </div>
+      </section>
+    </main>
+    <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
+    <script src="../glossary.js"></script>
+    <script src="../page-glossary.js"></script>
+  </body>
+</html>

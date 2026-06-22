@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>能源层 Power | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#overview"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="层级导航">
+        <a href="../index.html#layers">返回五层</a>
+        <a href="#status">行业现状</a>
+        <a href="#frontiers">前沿路线</a>
+        <a href="#friction">接口摩擦</a>
+        <a href="#capex">CAPEX</a>
+        <a href="#players">玩家图谱</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero layer-page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Layer 01 · Power</p>
+          <h1>能源层：AI 算力扩张的第一物理瓶颈</h1>
+          <p class="lead">核心矛盾：AI 的扩张速度是软件级的，但电力、并网、变压器、冷却和核能建设是物理世界级的。</p>
+        </div>
+        <div class="cake-visual">
+          <div class="cake-layer layer-energy">
+            <strong>当前判断</strong>
+            <span>AI 能源层的核心不是总发电量够不够，而是能否在数据中心所在节点交付连续、低碳、低延迟扩容的电力容量。</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="status" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Industry Status</p>
+          <h2>当前行业现状</h2>
+        </div>
+        <div class="energy-dashboard">
+          <article class="energy-block">
+            <h3>已核验事实</h3>
+            <ul>
+              <li>IEA 2026 报告：2025 年全球数据中心用电增长 17%，其中 AI 专用数据中心用电增长 33%；数据中心在全球电力需求中的占比约 1.5%。</li>
+              <li>Google 与 Kairos Power 签署协议，计划到 2035 年部署 500MW <button class="term" type="button" data-term="SMR">先进核能</button>，用于支持 AI 和数据中心负载。</li>
+              <li>Amazon 宣布投资 X-energy，相关合作目标是在美国部署超过 5GW 新核能项目。</li>
+              <li>Microsoft 与 Constellation 签署 20 年<button class="term" type="button" data-term="PPA">购电协议</button>，推动 Three Mile Island 1 号机组重启，为数据中心供电。</li>
+            </ul>
+            <div class="source-badges" data-source-ids="iea-energy-ai, google-kairos, amazon-x-energy, constellation-microsoft-ppa"></div>
+          </article>
+          <article class="energy-block">
+            <h3>一句话现状</h3>
+            <p>云厂商正在从“购买云基础设施”变成“锁定能源基础设施”：长期 <button class="term" type="button" data-term="PPA">PPA</button>、核能合作、<button class="term" type="button" data-term="表后供电">表后供电</button>、燃气轮机、<button class="term" type="button" data-term="储能">储能</button>和<button class="term" type="button" data-term="液冷">液冷</button>工程共同决定未来 AI 产能。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Fundamentals</p>
+          <h2>经典基础知识筑基</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card" id="electricity"><h3>电力实时平衡</h3><p>电网频率必须在发电与负载之间实时平衡。AI 数据中心是高连续性、高功率密度负载，不能只靠软件弹性调度解决。</p></article>
+          <article class="detail-card" id="grid"><h3>电网与三相系统</h3><p>电力落地到数据中心要经过变电站、变压器、开关柜、UPS 和母线系统。瓶颈常常卡在接入容量和设备交付周期。</p></article>
+          <article class="detail-card"><h3>热力学与冷却</h3><p><button class="term" type="button" data-term="GPU">GPU</button> 消耗的电最终几乎全部变成热。机柜功率密度越高，风冷越难支撑，<button class="term" type="button" data-term="液冷">液冷</button>、<button class="term" type="button" data-term="CDU">CDU</button>、水资源和热回收成为硬约束。</p></article>
+          <article class="detail-card"><h3>基荷与峰荷</h3><p>训练负载偏阶段性高峰，推理负载偏持续在线。AI 越进入应用层，能源需求越从周期性 capex 变成持续性 opex。</p></article>
+        </div>
+      </section>
+
+      <section id="frontiers" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">2026 Frontiers</p>
+          <h2>前沿技术路线</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card frontier" id="smr"><h3><button class="term" type="button" data-term="SMR">SMR</button> / 先进核能直连</h3><p>云厂商提前锁定 2030 年后的清洁<button class="term" type="button" data-term="基荷">基荷</button>电力。Google-Kairos、Amazon-X-energy、Microsoft-Constellation 说明核能从 ESG 叙事变成 AI 基础设施期权。</p></article>
+          <article class="detail-card frontier" id="behind-the-meter"><h3><button class="term" type="button" data-term="表后供电">Behind-the-Meter</button> 自备电厂</h3><p>数据中心与燃气轮机、<button class="term" type="button" data-term="储能">储能</button>、微电网或核能共址，绕开公共电网扩容排队。核心收益是交付速度和供电确定性。</p></article>
+          <article class="detail-card frontier" id="ppa"><h3>长期 <button class="term" type="button" data-term="PPA">PPA</button> 与电力金融化</h3><p>AI 公司用长期购电协议锁定电价、容量和低碳属性。电力从成本项变成战略资产，<button class="term" type="button" data-term="PPA">PPA</button> 质量会影响云厂商长期毛利。</p></article>
+          <article class="detail-card frontier" id="power-cooling"><h3>电力-冷却一体化工程</h3><p>高密机柜推动变电站、UPS、母线槽、<button class="term" type="button" data-term="CDU">CDU</button>、冷板<button class="term" type="button" data-term="液冷">液冷</button>和水路监控一起设计。能源层与基础设施层正在合并成系统工程。</p></article>
+        </div>
+      </section>
+
+      <section id="friction" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Interface Friction</p>
+          <h2>能源层与上层的接口摩擦</h2>
+          <p>能源层最大的摩擦不是“有没有电”，而是电力资产、数据中心建设、AI 机柜和模型负载之间的交付周期完全不同步。</p>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card">
+            <h3>电网接入 vs 数据中心投产</h3>
+            <p><button class="term" type="button" data-term="Interconnection Queue">Interconnection Queue</button>、变电站扩容、输电线路和变压器交期会把 AI 数据中心从 IT 项目拖回公用事业项目。训练集群采购可以按季度推进，电力接入常按年推进。</p>
+          </article>
+          <article class="detail-card">
+            <h3>低碳承诺 vs 24/7 基荷</h3>
+            <p>可再生能源的间歇性与 AI 推理的持续负载存在错配。云厂商必须在 <button class="term" type="button" data-term="PPA">PPA</button>、储能、燃气、核能和区域调度之间组合，而不是只买“绿电证书”。</p>
+          </article>
+          <article class="detail-card">
+            <h3>电力链路 vs 高密液冷</h3>
+            <p>100kW+ 机柜要求电源、母线、UPS、CDU、冷板和漏液检测共同设计；Facility 团队和 IT 团队的责任边界会成为实际运维摩擦。</p>
+          </article>
+          <article class="detail-card">
+            <h3>本地许可 vs 全球算力调度</h3>
+            <p>模型公司希望全球调度训练和推理，但电力、水资源、土地、社区许可和数据驻留都具有强本地属性，导致算力不是完全可替代商品。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="capex" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">CAPEX / Value Capture</p>
+          <h2>资本开支与价值捕获</h2>
+          <p>能源层的超额收益来自可交付 MW、长期合同、稀缺选址和工程交付能力，而不是单纯电价上涨。</p>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>核心 CAPEX 变量</h3>
+            <ul>
+              <li><strong>可交付电力容量</strong>：已获并网、可实际送电的 MW 比规划 MW 更重要。</li>
+              <li><strong>长周期电气设备</strong>：变压器、开关柜、UPS、母线和保护系统决定项目排产。</li>
+              <li><strong>冷却与水资源</strong>：液冷改造、CDU、水处理和热回收进入数据中心总包成本。</li>
+              <li><strong>备用与韧性</strong>：燃气轮机、储能、柴油备份、微电网影响 SLA 和保险成本。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>价值捕获位置</h3>
+            <ul>
+              <li><strong>核电/低碳基荷资产</strong>：通过 20 年级别 PPA 锁定现金流和 AI 溢价。</li>
+              <li><strong>电气设备商</strong>：在 grid-to-chip 改造中吃到高确定性订单。</li>
+              <li><strong>液冷与热管理</strong>：随机柜密度上升，价值量从服务器侧外溢到设施侧。</li>
+              <li><strong>有电力入口的数据中心开发商</strong>：土地加电力接入权成为比建筑面积更硬的护城河。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="players" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Eco-Map</p>
+          <h2>全球玩家图谱</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>老牌公认巨头</h3>
+            <ul>
+              <li><strong>NextEra Energy</strong>：可再生能源、输配电与长期电力资产开发能力。</li>
+              <li><strong>Constellation Energy</strong>：美国核电资产与大型 PPA 能力。</li>
+              <li><strong>Vistra</strong>：调峰、燃气、核能与电力市场暴露度。</li>
+              <li><strong>GE Vernova</strong>：燃气轮机、电网设备与电力工程。</li>
+              <li><strong>Schneider Electric / Eaton / Siemens / ABB</strong>：配电、开关柜、UPS、自动化和电气系统集成。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>卡脖子隐形冠军</h3>
+            <ul>
+              <li><strong>Kairos Power</strong>：先进核能与 Google 500MW 合作路线。</li>
+              <li><strong>X-energy</strong>：Amazon 投资支持的 SMR 路线。</li>
+              <li><strong>Oklo / NuScale</strong>：小型核反应堆商业化路线，仍需监管和项目验证。</li>
+              <li><strong>Vertiv</strong>：UPS、热管理、液冷与数据中心电力基础设施。</li>
+              <li><strong>Fluence / Tesla Energy</strong>：电池储能与电网侧灵活性。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>来源与持续核验</h2>
+        </div>
+        <div class="source-list">
+          <a href="https://www.iea.org/reports/energy-and-ai/executive-summary" target="_blank" rel="noreferrer">IEA - Energy and AI</a>
+          <a href="https://blog.google/outreach-initiatives/sustainability/google-kairos-power-nuclear-energy-agreement/" target="_blank" rel="noreferrer">Google - Kairos Power</a>
+          <a href="https://www.aboutamazon.com/news/sustainability/amazon-nuclear-small-modular-reactor-net-carbon-zero" target="_blank" rel="noreferrer">Amazon - X-energy</a>
+          <a href="https://www.constellationenergy.com/newsroom/2024/Constellation-launches-Crane-Clean-Energy-Center-restoring-jobs-and-carbon-free-power-to-The-Grid.html" target="_blank" rel="noreferrer">Constellation - Microsoft PPA</a>
+        </div>
+      </section>
+    </main>
+    <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
+    <script src="../glossary.js"></script>
+    <script src="../sources-data.js"></script>
+    <script src="../source-badges.js"></script>
+    <script src="../page-glossary.js"></script>
+  </body>
+</html>
