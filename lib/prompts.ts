@@ -237,18 +237,20 @@ function buildNutritionVisualRule(
   const nutrition = context.nutritionSummary;
 
   if (!nutrition.hasNutrition) {
-    return `营养信息：${nutrition.per100Text}${nutrition.unrecognizedText} 不要编造热量、蛋白质、碳水、脂肪或膳食纤维数值。`;
+    return "营养信息：食材重量或营养库暂未匹配，封面不展示具体营养数值，也不要编造热量、蛋白质、碳水、脂肪或膳食纤维数值。";
   }
 
+  const compactNutritionText = nutrition.per100Text.replace("营养估算角标：", "");
+
   if (context.audienceType === "fitness-light-meal") {
-    return `营养信息：仅在封面图右上角加入清晰但不抢主体的健身轻食营养角标，显示「估算 / 每100g」以及 ${nutrition.per100Text.replace("营养估算角标：", "")}${nutrition.recognizedText}${nutrition.coverageText}${nutrition.unrecognizedText}`;
+    return `营养信息：仅在封面图右上角加入一个简洁营养角标，最多显示 2 行；角标内容只保留「估算 / 每100g」「${compactNutritionText}」。`;
   }
 
   if (context.audienceType === "baby-food") {
-    return `营养信息：仅在封面图右上角加入小型「估算营养」标签，可弱化显示每100g热量与主要营养；${nutrition.per100Text}${nutrition.recognizedText}${nutrition.coverageText}${nutrition.unrecognizedText} 数值必须小而清楚，不要制造医学承诺。`;
+    return `营养信息：仅在封面图右上角加入一个小型「估算营养」角标，最多显示 2 行；角标内容只保留「估算 / 每100g」「${compactNutritionText}」。`;
   }
 
-  return `营养信息：如画面空间允许，仅在封面图右上角以低优先级小字显示「估算 / 每100g」和 ${nutrition.per100Text.replace("营养估算角标：", "")}${nutrition.recognizedText}${nutrition.coverageText}${nutrition.unrecognizedText}`;
+  return `营养信息：如画面空间允许，仅在封面图右上角以低优先级小字显示一个简洁角标，内容只保留「估算 / 每100g」「${compactNutritionText}」。`;
 }
 
 function buildAudienceVisualRule(
