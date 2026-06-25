@@ -175,7 +175,7 @@ function buildCoverPrompt(context: PromptContext): string {
     `标题结构：画面正上方正中央显示「${context.recipeName}」，标题字体与菜谱内容有关联，${getTitleDecoration(context.recipeName)}；标题清晰可读，不遮挡主体。`,
     `风格描述：${context.style.name}；${context.style.description}。优先保证主体清晰，控制粒子、光斑和装饰密度，避免画面过闪。`,
     `主体描述：成品「${context.recipeName}」作为唯一视觉主角，摆放在画面中心偏下位置，轮廓明确，层次清楚，食材质感可辨认；人物如出现只能作为远景或侧后方辅助，不可抢视觉焦点。`,
-    buildNutritionVisualRule(context, "cover"),
+    buildNutritionVisualRule(context),
     buildAudienceVisualRule(context, "cover"),
     buildConsistencyRule(context),
     `环境描述：背景保持弱化和简洁，使用低对比环境色衬托主体，不出现与菜谱无关的辅料或道具。`,
@@ -190,7 +190,6 @@ function buildIngredientsPrompt(context: PromptContext): string {
     `标题结构：画面正上方正中央显示「食材准备」，标题字体与食材内容有关联，可融入小份量食材、气泡、水滴、餐具或木纹元素；标题清晰可读。`,
     `风格描述：${context.style.name}；${context.style.description}。整体干净、可读、少噪声，避免过度炫光。`,
     `主体描述：严格完整呈现用户提供的所需食材：${context.ingredients || "用户未提供食材，画面不得自行添加未提及食材"}。食材按类别分区摆放，层次清楚，大小关系自然，每种食材都能被识别。`,
-    buildNutritionVisualRule(context, "ingredients"),
     buildAudienceVisualRule(context, "ingredients"),
     buildConsistencyRule(context),
     `环境描述：使用简洁桌面或料理台作为背景，背景纹理弱化，不能抢食材主体。`,
@@ -205,7 +204,6 @@ function buildStepsPrompt(context: PromptContext): string {
     `标题结构：画面正上方正中央显示「制作步骤」，标题字体与制作动作有关联，可融入搅拌轨迹、蒸汽、水滴、容器轮廓或食材切面元素；标题清晰可读。`,
     `风格描述：${context.style.name}；${context.style.description}。画面以直观动作为核心，光效克制，背景弱化。`,
     `主体描述：视觉化呈现用户提供的制作步骤：${context.steps || "用户未提供步骤，画面不得自行编造制作流程"}。将步骤拆解为 3-4 个连续动作画面，动作顺序必须符合用户输入，不更改制作逻辑；最后一步的成品外观必须与封面图中的成品保持一致。`,
-    buildNutritionVisualRule(context, "steps"),
     buildAudienceVisualRule(context, "steps"),
     buildConsistencyRule(context),
     `环境描述：使用清晰的厨房台面、杯具、锅具或容器环境，中景视角，能同时看清手部动作、食材状态和容器变化。`,
@@ -225,7 +223,6 @@ function buildFlexiblePrompt(context: PromptContext): string {
     `标题结构：画面正上方正中央显示「${title}」，标题字体必须与该环节内容有关联，可融入与动作、食材、器具或液体状态相关的元素；标题清晰可读，不遮挡主体。`,
     `风格描述：${context.style.name}；${context.style.description}。画面保持干净，优先保证主体清晰，避免过度炫光和装饰噪声。`,
     `主体描述：围绕「${title}」这个灵活补充环节进行视觉化呈现：${description}。画面必须忠于用户输入，不添加未提及的辅料、器具或制作逻辑；如果该环节会影响成品，变化结果必须能自然衔接到步骤图最后一步和封面图成品。`,
-    buildNutritionVisualRule(context, "flexible"),
     buildAudienceVisualRule(context, "flexible"),
     buildConsistencyRule(context),
     `环境描述：根据该环节选择简洁的料理台、案板、容器、锅具、杯具或操作台环境；背景弱化，不能抢主体。`,
@@ -235,30 +232,23 @@ function buildFlexiblePrompt(context: PromptContext): string {
 }
 
 function buildNutritionVisualRule(
-  context: PromptContext,
-  promptType: "cover" | "ingredients" | "steps" | "flexible"
+  context: PromptContext
 ): string {
   const nutrition = context.nutritionSummary;
-  const placement =
-    promptType === "cover"
-      ? "画面右上角"
-      : promptType === "ingredients"
-        ? "食材分区旁"
-        : "画面边缘空白处";
 
   if (!nutrition.hasNutrition) {
     return `营养信息：${nutrition.per100Text}${nutrition.unrecognizedText} 不要编造热量、蛋白质、碳水、脂肪或膳食纤维数值。`;
   }
 
   if (context.audienceType === "fitness-light-meal") {
-    return `营养信息：在${placement}加入清晰但不抢主体的健身轻食营养角标，显示「估算 / 每100g」以及 ${nutrition.per100Text.replace("营养估算角标：", "")}${nutrition.recognizedText}${nutrition.coverageText}${nutrition.unrecognizedText}`;
+    return `营养信息：仅在封面图右上角加入清晰但不抢主体的健身轻食营养角标，显示「估算 / 每100g」以及 ${nutrition.per100Text.replace("营养估算角标：", "")}${nutrition.recognizedText}${nutrition.coverageText}${nutrition.unrecognizedText}`;
   }
 
   if (context.audienceType === "baby-food") {
-    return `营养信息：在${placement}加入小型「估算营养」标签，可弱化显示每100g热量与主要营养；${nutrition.per100Text}${nutrition.recognizedText}${nutrition.coverageText}${nutrition.unrecognizedText} 数值必须小而清楚，不要制造医学承诺。`;
+    return `营养信息：仅在封面图右上角加入小型「估算营养」标签，可弱化显示每100g热量与主要营养；${nutrition.per100Text}${nutrition.recognizedText}${nutrition.coverageText}${nutrition.unrecognizedText} 数值必须小而清楚，不要制造医学承诺。`;
   }
 
-  return `营养信息：如画面空间允许，在${placement}以低优先级小字显示「估算 / 每100g」和 ${nutrition.per100Text.replace("营养估算角标：", "")}${nutrition.recognizedText}${nutrition.coverageText}${nutrition.unrecognizedText}`;
+  return `营养信息：如画面空间允许，仅在封面图右上角以低优先级小字显示「估算 / 每100g」和 ${nutrition.per100Text.replace("营养估算角标：", "")}${nutrition.recognizedText}${nutrition.coverageText}${nutrition.unrecognizedText}`;
 }
 
 function buildAudienceVisualRule(
