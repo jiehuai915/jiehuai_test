@@ -1,9 +1,16 @@
+import {
+  analyzeRecipeNutrition,
+  type AudienceType,
+  type NutritionSummary
+} from "./nutrition";
+
 export type ArtStyleId =
   | "cinematic-surreal-animation"
-  | "japanese-fresh-animation"
   | "hand-drawn-fantasy-animation"
   | "chinese-watercolor"
   | "retro-comic"
+  | "soft-3d-clay"
+  | "magazine-collage-journal"
   | "commercial-food-photography";
 
 type ArtStyle = {
@@ -38,12 +45,6 @@ export const ART_STYLES: ArtStyle[] = [
     bestFor: "清爽饮品、冰品、果茶、甜汤、带有透明液体或冰块的菜谱"
   },
   {
-    id: "japanese-fresh-animation",
-    name: "日系清新动画风",
-    description: "明亮自然光，柔和色彩，干净构图，温暖治愈氛围，低噪声背景",
-    bestFor: "家常菜、儿童餐、治愈系甜点、轻食"
-  },
-  {
     id: "hand-drawn-fantasy-animation",
     name: "手绘奇幻动画风",
     description: "自然质感，温暖色调，童话感场景，柔和笔触，轻量奇幻装饰",
@@ -62,6 +63,20 @@ export const ART_STYLES: ArtStyle[] = [
     bestFor: "街头小吃、炸物、辣味料理、重口味菜"
   },
   {
+    id: "soft-3d-clay",
+    name: "轻拟物 3D 黏土风",
+    description:
+      "柔软 3D 黏土质感，圆润造型，低饱和糖果色，明亮柔和灯光，食物可爱但保持可识别",
+    bestFor: "儿童餐、甜品、可爱主题、亲子食谱、节日小点心"
+  },
+  {
+    id: "magazine-collage-journal",
+    name: "杂志拼贴手账风",
+    description:
+      "杂志拼贴排版，纸张纹理，剪贴边缘，轻复古印刷质感，手账式标注与灵感板构图",
+    bestFor: "社媒封面、菜谱合集、教程灵感图、打卡内容、步骤概览"
+  },
+  {
     id: "commercial-food-photography",
     name: "商业美食摄影风",
     description: "真实质感，浅景深，自然光，高清细节，突出卖相，背景弱化",
@@ -76,6 +91,8 @@ type PromptContext = {
   flexibleTitle: string;
   flexibleDescription: string;
   style: ArtStyle;
+  audienceType: AudienceType;
+  nutritionSummary: NutritionSummary;
 };
 
 export function generateRecipePrompts(input: RecipePromptInput): RecipePrompts {
@@ -90,13 +107,20 @@ export function generateRecipePrompts(input: RecipePromptInput): RecipePrompts {
     };
   }
 
+  const nutritionSummary = analyzeRecipeNutrition({
+    recipeName,
+    ingredients: input.ingredients,
+    steps: input.steps
+  });
   const context: PromptContext = {
     recipeName,
     ingredients: normalizeMultilineText(input.ingredients),
     steps: normalizeMultilineText(input.steps),
     flexibleTitle: input.flexibleTitle.trim(),
     flexibleDescription: normalizeMultilineText(input.flexibleDescription),
-    style: getArtStyle(input.styleId)
+    style: getArtStyle(input.styleId),
+    audienceType: nutritionSummary.audienceType,
+    nutritionSummary
   };
 
   return {
@@ -114,6 +138,14 @@ export function recommendArtStyle(input: {
 }): ArtStyle {
   const content = `${input.recipeName} ${input.ingredients} ${input.steps}`;
 
+  if (/(宝宝|辅食|月龄|幼儿|儿童|米糊|蒸蛋|手指食物)/.test(content)) {
+    return getArtStyle("soft-3d-clay");
+  }
+
+  if (/(减脂|健身|轻食|低卡|高蛋白|沙拉|鸡胸肉|鸡胸|燕麦|藜麦|低脂)/.test(content)) {
+    return getArtStyle("commercial-food-photography");
+  }
+
   if (/[冰|冻|果茶|奶茶|椰|芒|西瓜|柠|茶|饮|汤|汁]/.test(content)) {
     return getArtStyle("cinematic-surreal-animation");
   }
@@ -126,8 +158,12 @@ export function recommendArtStyle(input: {
     return getArtStyle("retro-comic");
   }
 
-  if (/[儿童|便当|早餐|轻食|沙拉|蛋糕|布丁]/.test(content)) {
-    return getArtStyle("japanese-fresh-animation");
+  if (/[合集|封面|手账|拼贴|教程|打卡|灵感|菜单]/.test(content)) {
+    return getArtStyle("magazine-collage-journal");
+  }
+
+  if (/[便当|早餐|蛋糕|布丁]/.test(content)) {
+    return getArtStyle("soft-3d-clay");
   }
 
   return getArtStyle("commercial-food-photography");
@@ -139,6 +175,8 @@ function buildCoverPrompt(context: PromptContext): string {
     `标题结构：画面正上方正中央显示「${context.recipeName}」，标题字体与菜谱内容有关联，${getTitleDecoration(context.recipeName)}；标题清晰可读，不遮挡主体。`,
     `风格描述：${context.style.name}；${context.style.description}。优先保证主体清晰，控制粒子、光斑和装饰密度，避免画面过闪。`,
     `主体描述：成品「${context.recipeName}」作为唯一视觉主角，摆放在画面中心偏下位置，轮廓明确，层次清楚，食材质感可辨认；人物如出现只能作为远景或侧后方辅助，不可抢视觉焦点。`,
+    buildNutritionVisualRule(context, "cover"),
+    buildAudienceVisualRule(context, "cover"),
     buildConsistencyRule(context),
     `环境描述：背景保持弱化和简洁，使用低对比环境色衬托主体，不出现与菜谱无关的辅料或道具。`,
     `细节：强调真实材质、食材层次、自然光影和适度高光；冷饮可表现少量冷凝水与冰感，热食可表现轻微热气；画面必须包含一个不抢主体的小姜饼人彩蛋。`,
@@ -152,6 +190,8 @@ function buildIngredientsPrompt(context: PromptContext): string {
     `标题结构：画面正上方正中央显示「食材准备」，标题字体与食材内容有关联，可融入小份量食材、气泡、水滴、餐具或木纹元素；标题清晰可读。`,
     `风格描述：${context.style.name}；${context.style.description}。整体干净、可读、少噪声，避免过度炫光。`,
     `主体描述：严格完整呈现用户提供的所需食材：${context.ingredients || "用户未提供食材，画面不得自行添加未提及食材"}。食材按类别分区摆放，层次清楚，大小关系自然，每种食材都能被识别。`,
+    buildNutritionVisualRule(context, "ingredients"),
+    buildAudienceVisualRule(context, "ingredients"),
     buildConsistencyRule(context),
     `环境描述：使用简洁桌面或料理台作为背景，背景纹理弱化，不能抢食材主体。`,
     `细节：在食材旁使用黑色手写体中文名称标注，严禁使用指向线；强调食材的新鲜度、形状、颜色和材质差异；画面必须包含一个不遮挡食材的小姜饼人彩蛋。`,
@@ -165,6 +205,8 @@ function buildStepsPrompt(context: PromptContext): string {
     `标题结构：画面正上方正中央显示「制作步骤」，标题字体与制作动作有关联，可融入搅拌轨迹、蒸汽、水滴、容器轮廓或食材切面元素；标题清晰可读。`,
     `风格描述：${context.style.name}；${context.style.description}。画面以直观动作为核心，光效克制，背景弱化。`,
     `主体描述：视觉化呈现用户提供的制作步骤：${context.steps || "用户未提供步骤，画面不得自行编造制作流程"}。将步骤拆解为 3-4 个连续动作画面，动作顺序必须符合用户输入，不更改制作逻辑；最后一步的成品外观必须与封面图中的成品保持一致。`,
+    buildNutritionVisualRule(context, "steps"),
+    buildAudienceVisualRule(context, "steps"),
     buildConsistencyRule(context),
     `环境描述：使用清晰的厨房台面、杯具、锅具或容器环境，中景视角，能同时看清手部动作、食材状态和容器变化。`,
     `细节：每个动作旁用黑色手写体标注对应中文步骤；只在最后一步添加一个点睛标签「大功告成！」；人物只允许出现手部或局部辅助动作；画面必须包含一个不抢主体的小姜饼人彩蛋。`,
@@ -183,11 +225,63 @@ function buildFlexiblePrompt(context: PromptContext): string {
     `标题结构：画面正上方正中央显示「${title}」，标题字体必须与该环节内容有关联，可融入与动作、食材、器具或液体状态相关的元素；标题清晰可读，不遮挡主体。`,
     `风格描述：${context.style.name}；${context.style.description}。画面保持干净，优先保证主体清晰，避免过度炫光和装饰噪声。`,
     `主体描述：围绕「${title}」这个灵活补充环节进行视觉化呈现：${description}。画面必须忠于用户输入，不添加未提及的辅料、器具或制作逻辑；如果该环节会影响成品，变化结果必须能自然衔接到步骤图最后一步和封面图成品。`,
+    buildNutritionVisualRule(context, "flexible"),
+    buildAudienceVisualRule(context, "flexible"),
     buildConsistencyRule(context),
     `环境描述：根据该环节选择简洁的料理台、案板、容器、锅具、杯具或操作台环境；背景弱化，不能抢主体。`,
     `细节：突出该环节最关键的动作、食材状态和材质变化，例如揉面、醒发、调酱、腌制、裹粉、摆盘或冷藏成型；人物只允许作为手部或局部辅助动作出现；画面必须包含一个不抢主体的小姜饼人彩蛋。`,
     `参数：完整中文 Prompt，适合作为独立的一张补充流程图，比例为 3:4。`
   ].join("\n");
+}
+
+function buildNutritionVisualRule(
+  context: PromptContext,
+  promptType: "cover" | "ingredients" | "steps" | "flexible"
+): string {
+  const nutrition = context.nutritionSummary;
+  const placement =
+    promptType === "cover"
+      ? "画面右上角"
+      : promptType === "ingredients"
+        ? "食材分区旁"
+        : "画面边缘空白处";
+
+  if (!nutrition.hasNutrition) {
+    return `营养信息：${nutrition.per100Text}${nutrition.unrecognizedText} 不要编造热量、蛋白质、碳水、脂肪或膳食纤维数值。`;
+  }
+
+  if (context.audienceType === "fitness-light-meal") {
+    return `营养信息：在${placement}加入清晰但不抢主体的健身轻食营养角标，显示「估算 / 每100g」以及 ${nutrition.per100Text.replace("营养估算角标：", "")}${nutrition.recognizedText}${nutrition.coverageText}${nutrition.unrecognizedText}`;
+  }
+
+  if (context.audienceType === "baby-food") {
+    return `营养信息：在${placement}加入小型「估算营养」标签，可弱化显示每100g热量与主要营养；${nutrition.per100Text}${nutrition.recognizedText}${nutrition.coverageText}${nutrition.unrecognizedText} 数值必须小而清楚，不要制造医学承诺。`;
+  }
+
+  return `营养信息：如画面空间允许，在${placement}以低优先级小字显示「估算 / 每100g」和 ${nutrition.per100Text.replace("营养估算角标：", "")}${nutrition.recognizedText}${nutrition.coverageText}${nutrition.unrecognizedText}`;
+}
+
+function buildAudienceVisualRule(
+  context: PromptContext,
+  promptType: "cover" | "ingredients" | "steps" | "flexible"
+): string {
+  if (context.audienceType === "baby-food") {
+    if (promptType === "steps" || promptType === "flexible") {
+      return "受众重点：这是儿童辅食内容，突出软烂、细腻、易吞咽、少盐少糖和充分熟化的处理方式；需要避免整颗坚果、大块硬质食材、过黏拉丝或可能造成噎食的形态；可加入「首次添加少量观察」的小提示，但不要写成医疗建议。";
+    }
+
+    return "受众重点：这是儿童辅食内容，画面要传达适龄、温和、安全和食材新鲜感；用小标签表现「少盐少糖」「质地细腻」「软烂易吞咽」，避免过度调味、尖锐餐具和危险小硬块。";
+  }
+
+  if (context.audienceType === "fitness-light-meal") {
+    if (promptType === "steps" || promptType === "flexible") {
+      return "受众重点：这是健身减脂轻食内容，突出低油烹饪、清晰分量、蛋白质来源、蔬菜比例和主食来源；避免厚重酱汁、油炸质感和高油高糖暗示。";
+    }
+
+    return "受众重点：这是健身减脂轻食内容，画面要突出高蛋白、低负担、蔬菜充足和餐盘结构清楚；可用简洁图标表现蛋白质、碳水、脂肪和膳食纤维，不要让营养标签遮挡食物。";
+  }
+
+  return "受众重点：保持通用菜谱表达，营养信息只作为辅助参考，不要把画面强行做成儿童辅食或健身减脂主题。";
 }
 
 
