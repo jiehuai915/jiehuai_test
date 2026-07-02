@@ -21,20 +21,6 @@
     </header>
 
     <main>
-      <section class="hero layer-page-hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Layer 03 · Infra</p>
-          <h1>基础设施层：把 GPU 变成可售卖的 AI 工厂</h1>
-          <p class="lead">核心矛盾：资本市场看到的是多少张卡，产业真正比拼的是这些卡能否在电力、网络、液冷、调度和推理服务中持续产出高利用率 token。</p>
-        </div>
-        <div class="cake-visual">
-          <div class="cake-layer layer-infra">
-            <strong>当前判断</strong>
-            <span>基础设施层正在从传统云计算升级为 AI Factory：训练要解决万卡并行效率，推理要解决 prefill/decode、KV cache、P99 延迟和单位 token 成本。</span>
-          </div>
-        </div>
-      </section>
-
       <section id="status" class="section">
         <div class="section-heading">
           <p class="eyebrow">Industry Status</p>
@@ -66,6 +52,7 @@
           <h2>经典基础知识筑基</h2>
         </div>
         <div class="detail-grid">
+          <article class="detail-card frontier"><h3>光互联 / OCS / AI 网络硬件专题</h3><p>从 800G/1.6T 光模块继续追踪 OCS、CPO/LPO、AEC、SerDes、PCB/CCL 和 AI 网络硬件价值链。</p><a class="chain-detail-link" href="optical-ocs.html">进入专题页</a></article>
           <article class="detail-card"><h3>分布式系统与容错</h3><p>万卡集群中任何一台服务器、光模块、网卡、存储节点或任务调度失败，都会被放大成训练中断。<button class="term" type="button" data-term="MTBF">MTBF</button>、checkpoint、恢复时间和作业编排是基础功。</p></article>
           <article class="detail-card"><h3>网络拓扑与集体通信</h3><p>大模型训练依赖 <button class="term" type="button" data-term="AllReduce">AllReduce</button>、AllGather、ReduceScatter 等 <button class="term" type="button" data-term="Collective Communication">Collective Communication</button>。网络不是配件，而是训练效率的一部分。</p></article>
           <article class="detail-card"><h3>排队论与资源调度</h3><p>GPU、CPU、存储、网络和显存都可能成为瓶颈。调度系统要在吞吐、延迟、优先级、租户隔离和硬件利用率之间权衡。</p></article>
@@ -260,6 +247,7 @@
     <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
     <script src="../glossary.js"></script>
     <script src="../sources-data.js"></script>
+    <script src="../source-quality.js"></script>
     <script src="../source-badges.js"></script>
     <script src="../page-glossary.js"></script>
   </body>

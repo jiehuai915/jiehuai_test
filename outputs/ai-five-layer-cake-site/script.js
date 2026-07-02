@@ -1553,9 +1553,29 @@ const genericKnowledge = {
 const companyViewState = {
   filter: "全部",
   query: "",
+  sort: "default",
+  statusFilter: "全部",
+  focus: "",
   showAll: false,
   pageSize: 24
 };
+
+const companySortOptions = [
+  ["default", "默认排序"],
+  ["aiExposure", "AI 暴露度优先"],
+  ["risk", "风险从高到低"],
+  ["deepDive", "已深挖优先"],
+  ["chinaMarket", "A/港股/中概优先"]
+];
+
+const companyStatusFilters = ["全部", "已深挖", "有来源", "来源待加强", "A/H 股"];
+
+const companyFocusGroups = [
+  ["highExposure", "高 AI 暴露度", "先看 AI 业务相关性最强的公司。"],
+  ["deepDive", "已深挖", "优先阅读已有深度研究内容的公司。"],
+  ["ahShare", "A/H 股", "优先看更贴近沪深港交易研究的标的。"],
+  ["highRisk", "风险较高", "适合专门核验估值、周期和技术替代风险。"]
+];
 
 function getKnowledgeCard(topic, context = {}) {
   const matrixDeepDive = window.matrixDeepDiveCards && window.matrixDeepDiveCards[topic];
@@ -1846,10 +1866,11 @@ function renderPortfolioDashboard() {
 
   root.innerHTML = `
     <div class="portfolio-summary">
-      <article><span>公司池</span><strong>${cards.length}</strong><p>覆盖五层与八条横向产业链。</p></article>
-      <article><span>最高暴露</span><strong>${exposureCounts["极高"] || 0}</strong><p>AI 暴露度标记为极高的公司。</p></article>
-      <article><span>高风险</span><strong>${riskCounts["高"] || 0}</strong><p>技术、商业化或估值不确定性更高。</p></article>
-      <article><span>主题数</span><strong>${Object.keys(themeCounts).length}</strong><p>可用于组合筛选的投资主题。</p></article>
+      <span>标的看板</span>
+      <strong>${cards.length}</strong><em>公司池</em>
+      <strong>${exposureCounts["极高"] || 0}</strong><em>极高 AI 暴露</em>
+      <strong>${riskCounts["高"] || 0}</strong><em>高风险</em>
+      <strong>${Object.keys(themeCounts).length}</strong><em>主题</em>
     </div>
     <div class="portfolio-baskets">
       ${baskets.map(([name, filter, desc]) => `
@@ -1883,11 +1904,172 @@ function renderCompanyFilters() {
   const root = document.querySelector("#companyFilters");
   if (!root) return;
   const filters = ["全部", "能源层", "芯片层", "基础设施层", "模型层", "应用层", "训练链", "推理链", "数据中心链", "芯片供应链", "企业落地链", "机器人链", "Agent链", "安全评测链"];
-  root.innerHTML = filters.map((filter, index) => renderFilterButton(filter, filter, index === 0)).join("");
+  const cards = window.companyCards || [];
+  root.innerHTML = filters.map((filter) => {
+    const count = filter === "全部"
+      ? cards.length
+      : cards.filter((company) => company.layers.includes(filter) || company.chains.includes(filter) || (company.themes || []).includes(filter)).length;
+    return renderFilterButton(`${filter} ${count}`, filter, filter === companyViewState.filter);
+  }).join("");
+}
+
+function renderCompanyResearchControls() {
+  const root = document.querySelector("#companyResearchControls");
+  if (!root) return;
+  const cards = window.companyCards || [];
+  const statusCounts = companyStatusFilters.reduce((acc, filter) => {
+    acc[filter] = filter === "全部"
+      ? cards.length
+      : cards.filter((company) => companyMatchesStatusName(company, filter)).length;
+    return acc;
+  }, {});
+  const focusCounts = companyFocusGroups.reduce((acc, [key]) => {
+    acc[key] = cards.filter((company) => companyMatchesFocusKey(company, key)).length;
+    return acc;
+  }, {});
+
+  root.innerHTML = `
+    <div class="company-control-row">
+      <label class="company-sort-control">
+        <span>排序</span>
+        <select data-company-sort>
+          ${companySortOptions.map(([value, label]) => `<option value="${value}" ${companyViewState.sort === value ? "selected" : ""}>${label}</option>`).join("")}
+        </select>
+      </label>
+      <div class="company-status-filters" aria-label="研究状态筛选">
+        <span>研究状态</span>
+        <div>
+          ${companyStatusFilters.map((filter) => `
+            <button class="terminal-filter ${companyViewState.statusFilter === filter ? "active" : ""}" type="button" data-company-status="${filter}">
+              ${filter} ${statusCounts[filter] || 0}
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    </div>
+    <div class="company-focus-groups" aria-label="重点关注分组">
+      <span>重点关注</span>
+      <div>
+        ${companyFocusGroups.map(([key, label, desc]) => `
+          <button class="company-focus-card ${companyViewState.focus === key ? "active" : ""}" type="button" data-company-focus="${key}">
+            <strong>${label}<em>${focusCounts[key] || 0}</em></strong>
+            <p>${desc}</p>
+          </button>
+        `).join("")}
+      </div>
+    </div>
+  `;
 }
 
 function isAhShareCompany(company) {
   return /(\.SS|\.SZ|\d{4}\.HK)/.test(company.ticker || "");
+}
+
+function isChinaLinkedCompany(company) {
+  if (isAhShareCompany(company)) return true;
+  return Boolean(getChineseAlias(company));
+}
+
+function getCompanySourceCount(company) {
+  return (company.sourceIds || []).filter(Boolean).length;
+}
+
+function getCompanyExposureRank(company) {
+  return {
+    "极高": 4,
+    "高": 3,
+    "中高": 2,
+    "中": 1,
+    "低": 0
+  }[company.aiExposure || "中"] ?? 1;
+}
+
+function getCompanyRiskRank(company) {
+  return {
+    "高": 4,
+    "中高": 3,
+    "中": 2,
+    "中低": 1,
+    "低": 0
+  }[company.riskRating || "中"] ?? 2;
+}
+
+function getCompanyResearchTags(company) {
+  const tags = [];
+  if (company.deepDive) tags.push("已深挖");
+  if (getCompanySourceCount(company) > 0) tags.push("有来源");
+  if (getCompanySourceCount(company) <= 1) tags.push("来源待加强");
+  if (isAhShareCompany(company)) tags.push("A/H 股");
+  return tags;
+}
+
+function companyMatchesStatusName(company, statusName) {
+  switch (statusName) {
+    case "已深挖":
+      return Boolean(company.deepDive);
+    case "有来源":
+      return getCompanySourceCount(company) > 0;
+    case "来源待加强":
+      return getCompanySourceCount(company) <= 1;
+    case "A/H 股":
+      return isAhShareCompany(company);
+    default:
+      return true;
+  }
+}
+
+function companyMatchesStatusFilter(company) {
+  return companyMatchesStatusName(company, companyViewState.statusFilter);
+}
+
+function companyMatchesFocusKey(company, focusKey) {
+  switch (focusKey) {
+    case "highExposure":
+      return ["极高", "高"].includes(company.aiExposure || "中");
+    case "deepDive":
+      return Boolean(company.deepDive);
+    case "ahShare":
+      return isAhShareCompany(company);
+    case "highRisk":
+      return ["高", "中高"].includes(company.riskRating || "中");
+    default:
+      return true;
+  }
+}
+
+function companyMatchesFocusGroup(company) {
+  return companyMatchesFocusKey(company, companyViewState.focus);
+}
+
+function getCompanyFocusLabel(key) {
+  const item = companyFocusGroups.find(([value]) => value === key);
+  return item ? item[1] : "";
+}
+
+function getCompanySortLabel(key) {
+  const item = companySortOptions.find(([value]) => value === key);
+  return item ? item[1] : "";
+}
+
+function sortCompanyCards(cards) {
+  return cards
+    .map((company, index) => ({ company, index }))
+    .sort((a, b) => {
+      if (companyViewState.sort === "aiExposure") {
+        return getCompanyExposureRank(b.company) - getCompanyExposureRank(a.company) || a.index - b.index;
+      }
+      if (companyViewState.sort === "risk") {
+        return getCompanyRiskRank(b.company) - getCompanyRiskRank(a.company) || a.index - b.index;
+      }
+      if (companyViewState.sort === "deepDive") {
+        return Number(Boolean(b.company.deepDive)) - Number(Boolean(a.company.deepDive)) || a.index - b.index;
+      }
+      if (companyViewState.sort === "chinaMarket") {
+        return Number(isChinaLinkedCompany(b.company)) - Number(isChinaLinkedCompany(a.company)) || a.index - b.index;
+      }
+      return a.index - b.index;
+    })
+    .map(({ company }) => company);
 }
 
 function getChineseAlias(company) {
@@ -1913,27 +2095,12 @@ function renderCompanyDeepDive(company) {
   const deep = company.deepDive;
   if (!deep) return "";
   const displayName = getCompanyDisplayName(company);
-  const modalPayload = encodeURIComponent(JSON.stringify({
-    topic: `${displayName} 深度研究卡`,
-    kicker: `Company Deep Dive · ${deep.rank}`,
-    summary: deep.investmentLens,
-    sections: [
-      ["产业位置", [deep.capexNode, [...company.layers, ...company.chains].join(" / ")]],
-      ["价值驱动", deep.valueDrivers],
-      ["关键 KPI", deep.watchKpis],
-      ["接口摩擦", deep.frictionPoints],
-      ["催化剂", deep.catalysts],
-      ["同业对照", deep.peers],
-      ["来源锚点", (company.sourceIds || []).map((id) => `<a href="pages/sources.html#${id}">${id}</a>`)]
-    ]
-  }));
 
   return `
     <section class="company-deep-dive" aria-label="${displayName} 深度研究">
       <div class="deep-dive-head">
         <span>${deep.rank}</span>
         <strong>${deep.capexNode}</strong>
-        <button class="mini-pill" type="button" data-knowledge="${modalPayload}">展开研究卡</button>
       </div>
       <p>${enhanceTerms(deep.investmentLens)}</p>
       <div class="deep-dive-grid">
@@ -1962,6 +2129,44 @@ function renderCompanyDeepDive(company) {
   `;
 }
 
+function getSourceQuality(source) {
+  if (window.getSourceQuality) return window.getSourceQuality(source);
+  if (!source) return "待核验";
+  return source.quality || source.confidence || "研究参考";
+}
+
+function renderCompanySourceQuality(company) {
+  const registry = window.sourceRegistry || [];
+  const byId = new Map(registry.map((source) => [source.id, source]));
+  const sources = (company.sourceIds || []).map((id) => byId.get(id)).filter(Boolean);
+  if (!sources.length) return "来源待补强";
+  const summary = Array.from(new Set(sources.map(getSourceQuality)));
+  return `${summary.join(" / ")} · ${sources.length} 条`;
+}
+
+function getCompanySearchTerms() {
+  return companyViewState.query
+    .trim()
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean);
+}
+
+function companyMatchesQuery(company, terms) {
+  if (!terms.length) return true;
+  const haystack = getCompanySearchText(company);
+  return terms.every((term) => haystack.includes(term));
+}
+
+function highlightCompanyMatch(text) {
+  const terms = getCompanySearchTerms();
+  if (!terms.length || !text) return text || "";
+  const pattern = terms
+    .map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .join("|");
+  return String(text).replace(new RegExp(`(${pattern})`, "gi"), `<mark class="search-hit">$1</mark>`);
+}
+
 function renderCompanyCardsGrid(cards) {
   return `
     <div class="company-grid">
@@ -1969,16 +2174,20 @@ function renderCompanyCardsGrid(cards) {
         const displayName = getCompanyDisplayName(company);
         const displayAliases = getCompanyDisplayAliases(company);
         const detailId = `company-detail-${company.name.replace(/[^a-z0-9\u3400-\u9fff]+/gi, "-")}`;
+        const researchTags = getCompanyResearchTags(company);
         return `
         <article class="company-card ${company.deepDive ? "company-card-deep" : ""}">
           <header>
             <div>
               <span class="status-chip">${company.status}</span>
-              <h3>${displayName}</h3>
-              ${displayAliases.length ? `<p class="company-aliases">${displayAliases.join(" · ")}</p>` : ""}
+              <h3>${highlightCompanyMatch(displayName)}</h3>
+              ${displayAliases.length ? `<p class="company-aliases">${displayAliases.map(highlightCompanyMatch).join(" · ")}</p>` : ""}
             </div>
-            <strong class="ticker">${company.ticker}</strong>
+            <strong class="ticker">${highlightCompanyMatch(company.ticker)}</strong>
           </header>
+          <div class="company-research-tags" aria-label="${displayName} 研究状态">
+            ${researchTags.map((tag) => `<span class="${tag === "来源待加强" ? "needs-source" : ""}">${tag}</span>`).join("")}
+          </div>
           <div class="company-meta">
             ${company.layers.map((item) => `<span>${item}</span>`).join("")}
             ${company.chains.map((item) => `<span>${item}</span>`).join("")}
@@ -1987,14 +2196,18 @@ function renderCompanyCardsGrid(cards) {
             <span>AI 暴露度：<strong>${company.aiExposure || "中"}</strong></span>
             <span>风险等级：<strong>${company.riskRating || "中"}</strong></span>
           </div>
-          <p class="company-moat-summary">${enhanceTerms(company.moat)}</p>
+          <p class="company-moat-summary">${enhanceTerms(highlightCompanyMatch(company.moat))}</p>
+          <div class="company-card-actions">
+            ${(company.themes || []).slice(0, 2).map((item) => `<span>${highlightCompanyMatch(item)}</span>`).join("")}
+          </div>
           <details class="company-details" id="${detailId}">
             <summary>详情</summary>
             <dl class="company-fields">
-              <div><dt>受益逻辑</dt><dd>${enhanceTerms(company.beneficiary)}</dd></div>
-              <div><dt>关键风险</dt><dd>${enhanceTerms(company.risks)}</dd></div>
+              <div><dt>受益逻辑</dt><dd>${enhanceTerms(highlightCompanyMatch(company.beneficiary))}</dd></div>
+              <div><dt>关键风险</dt><dd>${enhanceTerms(highlightCompanyMatch(company.risks))}</dd></div>
               <div><dt>投资主题</dt><dd>${(company.themes || []).map((item) => `<button class="mini-pill" type="button" data-knowledge="${encodeURIComponent(JSON.stringify({ topic: item, kicker: `投资主题 · ${displayName}`, summary: `${item} 是 ${displayName} 在 AI 五层蛋糕中的主要价值暴露方向，需结合订单、客户验证、CAPEX 周期和竞争格局持续跟踪。`, sections: [["关注变量", [company.beneficiary, company.risks]], ["关联层链", [[...company.layers, ...company.chains].join(" / ")]]] }))}">${item}</button>`).join("")}</dd></div>
               <div><dt>代表产品</dt><dd>${company.products.map((item) => `<button class="mini-pill" type="button" data-knowledge="${encodeURIComponent(JSON.stringify({ topic: item, kicker: `公司产品 · ${displayName}`, summary: `${item} 是 ${displayName} 在 AI 五层蛋糕中的关键产品或能力入口。它的研究价值在于观察该产品如何把公司的护城河转化为订单、客户锁定、成本优势或生态控制权。`, sections: [["产业位置", [[...company.layers, ...company.chains].join(" / ")]], ["价值捕获", [company.beneficiary]], ["风险约束", [company.risks]], ["来源锚点", (company.sourceIds || []).map((id) => `<a href="pages/sources.html#${id}">${id}</a>`)]] }))}">${item}</button>`).join("")}</dd></div>
+              <div><dt>来源质量</dt><dd>${renderCompanySourceQuality(company)}</dd></div>
               <div><dt>来源锚点</dt><dd>${renderInlineSourceBadges(company.sourceIds || [], true)}</dd></div>
             </dl>
             ${renderCompanyDeepDive(company)}
@@ -2038,20 +2251,42 @@ function renderCompanyTerminal(filter = "全部") {
   if (!root) return;
   const cards = window.companyCards || [];
   const normalizedQuery = companyViewState.query.trim().toLowerCase();
+  const searchTerms = getCompanySearchTerms();
   const filtered = filter === "全部"
     ? cards
     : cards.filter((company) => company.layers.includes(filter) || company.chains.includes(filter) || (company.themes || []).includes(filter));
-  const visible = normalizedQuery
-    ? filtered.filter((company) => getCompanySearchText(company).includes(normalizedQuery))
+  const searched = normalizedQuery
+    ? filtered.filter((company) => companyMatchesQuery(company, searchTerms))
     : filtered;
+  const statusFiltered = searched.filter(companyMatchesStatusFilter);
+  const focusFiltered = statusFiltered.filter(companyMatchesFocusGroup);
+  const visible = sortCompanyCards(focusFiltered);
   const shouldLimit = !companyViewState.showAll && visible.length > companyViewState.pageSize;
   const rendered = shouldLimit ? visible.slice(0, companyViewState.pageSize) : visible;
+  const activeChips = [
+    filter !== "全部" ? ["筛选", filter, "data-company-clear-filter"] : null,
+    normalizedQuery ? ["搜索", companyViewState.query, "data-company-clear-query"] : null,
+    companyViewState.statusFilter !== "全部" ? ["状态", companyViewState.statusFilter, "data-company-clear-status"] : null,
+    companyViewState.focus ? ["重点", getCompanyFocusLabel(companyViewState.focus), "data-company-clear-focus"] : null,
+    companyViewState.sort !== "default" ? ["排序", getCompanySortLabel(companyViewState.sort), "data-company-clear-sort"] : null
+  ].filter(Boolean);
 
   root.innerHTML = `
     <div class="terminal-summary">
       <strong>${visible.length}</strong>
-      <span>${normalizedQuery ? `条搜索匹配：${companyViewState.query}` : "家公司 / 平台进入当前视图"}。默认展示 ${rendered.length} 家摘要卡，细节可展开。</span>
+      <span>${normalizedQuery ? `条搜索匹配：${companyViewState.query}` : "家公司 / 平台进入当前视图"}。当前展示 ${rendered.length} 家摘要卡，细节可展开。</span>
     </div>
+    ${activeChips.length ? `
+      <div class="company-active-context" aria-label="当前公司筛选条件">
+        ${activeChips.map(([label, value, action]) => `
+          <button type="button" ${action}>
+            <span>${label}</span>
+            <strong>${value}</strong>
+            <em>清除</em>
+          </button>
+        `).join("")}
+      </div>
+    ` : ""}
     ${visible.length ? renderCompanyCardsGrid(rendered) : `
       <div class="empty-state">
         <strong>没有匹配公司</strong>
@@ -2081,6 +2316,11 @@ function clearCompanySearch() {
   companyViewState.query = "";
   const input = document.querySelector("#companySearchInput");
   if (input) input.value = "";
+}
+
+function renderCompanyView() {
+  renderCompanyResearchControls();
+  renderCompanyTerminal(companyViewState.filter);
 }
 
 function getCompanyByName(name) {
@@ -2566,9 +2806,11 @@ function renderInlineSourceBadges(ids = [], linked = true) {
   return `<div class="source-badges">${ids.map((id) => {
     const source = byId.get(id);
     if (!source) return `<span class="source-badge missing">Missing source: ${id}</span>`;
+    const quality = getSourceQuality(source);
+    const qualityClass = window.getSourceQualityClass ? window.getSourceQualityClass(source) : "";
     return linked
-      ? `<a class="source-badge" href="pages/sources.html#${source.id}" title="${source.note}">${source.publisher} · ${source.confidence}</a>`
-      : `<span class="source-badge" title="${source.note}">${source.publisher} · ${source.confidence}</span>`;
+      ? `<a class="source-badge ${qualityClass}" href="pages/sources.html#${source.id}" title="${source.type} · ${source.confidence} · ${source.note}">${source.publisher} · ${quality}</a>`
+      : `<span class="source-badge ${qualityClass}" title="${source.type} · ${source.confidence} · ${source.note}">${source.publisher} · ${quality}</span>`;
   }).join("")}</div>`;
 }
 
@@ -2619,6 +2861,31 @@ function bindTerminalFilters() {
     setCompanyFilter(button.dataset.filter);
   });
 
+  document.querySelector("#companyResearchControls")?.addEventListener("change", (event) => {
+    const sort = event.target.closest("[data-company-sort]");
+    if (!sort) return;
+    companyViewState.sort = sort.value;
+    companyViewState.showAll = false;
+    renderCompanyView();
+  });
+
+  document.querySelector("#companyResearchControls")?.addEventListener("click", (event) => {
+    const statusButton = event.target.closest("[data-company-status]");
+    if (statusButton) {
+      companyViewState.statusFilter = statusButton.dataset.companyStatus;
+      companyViewState.showAll = false;
+      renderCompanyView();
+      return;
+    }
+
+    const focusButton = event.target.closest("[data-company-focus]");
+    if (!focusButton) return;
+    companyViewState.focus = companyViewState.focus === focusButton.dataset.companyFocus ? "" : focusButton.dataset.companyFocus;
+    companyViewState.showAll = false;
+    renderCompanyView();
+    document.querySelector("#companyTerminal")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
   document.querySelector("#companySearchInput")?.addEventListener("input", (event) => {
     companyViewState.query = event.target.value;
     companyViewState.showAll = false;
@@ -2626,6 +2893,43 @@ function bindTerminalFilters() {
   });
 
   document.querySelector("#companyTerminal")?.addEventListener("click", (event) => {
+    const clearFilter = event.target.closest("[data-company-clear-filter]");
+    if (clearFilter) {
+      setCompanyFilter("全部");
+      return;
+    }
+
+    const clearQuery = event.target.closest("[data-company-clear-query]");
+    if (clearQuery) {
+      clearCompanySearch();
+      renderCompanyTerminal(companyViewState.filter);
+      return;
+    }
+
+    const clearStatus = event.target.closest("[data-company-clear-status]");
+    if (clearStatus) {
+      companyViewState.statusFilter = "全部";
+      companyViewState.showAll = false;
+      renderCompanyView();
+      return;
+    }
+
+    const clearFocus = event.target.closest("[data-company-clear-focus]");
+    if (clearFocus) {
+      companyViewState.focus = "";
+      companyViewState.showAll = false;
+      renderCompanyView();
+      return;
+    }
+
+    const clearSort = event.target.closest("[data-company-clear-sort]");
+    if (clearSort) {
+      companyViewState.sort = "default";
+      companyViewState.showAll = false;
+      renderCompanyView();
+      return;
+    }
+
     const toggleAll = event.target.closest("[data-company-toggle-all]");
     if (toggleAll) {
       companyViewState.showAll = !companyViewState.showAll;
@@ -2705,6 +3009,11 @@ function bindTerminalFilters() {
 
 function activateCategory(key, shouldScroll = false) {
   const nextCategory = contentCategories.find((category) => category.key === key) || contentCategories[0];
+  const overviewHero = document.querySelector("#overview.hero");
+
+  if (overviewHero) {
+    overviewHero.hidden = nextCategory.key !== "overview";
+  }
 
   document.querySelectorAll("[data-category-panel]").forEach((panel) => {
     const isActive = panel.dataset.categoryPanel === nextCategory.key;
@@ -2837,6 +3146,35 @@ function buildGlobalSearchIndex() {
     kicker: "来源库"
   }));
 
+  [
+    {
+      title: "HBM / AI 存储瓶颈",
+      url: "pages/hbm-storage.html",
+      tags: ["HBM", "DRAM", "NAND", "SSD", "AI 挤出效应", "存储", "芯片供应链"],
+      body: "AI 数据中心把 HBM、服务器 DRAM、企业 SSD 和存储系统推到供给瓶颈位置；专题同时跟踪大厂产能转向 AI 后，消费电子、汽车电子、工业存储、小容量 NOR/SLC NAND、模组和控制器由谁补位。"
+    },
+    {
+      title: "光互联 / OCS / AI 网络硬件",
+      url: "pages/optical-ocs.html",
+      tags: ["光互联", "OCS", "CPO", "LPO", "AEC", "SerDes", "PCB", "CCL", "AI 网络"],
+      body: "AI 集群从单卡竞争进入网络 fabric 竞争；专题覆盖 800G/1.6T 光模块、OCS、CPO/LPO、硅光、AEC、SerDes、交换芯片、PCB/CCL 和数据中心网络硬件。"
+    },
+    {
+      title: "AI 电力 / 数据中心能源",
+      url: "pages/ai-power.html",
+      tags: ["AI 电力", "数据中心能源", "PUE", "WUE", "PPA", "并网", "电网设备", "燃气轮机", "核能", "储能", "液冷"],
+      body: "AI 数据中心扩张把电力容量、并网、PUE/WUE、长期 PPA、液冷、储能和数据中心选址推到前台；专题用于跟踪电力和能源基础设施如何约束 AI 工厂落地。"
+    }
+  ].forEach((topic) => push({
+    type: "专题",
+    title: topic.title,
+    body: topic.body,
+    tags: topic.tags,
+    url: topic.url,
+    topic: topic.title,
+    kicker: "重点赛道深挖"
+  }));
+
   return entries;
 }
 
@@ -2851,14 +3189,24 @@ function renderGlobalSearchResults(index, query = "", filter = "全部") {
   const root = document.querySelector("#searchResults");
   if (!root) return;
   const normalized = query.trim().toLowerCase();
+
+  if (!normalized) {
+    root.innerHTML = `
+      <div class="empty-state">
+        <strong>输入关键词后开始搜索。</strong>
+      </div>
+    `;
+    return;
+  }
+
   const visible = index.filter((item) => {
     const matchesFilter = filter === "全部" || item.type === filter;
     const haystack = `${item.title} ${item.body} ${item.tags.join(" ")}`.toLowerCase();
-    return matchesFilter && (!normalized || haystack.includes(normalized));
-  }).slice(0, normalized ? 80 : 18);
+    return matchesFilter && haystack.includes(normalized);
+  }).slice(0, 80);
 
   root.innerHTML = `
-    <div class="terminal-summary"><strong>${visible.length}</strong><span>${normalized ? "条匹配结果" : "条默认精选结果"}。输入关键词可扩大精确检索。</span></div>
+    <div class="terminal-summary"><strong>${visible.length}</strong><span>条匹配结果</span></div>
     <div class="search-result-grid">
       ${visible.map((item) => {
         const payload = encodeURIComponent(JSON.stringify({
@@ -3006,6 +3354,7 @@ renderChains();
 renderLinks();
 renderPortfolioDashboard();
 renderCompanyFilters();
+renderCompanyResearchControls();
 renderCompanyTerminal();
 renderPeerComparisonTerminal();
 renderKpiFilters();

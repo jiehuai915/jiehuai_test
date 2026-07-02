@@ -1,7 +1,8 @@
 function buildSourceFilters(sources) {
   const types = Array.from(new Set(sources.map((source) => source.type))).sort((a, b) => a.localeCompare(b, "zh-CN"));
   const confidence = Array.from(new Set(sources.map((source) => `可信度：${source.confidence}`)));
-  return ["全部", ...types, ...confidence];
+  const quality = Array.from(new Set(sources.map((source) => `质量：${getSourceQuality(source)}`)));
+  return ["全部", ...quality, ...types, ...confidence];
 }
 
 function renderSourceFilters(sources) {
@@ -14,6 +15,7 @@ function renderSourceFilters(sources) {
 
 function sourceMatchesFilter(source, filter) {
   if (filter === "全部") return true;
+  if (filter.startsWith("质量：")) return getSourceQuality(source) === filter.replace("质量：", "");
   if (filter.startsWith("可信度：")) return source.confidence === filter.replace("可信度：", "");
   return source.type === filter;
 }
@@ -24,7 +26,7 @@ function renderSources(sources, query = "", filter = "全部") {
   if (!root) return;
   const normalized = query.trim().toLowerCase();
   const visible = sources.filter((source) => {
-    const haystack = `${source.title} ${source.publisher} ${source.type} ${source.date} ${source.confidence} ${source.usedFor.join(" ")} ${source.note}`.toLowerCase();
+    const haystack = `${source.title} ${source.publisher} ${source.type} ${source.date} ${source.confidence} ${getSourceQuality(source)} ${source.usedFor.join(" ")} ${source.note}`.toLowerCase();
     return sourceMatchesFilter(source, filter) && (!normalized || haystack.includes(normalized));
   });
 
@@ -33,10 +35,11 @@ function renderSources(sources, query = "", filter = "全部") {
     <article class="source-index-card" id="${source.id}">
       <header>
         <span>${source.type}</span>
-        <strong>${source.confidence}</strong>
+        <strong class="${getSourceQualityClass(source)}">${getSourceQuality(source)}</strong>
       </header>
       <h3>${source.title}</h3>
       <p>${source.publisher} · ${source.date}</p>
+      <p><strong>可信度：</strong>${source.confidence}</p>
       <p>${source.note}</p>
       <div class="company-meta">${source.usedFor.map((item) => `<span>${item}</span>`).join("")}</div>
       <a class="chain-detail-link" href="${source.url}" target="_blank" rel="noreferrer">打开来源</a>

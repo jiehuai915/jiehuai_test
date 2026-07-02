@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI 电力 / 数据中心能源 | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#overview"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="AI 电力专题导航">
+        <a href="../index.html#chains">返回产业链</a>
+        <a href="#companies">相关公司</a>
+        <a href="#metrics">指标</a>
+        <a href="#brief">简报</a>
+        <a href="#sources">来源</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="what" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">What It Is</p>
+          <h2>这是什么</h2>
+          <p>AI 电力不是只看“有没有电”，而是看数据中心能不能持续拿到大容量、低碳、可靠、可并网、可冷却、可融资的电力和机房条件。GPU 集群越大，电力、冷却、土地、水资源和并网审批越像同一个工程问题。</p>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card"><h3>PUE / WUE</h3><p>PUE 看总耗电中有多少进入 IT 设备，WUE 看单位计算负载消耗多少水。高密机柜会把能效和水耗一起推到选址前台。</p></article>
+          <article class="detail-card"><h3>PPA / 并网</h3><p>长期购电协议、输电接入、变压器、开关设备和排队周期，决定数据中心项目能否按时落地。</p></article>
+          <article class="detail-card"><h3>可调度电源</h3><p>天然气、核电、储能和电网调度提供稳定容量；可再生能源降低碳约束，但需要配套储能和输电。</p></article>
+          <article class="detail-card"><h3>液冷 / 热管理</h3><p>100kW+ 机柜让液冷、CDU、冷板、泵、换热和运维监控成为 AI 工厂的基础设施，而不是可选升级。</p></article>
+        </div>
+      </section>
+
+      <section id="why" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Why It Matters</p>
+          <h2>为什么重要</h2>
+          <p>AI 训练和推理扩张已经从“买 GPU”变成“交付可运行的 AI 工厂”。如果电力容量、并网、冷却或水资源跟不上，GPU、服务器和模型能力都会变成闲置资本开支。</p>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>训练侧</h3>
+            <ul>
+              <li><strong>集中负载</strong>：大训练集群倾向集中建设，对单园区电力容量、网络和冷却要求很高。</li>
+              <li><strong>停机成本</strong>：供电、冷却和运维故障会造成训练中断、checkpoint 重启和昂贵 GPU 空转。</li>
+              <li><strong>资本开支</strong>：电力基础设施、液冷、机柜、变压器和备用电源会进入 AI 工厂总成本。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>推理侧</h3>
+            <ul>
+              <li><strong>低延迟部署</strong>：推理需要更靠近用户和企业数据，受城市电力、园区容量和散热改造约束。</li>
+              <li><strong>全天候负载</strong>：企业 Agent、搜索、编程助手和多模态服务会形成更稳定的 24/7 用电曲线。</li>
+              <li><strong>单位 token 成本</strong>：电价、PUE、冷却效率和 GPU 利用率共同影响推理毛利。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="map" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Supply Chain Position</p>
+          <h2>产业链位置</h2>
+          <p>这个专题横跨能源层、基础设施层和数据中心链：上游是发电、输电、储能和电网设备，中游是配电、UPS、液冷和机房工程，下游是云厂商、GPU 云、模型公司和企业 AI 服务。</p>
+        </div>
+        <div class="chain-flow">
+          <a href="power.html">能源层</a>
+          <a href="datacenter-chain.html">数据中心链</a>
+          <a href="#companies">相关公司</a>
+          <a href="#metrics">指标</a>
+          <a href="#risks">风险</a>
+          <a href="#brief">简报</a>
+        </div>
+      </section>
+
+      <section id="companies" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Company Map</p>
+          <h2>相关公司池</h2>
+          <p>这里是学习和研究入口，不构成投资建议。真正比较时应继续回到公司研究页、同业对照和来源库核验。</p>
+        </div>
+        <div data-topic-companies="Vertiv,Schneider Electric,Eaton,Constellation Energy,NextEra Energy,Vistra,GE Vernova,Siemens Energy,Delta Electronics,Envicool,CoolIT Systems,Modine,Digital Realty,Equinix,GDS Holdings,CoreWeave,Microsoft,Amazon,Alphabet / Google"></div>
+      </section>
+
+      <section id="metrics" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">What To Watch</p>
+          <h2>炒股研究时看什么指标</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>工程指标</h3>
+            <ul>
+              <li>PUE、WUE、机柜功率密度、液冷占比、CDU / 冷板交付、故障率和维护成本。</li>
+              <li>变压器、开关柜、UPS、母线、备用电源和电力模块交付周期。</li>
+              <li>园区电力容量、并网排队时间、输电约束、土地和水资源许可。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>商业指标</h3>
+            <ul>
+              <li>长期 PPA 价格和期限、可再生能源匹配、核电或燃机容量、储能配置。</li>
+              <li>数据中心预租率、客户集中度、资本开支、融资成本和利用率爬坡。</li>
+              <li>液冷订单、毛利率、客户认证、项目验收节奏和售后运维收入。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="risks" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Risks</p>
+          <h2>主要风险</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card"><h3>并网和审批</h3><p>电力项目、输电扩容、核电重启和数据中心建设都受监管、社区、环保和排队周期影响。</p></article>
+          <article class="detail-card"><h3>需求节奏</h3><p>云厂商 AI CAPEX 若放缓，数据中心电力、液冷和电网设备订单可能延后。</p></article>
+          <article class="detail-card"><h3>技术路线</h3><p>风冷、冷板液冷、浸没式液冷、园区余热利用和储能配置会互相替代或分阶段导入。</p></article>
+          <article class="detail-card"><h3>估值和周期</h3><p>电力和数据中心链条容易在订单高景气时被高估，需要持续核验合同、交付、毛利和现金流。</p></article>
+        </div>
+      </section>
+
+      <section id="brief" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Brief View</p>
+          <h2>可复制学习笔记 / 股票研究简报</h2>
+        </div>
+        <article class="research-brief">
+          <h3>核心结论</h3>
+          <p>AI 数据中心扩张的第三个硬瓶颈是电力和能源基础设施。GPU、HBM 和光互联决定算力效率，但电力容量、并网、PUE/WUE、液冷和长期 PPA 决定这些算力能否按时运行。</p>
+          <h3>产业链位置</h3>
+          <p>能源层 × 基础设施层 × 数据中心链，连接发电、输电、储能、配电、UPS、液冷、机房工程、云厂商和数据中心运营商。</p>
+          <h3>相关公司</h3>
+          <p>Vertiv、Schneider Electric、Eaton、Constellation、NextEra、Vistra、GE Vernova、Siemens Energy、Delta Electronics、英维克、科华数据、申菱环境、Digital Realty、Equinix、GDS、CoreWeave、Microsoft、Amazon、Alphabet。</p>
+          <h3>关键指标</h3>
+          <p>PUE、WUE、机柜功率密度、长期 PPA、并网排队、变压器交付、液冷占比、数据中心预租率、资本开支、利用率和电价。</p>
+          <h3>风险</h3>
+          <p>并网审批、政策监管、CAPEX 放缓、液冷路线切换、客户集中、估值过热、项目延期和电价波动。</p>
+          <p class="disclaimer">本页仅用于个人学习、产业科普和股票研究框架搭建，不构成投资建议、证券推荐或交易指令。</p>
+        </article>
+      </section>
+
+      <section id="sources" class="section section-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>来源与持续核验</h2>
+        </div>
+        <div class="source-badges" data-source-ids="iea-energy-ai,nvidia-gb200-nvl72,constellation-microsoft-ppa,google-kairos,amazon-x-energy,vertiv-official,schneider-official,eaton-official,nextera-official,ge-vernova-official,envicool-official"></div>
+        <div class="source-list">
+          <a href="sources.html#iea-energy-ai">IEA Energy and AI</a>
+          <a href="sources.html#nvidia-gb200-nvl72">NVIDIA GB200 NVL72</a>
+          <a href="sources.html#constellation-microsoft-ppa">Constellation / Microsoft PPA</a>
+          <a href="sources.html#vertiv-official">Vertiv</a>
+          <a href="sources.html#schneider-official">Schneider Electric</a>
+          <a href="sources.html#eaton-official">Eaton</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>AI 五层蛋糕产业知识体系 · AI 电力 / 数据中心能源</span>
+      <span>核心判断需持续核验来源与时间。</span>
+    </footer>
+
+    <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
+    <script src="../glossary.js"></script>
+    <script src="../investment-data.js"></script>
+    <script src="../company-deepdives.js"></script>
+    <script src="../company-expansion-data.js"></script>
+    <script src="../sources-data.js"></script>
+    <script src="../source-quality.js"></script>
+    <script src="../source-badges.js"></script>
+    <script src="../page-topic-companies.js"></script>
+    <script src="../page-glossary.js"></script>
+  </body>
+</html>

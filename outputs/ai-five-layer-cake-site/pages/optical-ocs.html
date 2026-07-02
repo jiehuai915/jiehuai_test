@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>光互联 / OCS / AI 网络硬件 | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#overview"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="光互联专题导航">
+        <a href="../index.html#chains">返回产业链</a>
+        <a href="#ocs">OCS</a>
+        <a href="#companies">相关公司</a>
+        <a href="#metrics">指标</a>
+        <a href="#brief">简报</a>
+        <a href="#sources">来源</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="what" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">What It Is</p>
+          <h2>这是什么</h2>
+          <p>光互联不是单一产品，而是一组把 AI 服务器、交换机、机柜和数据中心园区连接起来的硬件链条。它决定 GPU 间数据交换、参数同步、推理服务调度和多机多卡训练的真实效率。</p>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card"><h3>光模块</h3><p>800G/1.6T 光模块把电信号转换成光信号，是交换机和服务器之间的主流高速连接形态。</p></article>
+          <article class="detail-card"><h3>CPO / LPO / 硅光</h3><p>CPO 试图把光学更靠近交换芯片以降低功耗，LPO 试图简化 DSP 降低成本和功耗，硅光则影响光器件集成路线。</p></article>
+          <article class="detail-card"><h3>AEC / 铜缆</h3><p>短距连接中，有源铜缆和高速连接芯片可能在机柜内承担低功耗、低成本过渡角色。</p></article>
+          <article class="detail-card"><h3>PCB / CCL / 背板</h3><p>112G/224G SerDes 推高信号完整性门槛，低损耗材料、高多层板、背钻、连接器和测试良率都变得更重要。</p></article>
+        </div>
+      </section>
+
+      <section id="why" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Why It Matters</p>
+          <h2>为什么重要</h2>
+          <p>AI 集群的瓶颈不只是 GPU 数量，而是有效通信带宽。AllReduce、参数同步、KV Cache 调度、跨节点推理和大规模训练都会消耗网络能力。网络越慢，GPU 越容易等数据，昂贵算力就变成低利用率资产。</p>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>训练侧</h3>
+            <ul>
+              <li><strong>东西向流量</strong>：多机多卡训练需要频繁同步梯度、参数和中间状态。</li>
+              <li><strong>集群扩展</strong>：规模越大，网络拓扑、拥塞控制和故障恢复越关键。</li>
+              <li><strong>GPU 利用率</strong>：网络瓶颈会直接拖低 MFU 和训练吞吐。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>推理侧</h3>
+            <ul>
+              <li><strong>高并发服务</strong>：模型路由、prefill/decode 分离和缓存调度需要低延迟网络。</li>
+              <li><strong>跨机柜部署</strong>：大模型推理会把算力、内存和存储分散到更多节点。</li>
+              <li><strong>成本约束</strong>：每 bit 功耗和网络设备 CAPEX 会进入单位 token 成本。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="map" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Supply Chain Position</p>
+          <h2>产业链位置</h2>
+          <p>这个专题横跨基础设施层、芯片层和数据中心链：上游是交换芯片、SerDes、DSP、激光器、光芯片和 PCB/CCL，下游是 AI 服务器、交换机、机柜和数据中心园区网络。</p>
+        </div>
+        <div class="chain-flow">
+          <a href="infra.html#optical-interconnect">光互联</a>
+          <a href="datacenter-chain.html#network">数据中心网络</a>
+          <a href="semiconductor-chain.html#board">PCB/基板</a>
+          <a href="#ocs">OCS</a>
+          <a href="#companies">相关公司</a>
+          <a href="#metrics">指标</a>
+        </div>
+      </section>
+
+      <section id="ocs" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">OCS Lens</p>
+          <h2>OCS：长期路线，不是所有场景的万能答案</h2>
+          <p>OCS 是 Optical Circuit Switch，核心是用光路重构网络连接，让拓扑可以按任务或流量需求调整。Google Apollo / TPU v4 相关论文证明 OCS 可以在超大规模数据中心或专用加速器网络中落地，但它更像 hyperscaler 和专用集群的长期网络架构选项，不等于传统光模块需求会立刻消失。</p>
+        </div>
+        <div class="topic-lens-grid">
+          <article class="topic-lens-card">
+            <span>适合什么</span>
+            <h3>可重构大集群</h3>
+            <p>当训练任务或加速器 pod 需要动态拓扑时，OCS 可以帮助调整连接关系，提高利用率和容错能力。</p>
+          </article>
+          <article class="topic-lens-card">
+            <span>卡在哪里</span>
+            <h3>控制与调度</h3>
+            <p>OCS 不只是硬件，关键是调度、路由、故障恢复、切换时间、光损耗、端口规模和软件协同。</p>
+          </article>
+          <article class="topic-lens-card">
+            <span>和光模块关系</span>
+            <h3>替代与增量并存</h3>
+            <p>OCS 可能改变部分网络拓扑和光连接结构，但 800G/1.6T 光模块、激光器、连接器和测试仍是当前主线。</p>
+          </article>
+          <article class="topic-lens-card">
+            <span>投资读法</span>
+            <h3>看工程验证</h3>
+            <p>不要只看概念，要看超大客户是否进入规模部署、供应链是否有明确订单、功耗和成本是否优于传统交换网络。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="companies" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Company Map</p>
+          <h2>相关公司池</h2>
+          <p>这里是学习和研究入口，不构成投资建议。真正比较时应回到现有“光互联与高速 PCB 同业对照表”。</p>
+        </div>
+        <div data-topic-companies="Zhongji Innolight,Eoptolink,Accelink Technologies,Cambridge Industries Group,TFC Communication,Broadex Technologies,Coherent,Lumentum,AAOI,Fabrinet,Broadcom,Marvell,Credo Technology,Astera Labs,WUS Printed Circuit,Shengyi Technology,Shennan Circuits,Dongshan Precision,Amphenol,Corning"></div>
+      </section>
+
+      <section id="metrics" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">What To Watch</p>
+          <h2>炒股研究时看什么指标</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>产品与客户</h3>
+            <ul>
+              <li>800G / 1.6T 出货、客户认证、产品结构、海外云客户拉货。</li>
+              <li>光模块良率、激光器供应、DSP/SerDes 代际、AEC 客户导入。</li>
+              <li>CPO/LPO/硅光是否从样机、验证走向规模部署。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>财务与周期</h3>
+            <ul>
+              <li>毛利率、ASP、客户集中度、库存、产能利用率和资本开支。</li>
+              <li>PCB 高端材料占比、高多层板良率、低损耗 CCL 认证进度。</li>
+              <li>AI 网络 CAPEX 节奏、数据中心互联架构变化和价格竞争。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="risks" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Risks</p>
+          <h2>主要风险</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card"><h3>技术路线切换</h3><p>CPO、LPO、AEC、传统可插拔光模块和 OCS 之间可能互相替代或延后，不能把单一路线当成确定答案。</p></article>
+          <article class="detail-card"><h3>客户集中</h3><p>光模块、DSP、AEC 和 AI PCB 都容易受少数云客户拉货节奏影响。</p></article>
+          <article class="detail-card"><h3>价格竞争</h3><p>速率升级带来弹性，但成熟后价格下行、良率爬坡和模组竞争会压缩毛利。</p></article>
+          <article class="detail-card"><h3>资本开支波动</h3><p>AI 网络硬件受云厂商 CAPEX、平台代际和库存周期影响，订单节奏可能很陡。</p></article>
+        </div>
+      </section>
+
+      <section id="brief" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Brief View</p>
+          <h2>可复制学习笔记 / 股票研究简报</h2>
+        </div>
+        <article class="research-brief">
+          <h3>核心结论</h3>
+          <p>AI 集群竞争从单卡性能扩展到网络 fabric。800G/1.6T 光模块是当前主线，SerDes/DSP/AEC、CPO/LPO、PCB/CCL 和 OCS 是围绕功耗、成本、距离和拓扑灵活性的多条工程路线。</p>
+          <h3>产业链位置</h3>
+          <p>基础设施层 × 数据中心链 × 芯片供应链，连接光模块、交换芯片、SerDes、激光器、PCB/CCL、连接器和数据中心网络。</p>
+          <h3>相关公司</h3>
+          <p>中际旭创、新易盛、光迅科技、剑桥科技、天孚通信、博创科技、源杰科技、Coherent、Lumentum、AAOI、Fabrinet、Broadcom、Marvell、Credo、Astera、沪电股份、生益科技、深南电路、Amphenol、Corning。</p>
+          <h3>关键指标</h3>
+          <p>800G/1.6T 出货、客户认证、毛利率、SerDes lane rate、DSP/AEC 导入、CPO/LPO 进展、PCB 高端材料占比、库存和客户集中度。</p>
+          <h3>风险</h3>
+          <p>技术路线切换、价格下行、客户集中、资本开支波动、海外限制、良率和库存周期。</p>
+          <p class="disclaimer">本页仅用于个人学习、产业科普和股票研究框架搭建，不构成投资建议、证券推荐或交易指令。</p>
+        </article>
+      </section>
+
+      <section id="sources" class="section section-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>来源与持续核验</h2>
+        </div>
+        <div class="source-badges" data-source-ids="nvidia-spectrum-x-official,broadcom-cpo-official,credo-official,google-apollo-ocs,innolight-official,eoptolink-official,coherent-official,lumentum-official,marvell-official,wus-official,shengyi-official"></div>
+        <div class="source-list">
+          <a href="sources.html#nvidia-spectrum-x-official">NVIDIA Spectrum-X</a>
+          <a href="sources.html#broadcom-cpo-official">Broadcom CPO</a>
+          <a href="sources.html#credo-official">Credo</a>
+          <a href="sources.html#google-apollo-ocs">Google Apollo OCS</a>
+          <a href="sources.html#innolight-official">中际旭创</a>
+          <a href="sources.html#eoptolink-official">新易盛</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>AI 五层蛋糕产业知识体系 · 光互联 / OCS / AI 网络硬件</span>
+      <span>核心判断需持续核验来源与时间。</span>
+    </footer>
+
+    <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
+    <script src="../glossary.js"></script>
+    <script src="../investment-data.js"></script>
+    <script src="../company-deepdives.js"></script>
+    <script src="../company-expansion-data.js"></script>
+    <script src="../sources-data.js"></script>
+    <script src="../source-quality.js"></script>
+    <script src="../source-badges.js"></script>
+    <script src="../page-topic-companies.js"></script>
+    <script src="../page-glossary.js"></script>
+  </body>
+</html>

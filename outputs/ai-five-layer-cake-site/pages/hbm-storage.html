@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HBM 与 AI 存储瓶颈 | AI 五层蛋糕</title>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html#overview"><span class="brand-mark"></span><span>AI 五层蛋糕产业知识体系</span></a>
+      <nav class="nav" aria-label="HBM 与 AI 存储瓶颈导航">
+        <a href="../index.html#chains">返回产业链</a>
+        <a href="#squeeze">挤出效应</a>
+        <a href="#companies">相关公司</a>
+        <a href="#metrics">指标</a>
+        <a href="#brief">简报</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="what" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">What It Is</p>
+          <h2>这是什么</h2>
+          <p>HBM 是把多层 DRAM 通过 TSV 垂直堆叠，并放到 GPU/ASIC 封装旁边的高带宽内存。AI 训练和推理需要持续喂数据，GPU 算力、HBM 带宽、服务器 DRAM 容量、企业 SSD 吞吐和数据中心存储共同决定真实产出。</p>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card"><h3><button class="term" type="button" data-term="HBM">HBM</button></h3><p>解决显存带宽和封装距离问题，是高端 AI GPU、ASIC 和加速器的核心供给闸门。</p></article>
+          <article class="detail-card"><h3>服务器 DRAM</h3><p>支撑 CPU 侧内存容量、数据预处理、推理服务和数据库缓存，受益于 AI 服务器内存容量提升。</p></article>
+          <article class="detail-card"><h3>NAND / 企业 SSD</h3><p>支撑训练数据集、checkpoint、向量库、冷热数据分层和推理服务日志，高性能企业 SSD 会和 AI 数据中心扩张同步被重估。</p></article>
+          <article class="detail-card"><h3>控制器 / 模组</h3><p>存储模组、SSD 控制器、UFS/eMMC、车规/工规小容量存储连接终端市场，是观察“挤出效应”是否外溢的窗口。</p></article>
+        </div>
+      </section>
+
+      <section id="why" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Why It Matters</p>
+          <h2>为什么重要</h2>
+          <p>AI 存储瓶颈的投资含义不只在 HBM 涨价，而在产能、客户认证和资本开支重新排序：先进 DRAM 产能投向 HBM，NAND 投向企业 SSD，低毛利终端存储可能从“过剩品类”变成“需要观察供给缺口的品类”。</p>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>AI 侧需求</h3>
+            <ul>
+              <li><strong>训练</strong>：需要 HBM、服务器内存、分布式存储和高吞吐 checkpoint。</li>
+              <li><strong>推理</strong>：长上下文、KV Cache、RAG 和多租户服务提高内存与 SSD 压力。</li>
+              <li><strong>数据中心</strong>：企业 SSD、存储网络和冷热分层决定 GPU 是否等数据。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>供给侧变化</h3>
+            <ul>
+              <li><strong>HBM trade ratio</strong>：同样晶圆产能转成 HBM 后，会挤压传统 DRAM bit 供给。</li>
+              <li><strong>客户长协</strong>：SCA、take-or-pay、floor price 和 RPO 让高端客户优先级更高。</li>
+              <li><strong>资本开支</strong>：大厂更愿意投高毛利 HBM、DDR5、企业 SSD 和先进封装配套。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="map" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Supply Chain Position</p>
+          <h2>产业链位置</h2>
+          <p>这个专题处在芯片层和基础设施层交界：上接 DRAM/NAND 晶圆、封装和控制器，下接 AI 服务器、数据中心、消费电子、汽车电子和工业设备。</p>
+        </div>
+        <div class="chain-flow">
+          <a href="semiconductor-chain.html#hbm">HBM</a>
+          <a href="silicon.html#hbm4">AI 加速器</a>
+          <a href="datacenter-chain.html#servers">AI 服务器</a>
+          <a href="datacenter-chain.html#network">数据中心存储</a>
+          <a href="#squeeze">消费/车载/工业</a>
+          <a href="#companies">相关公司</a>
+        </div>
+      </section>
+
+      <section id="squeeze" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">AI Capacity Squeeze</p>
+          <h2>AI 挤出效应：低毛利存储谁来补位</h2>
+          <p>这不是一句“低端存储全都受益”。更准确的框架是：大厂资源转向 AI 后，普通 DRAM、消费 NAND、车规/工业存储、小容量 NOR/SLC NAND、模组和控制器会分层出现机会，但能否兑现取决于供给缺口、客户认证、库存周期、涨价能力和国产替代。</p>
+        </div>
+        <div class="topic-lens-grid">
+          <article class="topic-lens-card">
+            <span>普通 DRAM</span>
+            <h3>谁补位</h3>
+            <p>长鑫、南亚科、华邦电等更可能承接部分 DDR4、LPDDR、利基 DRAM 和中低端市场缺口。但长鑫若继续向 DDR5/LPDDR5X/服务器内存升级，也不会长期只停留在低毛利替代。</p>
+          </article>
+          <article class="topic-lens-card">
+            <span>车载 / 工业</span>
+            <h3>谁补位</h3>
+            <p>北京君正、兆易创新、普冉、东芯、聚辰、ISSI、Winbond 更适合跟踪。车规/工规更看重认证、生命周期、可靠性和小批量多型号，不完全由先进制程决定。</p>
+          </article>
+          <article class="topic-lens-card">
+            <span>NAND / SSD / 模组</span>
+            <h3>谁补位</h3>
+            <p>长江存储、江波龙、佰维、德明利、群联、慧荣、香农芯创等对应颗粒、模组、控制器或分销链条。这里弹性强，但库存和价格周期也更容易反噬。</p>
+          </article>
+          <article class="topic-lens-card">
+            <span>判断变量</span>
+            <h3>怎么跟踪</h3>
+            <p>看大厂是否缩普通 DRAM/消费 NAND 供给，中小厂稼动率是否提升，现货价和合约价是否同步上涨，车规客户是否接受涨价，国产替代是否进入真实大客户认证。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="companies" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Company Map</p>
+          <h2>相关公司池</h2>
+          <p>这里是学习和研究入口，不构成投资建议。公司卡用于快速查看层级、链条、护城河、风险和来源质量。</p>
+        </div>
+        <div data-topic-companies="SK hynix,Micron,Samsung Electronics,GigaDevice,Montage Technology"></div>
+      </section>
+
+      <section id="metrics" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">What To Watch</p>
+          <h2>炒股研究时看什么指标</h2>
+        </div>
+        <div class="energy-block split">
+          <div>
+            <h3>供需与价格</h3>
+            <ul>
+              <li>HBM 收入、HBM bit 出货、客户认证、良率和 stack 层数。</li>
+              <li>DRAM/NAND bit growth、现货价、合约价、库存天数和稼动率。</li>
+              <li>企业 SSD、服务器 DRAM、消费 SSD、车规/工业存储的价格分化。</li>
+            </ul>
+          </div>
+          <div>
+            <h3>财务与合同</h3>
+            <ul>
+              <li>CapEx、先进封装/后道投资、SCA/RPO、take-or-pay、floor price。</li>
+              <li>毛利率、ASP、产品结构、库存减值和客户集中度。</li>
+              <li>国产替代订单、车规认证进度、模组厂库存和渠道价格。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="risks" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Risks</p>
+          <h2>主要风险</h2>
+        </div>
+        <div class="detail-grid">
+          <article class="detail-card"><h3>周期反转</h3><p>存储仍是强周期行业，若大厂扩产过快或终端需求走弱，价格和毛利率会快速反转。</p></article>
+          <article class="detail-card"><h3>库存反噬</h3><p>模组、分销和消费存储公司如果高价拿货、低价出货，股价弹性可能变成业绩压力。</p></article>
+          <article class="detail-card"><h3>认证慢</h3><p>车规、工业和数据中心客户认证周期长，不是有产能就能立刻替代。</p></article>
+          <article class="detail-card"><h3>技术替代</h3><p>CXL、内存池化、新型存储、GPU/ASIC 架构变化都可能改变存储价值分配。</p></article>
+        </div>
+      </section>
+
+      <section id="brief" class="section section-tint">
+        <div class="section-heading">
+          <p class="eyebrow">Brief View</p>
+          <h2>可复制学习笔记 / 股票研究简报</h2>
+        </div>
+        <article class="research-brief">
+          <h3>核心结论</h3>
+          <p>AI 数据中心把存储从普通周期品推向“算力供给瓶颈”的一部分。HBM 是主线，但更值得跟踪的二阶问题是：大厂产能转向 AI 后，消费、车载、工业和模组存储是否出现供给缺口与价格修复。</p>
+          <h3>产业链位置</h3>
+          <p>芯片层 × 芯片供应链 × 数据中心链，连接 HBM/DRAM/NAND、先进封装、AI 服务器、企业 SSD 和终端存储。</p>
+          <h3>相关公司</h3>
+          <p>Micron、SK hynix、Samsung、长鑫存储、长江存储、北京君正、兆易创新、江波龙、佰维存储、德明利、东芯股份、普冉股份、聚辰股份、香农芯创、群联、慧荣。</p>
+          <h3>关键指标</h3>
+          <p>HBM 收入、bit growth、合约价、现货价、库存、CapEx、SCA/RPO、客户认证、车规认证、模组库存和毛利率。</p>
+          <h3>风险</h3>
+          <p>周期反转、扩产过热、库存减值、客户砍单、认证不及预期、低端价格传导失败。</p>
+          <p class="disclaimer">本页仅用于个人学习、产业科普和股票研究框架搭建，不构成投资建议、证券推荐或交易指令。</p>
+        </article>
+      </section>
+
+      <section id="sources" class="section section-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>来源与持续核验</h2>
+          <p>Longbridge 截图可作为研究线索，但不作为唯一事实来源；写入网站的核心事实优先回到公司公告、IR、年报、监管文件和官网。</p>
+        </div>
+        <div class="source-badges" data-source-ids="micron-hbm4-vera-rubin,samsung-hbm4,skhynix-official,cxmt-official,ymtc-official,gigadevice-official,issi-official,winbond-official"></div>
+        <div class="source-list">
+          <a href="sources.html#micron-hbm4-vera-rubin">Micron HBM4</a>
+          <a href="sources.html#samsung-hbm4">Samsung HBM4</a>
+          <a href="sources.html#skhynix-official">SK hynix</a>
+          <a href="sources.html#cxmt-official">长鑫存储</a>
+          <a href="sources.html#ymtc-official">长江存储</a>
+          <a href="sources.html#gigadevice-official">兆易创新</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>AI 五层蛋糕产业知识体系 · HBM 与 AI 存储瓶颈</span>
+      <span>核心判断需持续核验来源与时间。</span>
+    </footer>
+
+    <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
+    <script src="../glossary.js"></script>
+    <script src="../investment-data.js"></script>
+    <script src="../company-deepdives.js"></script>
+    <script src="../company-expansion-data.js"></script>
+    <script src="../sources-data.js"></script>
+    <script src="../source-quality.js"></script>
+    <script src="../source-badges.js"></script>
+    <script src="../page-topic-companies.js"></script>
+    <script src="../page-glossary.js"></script>
+  </body>
+</html>

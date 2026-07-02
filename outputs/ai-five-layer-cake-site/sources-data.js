@@ -44,6 +44,50 @@ const sourceRegistry = [
     note: "用于核验 Samsung HBM4 量产/出货叙事与 HBM 竞争格局。"
   },
   {
+    id: "cxmt-official",
+    title: "ChangXin Memory Technologies",
+    publisher: "CXMT",
+    date: "2025-2026",
+    type: "公司官网",
+    url: "https://www.cxmt.com/",
+    confidence: "中",
+    usedFor: ["芯片层", "DRAM", "国产替代", "AI 存储瓶颈"],
+    note: "用于跟踪长鑫存储 DRAM、DDR/LPDDR 路线和国产内存供给变化；具体产能与客户认证需继续用公开公告或渠道资料核验。"
+  },
+  {
+    id: "ymtc-official",
+    title: "Yangtze Memory Technologies",
+    publisher: "YMTC",
+    date: "2025-2026",
+    type: "公司官网",
+    url: "https://www.ymtc.com/",
+    confidence: "中",
+    usedFor: ["芯片层", "NAND", "企业 SSD", "国产替代", "AI 存储瓶颈"],
+    note: "用于跟踪长江存储 NAND、Xtacking、企业/消费存储供给；具体客户和价格弹性需继续核验。"
+  },
+  {
+    id: "issi-official",
+    title: "ISSI",
+    publisher: "ISSI",
+    date: "2025-2026",
+    type: "公司官网",
+    url: "https://www.issi.com/",
+    confidence: "中",
+    usedFor: ["芯片层", "车规存储", "工业存储", "利基 DRAM"],
+    note: "用于跟踪 ISSI 在车规、工业、通信和利基存储中的产品线；北京君正通过 ISSI 暴露车规/工业存储研究线索。"
+  },
+  {
+    id: "winbond-official",
+    title: "Winbond",
+    publisher: "Winbond",
+    date: "2025-2026",
+    type: "公司官网",
+    url: "https://www.winbond.com/",
+    confidence: "中",
+    usedFor: ["芯片层", "NOR Flash", "Specialty DRAM", "车规/工业存储"],
+    note: "用于跟踪华邦电 NOR Flash、Specialty DRAM、车规与工业存储供给。"
+  },
+  {
     id: "tsmc-2025-annual",
     title: "TSMC 2025 Annual Report",
     publisher: "TSMC",
@@ -900,6 +944,17 @@ const sourceRegistry = [
     confidence: "高",
     usedFor: ["基础设施层", "数据中心链", "AI 网络", "以太网"],
     note: "用于跟踪 Spectrum-X、AI Ethernet fabric、scale-out 网络和 AI 集群互联路线。"
+  },
+  {
+    id: "google-apollo-ocs",
+    title: "Mission Apollo: Landing Optical Circuit Switching at Datacenter Scale",
+    publisher: "Google / arXiv",
+    date: "2022-08-22",
+    type: "工程论文",
+    url: "https://arxiv.org/abs/2208.10041",
+    confidence: "中高",
+    usedFor: ["基础设施层", "数据中心链", "OCS", "可重构网络", "光互联"],
+    note: "用于研究 OCS 在大规模数据中心网络中的部署经验和工程边界；作为路线参考，不等同于所有 AI 集群的确定商用节奏。"
   },
   {
     id: "broadcom-cpo-official",

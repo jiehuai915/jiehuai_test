@@ -21,20 +21,6 @@
     </header>
 
     <main>
-      <section class="hero layer-page-hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Layer 02 · Silicon</p>
-          <h1>芯片层：从单卡竞争进入机柜级系统战</h1>
-          <p class="lead">核心矛盾：模型和 Agent 的算力需求继续指数级膨胀，但真正限制供给的已经不只是 GPU 芯片，而是 HBM、先进封装、互联、基板、电源、液冷和软件生态的整机柜系统能力。</p>
-        </div>
-        <div class="cake-visual">
-          <div class="cake-layer layer-chip">
-            <strong>当前判断</strong>
-            <span>NVIDIA 的壁垒正在从 GPU 单芯片扩大到 Vera CPU、Rubin GPU、NVLink 6、ConnectX-9、BlueField-4、Spectrum-6 和软件栈共同构成的 AI factory 平台。</span>
-          </div>
-        </div>
-      </section>
-
       <section id="status" class="section">
         <div class="section-heading">
           <p class="eyebrow">Industry Status</p>
@@ -81,6 +67,7 @@
         <div class="detail-grid">
           <article class="detail-card frontier" id="rubin"><h3>Rubin / Vera Rubin 机柜级平台</h3><p>Vera Rubin 把 CPU、<button class="term" type="button" data-term="GPU">GPU</button>、<button class="term" type="button" data-term="NVLink 6">NVLink 6</button>、SuperNIC、<button class="term" type="button" data-term="DPU">DPU</button>、Ethernet switch、软件栈和<button class="term" type="button" data-term="液冷">液冷</button>系统作为一个整体设计。AI 芯片竞争的单位从“卡”变成“rack / pod”。</p></article>
           <article class="detail-card frontier" id="hbm4"><h3><button class="term" type="button" data-term="HBM4">HBM4</button> 与内存系统重构</h3><p><button class="term" type="button" data-term="HBM4">HBM4</button> 面向更宽接口、更高带宽和更复杂 base die。Micron、Samsung、SK hynix 的 <button class="term" type="button" data-term="HBM">HBM</button> 产能、良率和客户认证成为 AI <button class="term" type="button" data-term="GPU">GPU</button> 供给天花板。</p></article>
+          <article class="detail-card frontier"><h3>HBM / AI 存储瓶颈专题</h3><p>从 HBM 主线继续追踪 DRAM、NAND、企业 SSD 和消费/车载/工业存储的 AI 挤出效应。</p><a class="chain-detail-link" href="hbm-storage.html">进入专题页</a></article>
           <article class="detail-card frontier" id="cowos"><h3><button class="term" type="button" data-term="CoWoS-L/R">CoWoS-L/R</button> 与 3D 封装</h3><p><button class="term" type="button" data-term="先进封装">先进封装</button>把 <button class="term" type="button" data-term="GPU">GPU</button> chiplet、I/O die、<button class="term" type="button" data-term="HBM">HBM</button> 和<button class="term" type="button" data-term="ABF 基板">基板</button>连接成可制造系统。<button class="term" type="button" data-term="CoWoS">CoWoS</button> 不再是后段工艺，而是 AI 算力交付的核心瓶颈。</p></article>
           <article class="detail-card frontier" id="silicon-photonics"><h3>硅光 / <button class="term" type="button" data-term="CPO">CPO</button> / <button class="term" type="button" data-term="Spectrum-6">Spectrum-6</button></h3><p>跨机柜、跨集群互联的功耗和延迟开始逼近电互联极限，硅光和共封装光学成为 <button class="term" type="button" data-term="AI Factory">AI factory</button> 网络路线的核心变量。</p></article>
           <article class="detail-card frontier" id="inference-asic"><h3>推理 <button class="term" type="button" data-term="ASIC">ASIC</button> 与数据流架构</h3><p><button class="term" type="button" data-term="Reasoning Model">Reasoning 模型</button>带来推理 token 爆炸，Cerebras、Groq、Etched、SambaNova 等路线押注低延迟、低成本、专用化推理。</p></article>
@@ -217,6 +204,7 @@
     <div class="term-popup" id="termPopup" aria-hidden="true"><strong id="termTitle"></strong><p id="termBody"></p></div>
     <script src="../glossary.js"></script>
     <script src="../sources-data.js"></script>
+    <script src="../source-quality.js"></script>
     <script src="../source-badges.js"></script>
     <script src="../page-glossary.js"></script>
   </body>
