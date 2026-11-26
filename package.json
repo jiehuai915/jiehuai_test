@@ -6,6 +6,7 @@
     "dev": "WATCHPACK_POLLING=true next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
+    "test": "node tests/run.cjs",
     "lint": "next lint"
   },
   "dependencies": {
