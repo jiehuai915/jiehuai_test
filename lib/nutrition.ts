@@ -350,19 +350,8 @@ const FOOD_DATABASE: FoodEntry[] = [
   }
 ];
 
-const BABY_KEYWORDS = [
-  "宝宝",
-  "辅食",
-  "儿童",
-  "幼儿",
-  "月龄",
-  "米糊",
-  "泥",
-  "蒸蛋",
-  "手指食物"
-];
-
-const STRONG_BABY_KEYWORDS = ["宝宝", "辅食", "月龄"];
+const STRONG_BABY_KEYWORDS = ["宝宝", "辅食", "月龄", "婴儿", "婴幼儿"];
+const CHILD_AUDIENCE_KEYWORDS = ["儿童", "幼儿"];
 
 const FITNESS_KEYWORDS = [
   "减脂",
@@ -437,22 +426,16 @@ export function analyzeRecipeNutrition(input: {
   };
 }
 
-function detectAudienceType(content: string): AudienceType {
-  const hasStrongBabyKeyword = STRONG_BABY_KEYWORDS.some((keyword) =>
-    content.includes(keyword)
-  );
-  const hasBabyKeyword = BABY_KEYWORDS.some((keyword) => content.includes(keyword));
-  const hasFitnessKeyword = FITNESS_KEYWORDS.some((keyword) => content.includes(keyword));
-
-  if (hasStrongBabyKeyword) {
+export function detectAudienceType(content: string): AudienceType {
+  if (STRONG_BABY_KEYWORDS.some((keyword) => content.includes(keyword))) {
     return "baby-food";
   }
 
-  if (hasFitnessKeyword) {
+  if (FITNESS_KEYWORDS.some((keyword) => content.includes(keyword))) {
     return "fitness-light-meal";
   }
 
-  if (hasBabyKeyword) {
+  if (CHILD_AUDIENCE_KEYWORDS.some((keyword) => content.includes(keyword))) {
     return "baby-food";
   }
 
