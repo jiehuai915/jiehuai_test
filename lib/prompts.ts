@@ -19,6 +19,22 @@ export type ArtStyleId =
 
 export const ART_STYLE_GROUPS = ["写实摄影", "手绘插画", "立体手作", "平面设计"] as const;
 
+export const DEFAULT_ART_STYLE_ID: ArtStyleId = "natural-light-photography";
+
+export const ART_STYLE_CHOICES: readonly { label: string; styles: readonly { id: ArtStyleId; label: string }[] }[] = [
+  { label: "常用画风", styles: [
+    { id: DEFAULT_ART_STYLE_ID, label: "真实美食摄影" },
+    { id: "cinematic-surreal-animation", label: "日系光影动画" },
+    { id: "chinese-watercolor", label: "国风水彩" },
+    { id: "soft-3d-clay", label: "软陶 3D" },
+    { id: "magazine-collage-journal", label: "杂志拼贴" }
+  ] },
+  { label: "更多画风", styles: [
+    { id: "colored-pencil", label: "彩铅手绘" },
+    { id: "retro-comic", label: "复古漫画" }
+  ] }
+];
+
 type ArtStyle = {
   id: ArtStyleId;
   name: string;
@@ -364,6 +380,20 @@ export function recommendArtStyle(input: {
   return getArtStyle("commercial-food-photography");
 }
 
+export function recommendSelectableArtStyle(input: Parameters<typeof recommendArtStyle>[0]): ArtStyleId {
+  const alternatives: Partial<Record<ArtStyleId, ArtStyleId>> = {
+    "commercial-food-photography": DEFAULT_ART_STYLE_ID,
+    "hand-drawn-fantasy-animation": "cinematic-surreal-animation",
+    "monochrome-line-art": "colored-pencil",
+    "needle-felt": "soft-3d-clay",
+    "low-poly-3d": "soft-3d-clay",
+    "flat-infographic": "magazine-collage-journal",
+    "pixel-art": "retro-comic"
+  };
+  const suggested = recommendArtStyle(input).id;
+  return alternatives[suggested] ?? suggested;
+}
+
 function buildCoverPrompt(context: PromptContext): string {
   const coverTitle = getCoverTitle(context.recipeName);
 
@@ -438,7 +468,7 @@ function buildStepsPrompt(context: PromptContext): string {
   return [
     `【${title}图 Prompt】`,
     `标题结构：画面正上方正中央显示「${title}」，标题字体与制作动作有关联，可融入搅拌轨迹、蒸汽、水滴、容器轮廓或食材切面元素；标题清晰可读。`,
-    `风格描述：${context.style.name}；${context.style.description}。画面以直观动作为核心，光效克制，背景弱化。`,
+    `风格描述：${context.style.name}；${context.style.description}。画面以直观动作为核心，光效克制，背景弱化。${context.style.id === "magazine-collage-journal" ? "剪贴边缘和纸纹只作陪衬，不跨步骤分格；编号和文字各自留在本格的干净区域。" : ""}`,
     `主体描述：视觉化呈现用户提供的制作步骤：${context.steps || "用户未提供步骤，画面不得自行编造制作流程"}。${layout}动作顺序必须符合用户输入，不更改制作逻辑；${isLastPage ? "最后一步的成品外观必须与同组封面成品保持一致" : "本图仅呈现当前阶段的食材状态，自然衔接下一张步骤图，不提前呈现成品"}。`,
     buildAudienceVisualRule(context, "steps"),
     buildConsistencyRule(context),

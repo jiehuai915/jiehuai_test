@@ -67,6 +67,16 @@ test("restoring a draft keeps optional details, including inactive extra images"
   assert.equal(isExtraCount(MAX_EXTRA_IMAGES + 1), false);
 });
 
+test("new drafts use natural light and saved photography or retired styles stay intact", () => {
+  assert.equal(readDraftWorkspace(null).draft.styleId, "natural-light-photography");
+  for (const styleId of ["commercial-food-photography", "pixel-art", "needle-felt"]) {
+    const draft = readDraftWorkspace(JSON.stringify({ draft: { recipeName: "焗饭", styleId } })).draft;
+    assert.equal(draft.styleId, styleId);
+    const cover = generateRecipePromptItems(draft)[0].content;
+    assert.doesNotMatch(cover, /受众重点：/);
+  }
+});
+
 test("the standard set assigns an explicit useful fourth prompt without another input", () => {
   const prompts = generateRecipePromptItems({ ...EMPTY_DRAFT, recipeName: "米饭" });
   assert.equal(prompts.length, 4);

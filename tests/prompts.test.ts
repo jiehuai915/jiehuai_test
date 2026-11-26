@@ -2,12 +2,14 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   ART_STYLES,
+  ART_STYLE_CHOICES,
   ART_STYLE_GROUPS,
   generateRecipePromptItems,
   generateRecipePrompts,
   getRecipeImageCount,
   hasRecipeDetailsInName,
   recommendArtStyle,
+  recommendSelectableArtStyle,
   type RecipeImageOptions,
   type RecipeMode,
   type RecipePromptInput
@@ -53,6 +55,35 @@ test("14 styles have unique IDs and belong to four populated groups", () => {
   ]) {
     assert.ok(ART_STYLES.some((style) => style.id === id));
   }
+});
+
+test("the picker exposes five distinct common styles and only two extras", () => {
+  assert.deepEqual(ART_STYLE_CHOICES.map(({ styles }) => styles.map(({ id }) => id)), [
+    ["natural-light-photography", "cinematic-surreal-animation", "chinese-watercolor", "soft-3d-clay", "magazine-collage-journal"],
+    ["colored-pencil", "retro-comic"]
+  ]);
+  assert.ok(ART_STYLE_CHOICES.flatMap(({ styles }) => styles).every(({ id }) => ART_STYLES.some((style) => style.id === id)));
+});
+
+test("picker recommendations never select retired presets or apply studio lighting automatically", () => {
+  const cases = [
+    ["奶油蘑菇鸡肉焗饭", "natural-light-photography"],
+    ["像素游戏蛋糕", "retro-comic"],
+    ["羊毛毡甜点", "soft-3d-clay"],
+    ["几何慕斯", "soft-3d-clay"],
+    ["黑白线描食谱", "colored-pencil"],
+    ["扁平信息图食谱", "magazine-collage-journal"]
+  ];
+  for (const [recipeName, expected] of cases) {
+    assert.equal(recommendSelectableArtStyle({ recipeName, ingredients: "", steps: "" }), expected);
+  }
+  assert.equal(recommendSelectableArtStyle({ ...recipe, audienceType: "fitness-light-meal" }), "natural-light-photography");
+});
+
+test("collage keeps paper edges and labels inside step panels", () => {
+  const prompts = generateRecipePrompts({ ...recipe, styleId: "magazine-collage-journal" });
+  assert.match(prompts.steps, /剪贴边缘和纸纹只作陪衬，不跨步骤分格/);
+  assert.doesNotMatch(prompts.cover, /不跨步骤分格/);
 });
 
 for (const style of ART_STYLES) {

@@ -1,6 +1,6 @@
 import type { BrandIntegration } from "./brand-integration";
 import type { AudienceType } from "./nutrition";
-import { ART_STYLES, hasRecipeDetailsInName, type ArtStyleId, type RecipeImageOptions, type SourceCard } from "./prompts";
+import { ART_STYLES, DEFAULT_ART_STYLE_ID, hasRecipeDetailsInName, type ArtStyleId, type RecipeImageOptions, type SourceCard } from "./prompts";
 
 export const DRAFT_KEY = "recipe-prompt-assistant:draft:v1";
 export const TAB_DRAFT_KEY = `${DRAFT_KEY}:tab`;
@@ -22,7 +22,7 @@ export type RecipeDraft = {
 
 export const EMPTY_DRAFT: RecipeDraft = {
   recipeName: "", ingredients: "", steps: "", flexibleTitle: "", flexibleDescription: "",
-  styleId: ART_STYLES[0].id, audienceType: "general",
+  styleId: DEFAULT_ART_STYLE_ID, audienceType: "general",
   sourceCard: { enabled: false, attribution: "", excerpt: "" },
   brandIntegration: { enabled: false, mode: "reserve", kind: "ingredient", productName: "", detail: "" },
   extraCount: 0, extraImages: []
